@@ -1,19 +1,88 @@
-<h2><b>My</b>Apartments</h2>
-
-<div class="jumbotron">
-  <p>Description of the project...</p>
-  <p>Source code:</p>
-    <ul>
-      <li><a href="https://github.com/UdL-EPS-SoftArch/myapartments-api" target="_blank">Spring Back-End</a></li>
-      <li><a href="https://github.com/UdL-EPS-SoftArch/myapartments" target="_blank">Angular Front-End</a></li>
-    </ul>
+<div class="container mt-5">
+  <div class="jumbotron">
+    <h1 class="display-4"><strong>My</strong>Apartments</h1>
+    <p class="lead">MyApartments is an application designed to facilitate the management and search of apartments, offering an intuitive interface for both owners and clients.</p>
+    <hr class="my-4">
+  </div>
+  <div class="mt-5">
+    <h2>Role-Based Functionalities</h2>
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead class="thead-light">
+          <tr>
+            <th>User</th>
+            <th>Admin</th>
+            <th>Student</th>
+            <th>Owner</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Register Student</td>
+            <td>Delete Advertisements</td>
+            <td>List Advertisements</td>
+            <td>Register Apartment (and rooms)</td>
+          </tr>
+          <tr>
+            <td>Register Owner</td>
+            <td>Block User</td>
+            <td>Find Advertisement</td>
+            <td>Publish Advertisement</td>
+          </tr>
+          <tr>
+            <td>Login</td>
+            <td>Delete User</td>
+            <td>Request Visit</td>
+            <td>List Owned Apartments</td>
+          </tr>
+          <tr>
+            <td>Logout</td>
+            <td></td>
+            <td>Filter Advertisement</td>
+            <td>List Own Advertisements</td>
+          </tr>
+          <tr>
+            <td>View Profile</td>
+            <td></td>
+            <td>Cancel Visit</td>
+            <td>Accept Visit</td>
+          </tr>
+          <tr>
+            <td>Edit Profile</td>
+            <td></td>
+            <td>Review Advertisement</td>
+            <td>Reject Visit</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>View Visit Status</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="mt-5">
+    <h2>Entities Model</h2>
+    <p>The following diagram represents the main entities of the system and their relationships:</p>
+    <div class="text-center mb-4">
+      <img src="assets/images/entities-model.png" class="img-fluid" alt="Entities Model">
+    </div>
 </div>
 
 <!--Footer-->
-<footer class="modal-footer">
+<footer class="modal-footer fixed-bottom bg-light">
   <div class="container">
     <div class="text-center">
-      <small>Footer...</small>
+      <div>
+        <a href="https://github.com/UdL-EPS-SoftArch/myapartments-api" target="_blank" class="me-3">
+          <i class="fab fa-github"></i> Spring Back-End
+        </a>
+        <a href="https://github.com/UdL-EPS-SoftArch/myapartments" target="_blank">
+          <i class="fab fa-github"></i> Angular Front-End
+        </a>
+      </div>
     </div>
   </div>
 </footer>
