@@ -7,6 +7,7 @@ import { AuthenticationBasicService } from '../../login-basic/authentication-bas
 import { Apartment } from '../IApartment';
 import { User } from '../../login-basic/user';
 import { FormsModule } from '@angular/forms';
+import { ErrorMessageService } from '../../error-handler/error-message.service';
 
 @Component({
   selector: 'app-apartment-create',
@@ -37,7 +38,8 @@ export class ApartmentCreateComponent implements OnInit {
   constructor(private router: Router,
               private authenticationService: AuthenticationBasicService,
               private userService: UserService,
-              private http: HttpClient) { }
+              private http: HttpClient,
+              private errorMessageService: ErrorMessageService) { }
 
   ngOnInit(): void {
     this.user = this.authenticationService.getCurrentUser();
@@ -49,12 +51,12 @@ export class ApartmentCreateComponent implements OnInit {
     this.apartment.createdBy = this.user.username;
     this.apartment.registrationDate = new Date();
 
-    this.http.post(`${environment.API}/apartments`, this.apartment).subscribe(
+    this.http.post(`${environment.API}/apartment`, this.apartment).subscribe(
       () => {
-        this.router.navigate(['/apartments']);
+        this.router.navigate(['/apartment']);
       },
-      error => {
-        console.error('Error creating apartment', error);
+      () => {
+        this.errorMessageService.showErrorMessage('Error creating apartment');
       }
     );
   }
