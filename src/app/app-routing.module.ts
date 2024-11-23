@@ -19,7 +19,7 @@ const routes: Routes = [
   { path: 'users', component: UserListComponent, canActivate: [LoggedInGuard]},
   { path: 'about', component: AboutComponent},
   {path: 'apartments', component: ApartmentListComponent},
-  {path: 'apartments/create', component: ApartmentCreateComponent},
+  {path: 'apartment/create', component: ApartmentCreateComponent},
   { path: '404', component: NotFoundComponent},
   { path: '', redirectTo: 'about', pathMatch: 'full'},
 ];
