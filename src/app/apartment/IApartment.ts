@@ -10,6 +10,5 @@ export interface Apartment {
   rooms: string;
   detail: string;
   note: string;
-  createdBy?: string;
   registrationDate?: Date;
 }

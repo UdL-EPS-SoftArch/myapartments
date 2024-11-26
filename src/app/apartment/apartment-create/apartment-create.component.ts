@@ -8,11 +8,12 @@ import { Apartment } from '../IApartment';
 import { User } from '../../login-basic/user';
 import { FormsModule } from '@angular/forms';
 import { ErrorMessageService } from '../../error-handler/error-message.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-apartment-create',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './apartment-create.component.html',
   styleUrls: ['./apartment-create.component.css']
 })
@@ -48,12 +49,17 @@ export class ApartmentCreateComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.apartment.createdBy = this.user.username;
+    if (!this.isAuthorized) {
+      this.onUnauthorised();
+      return;
+    }
+
+    this.apartment.owner = this.user.username;
     this.apartment.registrationDate = new Date();
 
-    this.http.post(`${environment.API}/apartment`, this.apartment).subscribe(
+    this.http.post(`${environment.API}/apartments`, this.apartment).subscribe(
       () => {
-        this.router.navigate(['/apartment']);
+        this.router.navigate(['/apartments']);
       },
       () => {
         this.errorMessageService.showErrorMessage('Error creating apartment');
@@ -63,5 +69,10 @@ export class ApartmentCreateComponent implements OnInit {
 
   private isAuthorised(): boolean {
     return this.userRoles.includes('admin') || this.userRoles.includes('owner');
+  }
+
+  onUnauthorised(): void {
+    this.errorMessageService.showErrorMessage('You are not authorized to create an apartment');
+    this.router.navigate(['/apartments']);
   }
 }
