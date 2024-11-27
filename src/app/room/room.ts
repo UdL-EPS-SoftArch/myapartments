@@ -1,5 +1,5 @@
 import { HateoasResource, Resource } from '@lagoshny/ngx-hateoas-client';
-import { Apartment } from "./../apartment/Apartment";
+import { Apartment } from "./../apartment/apartment";
 
 @HateoasResource('rooms')
 export class Room extends Resource {

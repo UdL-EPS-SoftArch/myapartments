@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { environment } from '../../../environments/environment';
 import { UserService } from '../../user/user.service';
 import { AuthenticationBasicService } from '../../login-basic/authentication-basic.service';
 import { Apartment } from '../apartment';
@@ -63,6 +62,7 @@ export class ApartmentCreateComponent implements OnInit {
 
     this.apartmentService.createResource({ body: this.apartment }).subscribe(
       (apartment: Apartment) => {
+        // TODO: Route into /apartment/{apartment.id}
         this.router.navigate(['/apartments']);
       },
       () => {
@@ -78,5 +78,9 @@ export class ApartmentCreateComponent implements OnInit {
   onUnauthorised(): void {
     this.errorMessageService.showErrorMessage('You are not authorized to create an apartment');
     this.router.navigate(['/apartments']);
+  }
+
+  redirectToCreateRoom(): void {
+    this.router.navigate(['/room/create']);
   }
 }
