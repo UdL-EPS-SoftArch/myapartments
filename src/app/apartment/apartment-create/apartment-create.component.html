@@ -1,39 +1,39 @@
 <div *ngIf="isAuthorized" class="container mt-5 w-50 p-3">
-  <h1>Create Apartment</h1>
+  <h1 class="mb-4">Create Apartment</h1>
   <form (ngSubmit)="onSubmit()" #apartmentForm="ngForm">
-    <div class="form-group mb-3">
-      <label for="name">Name</label>
+    <div class="mb-3">
+      <label for="name" class="form-label">Name</label>
       <input type="text" class="form-control" id="name" required [(ngModel)]="apartment.name" name="name">
     </div>
-    <div class="form-group mb-3">
-      <label for="floor">Floor</label>
+    <div class="mb-3">
+      <label for="floor" class="form-label">Floor</label>
       <input type="number" class="form-control" id="floor" required [(ngModel)]="apartment.floor" name="floor">
     </div>
-    <div class="form-group mb-3">
-      <label for="address">Address</label>
+    <div class="mb-3">
+      <label for="address" class="form-label">Address</label>
       <input type="text" class="form-control" id="address" required [(ngModel)]="apartment.address" name="address">
     </div>
-    <div class="form-group mb-3">
-      <label for="postalCode">Postal Code</label>
+    <div class="mb-3">
+      <label for="postalCode" class="form-label">Postal Code</label>
       <input type="text" class="form-control" id="postalCode" required [(ngModel)]="apartment.postalCode" name="postalCode">
     </div>
-    <div class="form-group mb-3">
-      <label for="city">City</label>
+    <div class="mb-3">
+      <label for="city" class="form-label">City</label>
       <input type="text" class="form-control" id="city" required [(ngModel)]="apartment.city" name="city">
     </div>
-    <div class="form-group mb-3">
-      <label for="country">Country</label>
+    <div class="mb-3">
+      <label for="country" class="form-label">Country</label>
       <input type="text" class="form-control" id="country" required [(ngModel)]="apartment.country" name="country">
     </div>
-    <div class="form-group mb-3">
-      <label for="description">Description</label>
+    <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
       <textarea class="form-control" id="description" rows="3" required [(ngModel)]="apartment.description" name="description" style="resize: vertical; min-height: 100px; max-height: 300px;"></textarea>
     </div>
-    <div class="form-group mb-3">
-    <a href="/room/create"><button type="button" class="btn btn-secondary">Add Room</button></a>
+    <div class="mb-3">
+      <button type="button" class="btn btn-secondary" (click)="redirectToCreateRoom()">Add Room</button>
     </div>
-    <div class="form-group mb-3">
-      <label for="detail">Apartment Details</label>
+    <div class="mb-3">
+      <label for="detail" class="form-label">Apartment Details</label>
       <input type="text" class="form-control" id="detail" required [(ngModel)]="apartment.detail" name="detail">
     </div>
     <button type="submit" class="btn btn-primary mt-3">Submit</button>
@@ -41,5 +41,7 @@
 </div>
 
 <div *ngIf="!isAuthorized" class="container mt-5 w-50 p-3">
-  <span [ngModel]="onUnauthorised()"></span>
+  <div class="alert alert-danger" role="alert">
+    You are not authorized to create an apartment.
+  </div>
 </div>
