@@ -4,11 +4,13 @@ import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { UserService } from '../../user/user.service';
 import { AuthenticationBasicService } from '../../login-basic/authentication-basic.service';
-import { Apartment } from '../IApartment';
+import { Apartment } from '../apartment';
+import { Room } from '../../room/room';
 import { User } from '../../login-basic/user';
 import { FormsModule } from '@angular/forms';
 import { ErrorMessageService } from '../../error-handler/error-message.service';
 import { CommonModule } from '@angular/common';
+import { ApartmentService } from '../apartment.service';
 
 @Component({
   selector: 'app-apartment-create',
@@ -18,19 +20,7 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./apartment-create.component.css']
 })
 export class ApartmentCreateComponent implements OnInit {
-    public apartment: Apartment = {
-      name: '',
-      floor: 0,
-      address: '',
-      postalCode: '',
-      city: '',
-      country: '',
-      description: '',
-      owner: '',
-      rooms: '',
-      detail: '',
-      note: ''
-    };
+    public apartment: Apartment = new Apartment();
 
     private userRoles: string[] = [];
     private user: User = new User();
@@ -40,7 +30,9 @@ export class ApartmentCreateComponent implements OnInit {
               private authenticationService: AuthenticationBasicService,
               private userService: UserService,
               private http: HttpClient,
-              private errorMessageService: ErrorMessageService) { }
+              private errorMessageService: ErrorMessageService,
+              private apartmentService: ApartmentService
+            ) { }
 
   ngOnInit(): void {
     this.user = this.authenticationService.getCurrentUser();
@@ -54,15 +46,27 @@ export class ApartmentCreateComponent implements OnInit {
       return;
     }
 
-    this.apartment.owner = this.user.username;
+    this.apartment.owner = this.user;
     this.apartment.registrationDate = new Date();
 
-    this.http.post(`${environment.API}/apartments`, this.apartment).subscribe(
-      () => {
+
+    const room: Room = new Room({
+      surface: 0,
+      isOccupied: false,
+      hasWindow: false,
+      hasDesk: false,
+      hasBed: false,
+      apart: this.apartment,
+      ownerId: this.user
+    });
+    this.apartment.room = room;
+
+    this.apartmentService.createResource({ body: this.apartment }).subscribe(
+      (apartment: Apartment) => {
         this.router.navigate(['/apartments']);
       },
       () => {
-        this.errorMessageService.showErrorMessage('Error creating apartment');
+        this.errorMessageService.showErrorMessage('Failed to create apartment. Please try again.');
       }
     );
   }
