@@ -11,6 +11,7 @@ export class Room extends Resource {
   hasBed: boolean = false;
   apart: Apartment | undefined;
   ownerId?: string;
+  uri: string = '';
 
   constructor(values: object = {}) {
     super();
