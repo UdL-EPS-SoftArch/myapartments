@@ -56,7 +56,7 @@ export class ApartmentCreateComponent implements OnInit {
     this.apartment.rooms = [room];
 
     this.apartmentService.createResource({ body: this.apartment }).subscribe(
-      (apartment: Apartment) => {
+      () => {
         // TODO: Redirect to the apartment detail page
         this.router.navigate(['/apartments']);
       },
