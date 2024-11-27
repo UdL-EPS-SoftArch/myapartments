@@ -13,7 +13,7 @@ export class Apartment extends Resource {
   country: string = '';
   description?: string = '';
   owner: User = new User();
-  room: Room = new Room();
+  rooms: Room[] = [];
   detail: string = '';
   note?: string = '';
   registrationDate?: Date = new Date();

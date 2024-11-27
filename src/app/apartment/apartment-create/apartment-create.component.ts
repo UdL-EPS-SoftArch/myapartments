@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { UserService } from '../../user/user.service';
 import { AuthenticationBasicService } from '../../login-basic/authentication-basic.service';
@@ -19,23 +18,20 @@ import { ApartmentService } from '../apartment.service';
   styleUrls: ['./apartment-create.component.css']
 })
 export class ApartmentCreateComponent implements OnInit {
-    public apartment: Apartment = new Apartment();
+  public apartment: Apartment = new Apartment();
+  public user: User = new User();
+  public isAuthorized: boolean = false;
 
-    private userRoles: string[] = [];
-    private user: User = new User();
-    public isAuthorized: boolean = false;
-
-  constructor(private router: Router,
-              private authenticationService: AuthenticationBasicService,
-              private userService: UserService,
-              private http: HttpClient,
-              private errorMessageService: ErrorMessageService,
-              private apartmentService: ApartmentService
-            ) { }
+  constructor(
+    private router: Router,
+    private authenticationService: AuthenticationBasicService,
+    private userService: UserService,
+    private errorMessageService: ErrorMessageService,
+    private apartmentService: ApartmentService
+  ) {}
 
   ngOnInit(): void {
     this.user = this.authenticationService.getCurrentUser();
-    this.userRoles = this.user.getRoles();
     this.isAuthorized = this.isAuthorised();
   }
 
@@ -48,39 +44,35 @@ export class ApartmentCreateComponent implements OnInit {
     this.apartment.owner = this.user;
     this.apartment.registrationDate = new Date();
 
-
+    // TODO: Remove this Room mock
     const room: Room = new Room({
       surface: 0,
       isOccupied: false,
       hasWindow: false,
       hasDesk: false,
       hasBed: false,
-      apart: this.apartment,
-      ownerId: this.user
+      ownerId: this.user.username
     });
-    this.apartment.room = room;
+    this.apartment.rooms = [room];
 
     this.apartmentService.createResource({ body: this.apartment }).subscribe(
       (apartment: Apartment) => {
-        // TODO: Route into /apartment/{apartment.id}
+        // TODO: Redirect to the apartment detail page
         this.router.navigate(['/apartments']);
       },
-      () => {
+      (error) => {
+        console.error('Error creating apartment:', error);
         this.errorMessageService.showErrorMessage('Failed to create apartment. Please try again.');
       }
     );
   }
 
   private isAuthorised(): boolean {
-    return this.userRoles.includes('admin') || this.userRoles.includes('owner');
+    return this.user.getRoles().includes('admin') || this.user.getRoles().includes('owner');
   }
 
   onUnauthorised(): void {
     this.errorMessageService.showErrorMessage('You are not authorized to create an apartment');
     this.router.navigate(['/apartments']);
-  }
-
-  redirectToCreateRoom(): void {
-    this.router.navigate(['/room/create']);
   }
 }
