@@ -21,7 +21,22 @@ export class ApartmentDeleteComponent {
     private errorMessageService: ErrorMessageService
   ) {}
 
+onDelete(): void {
+    if (this.apartmentId === null) {
+      this.errorMessageService.showErrorMessage("No apartment selected for deletion.");
+      return;
+    }
 
+    this.apartmentService.deleteResource({id: this.apartmentId}).subscribe(
+      () => {
+        this.router.navigate(['/apartments']);
+      },
+      (error) => {
+        console.error('Error deleting apartment', error);
+        this.errorMessageService.showErrorMessage('Failed to delete apartment. Please try again.');
+      }
+    );
+}
 
 
 }
