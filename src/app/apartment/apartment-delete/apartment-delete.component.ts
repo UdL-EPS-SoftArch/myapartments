@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import {Apartment} from '../apartment';
-import {ActivatedRoute} from '@angular/router';
-import {User} from '../../login-basic/user';
+import { Component } from '@angular/core';
+import { Router} from '@angular/router';
+import { User } from '../../login-basic/user';
+import { ApartmentService } from '../apartment.service';
+import { ErrorMessageService } from '../../error-handler/error-message.service';
 
 @Component({
   selector: 'app-apartment-delete',
@@ -10,17 +11,17 @@ import {User} from '../../login-basic/user';
   templateUrl: './apartment-delete.component.html',
   styleUrl: './apartment-delete.component.css'
 })
-export class ApartmentDeleteComponent implements OnInit {
-  public apartment: Apartment = new Apartment();
+export class ApartmentDeleteComponent {
+  public apartmentId: number | null = null;
   public user: User = new User();
-  public isAuthorized: boolean = false;
 
-  constructor(private activatedApartment: ActivatedRoute,
-               ) {
-  }
+  constructor(
+    private router: Router,
+    private apartmentService: ApartmentService,
+    private errorMessageService: ErrorMessageService
+  ) {}
 
-  ngOnInit(): void {
-    this.user = this.authenticationService.getCurrentUser();
-    this.isAuthorized = this.isAuthorised();
-  }
+
+
+
 }
