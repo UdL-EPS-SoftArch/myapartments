@@ -34,4 +34,7 @@ export class ApartmentService extends HateoasResourceOperation<Apartment> {
   public findByAddress(address: string): Observable<ResourceCollection<Apartment>> {
     return this.searchCollection("findByAddress", { params: { address: address } });
   }
+  getApartmentsByOwner(ownerId: string): Observable<ResourceCollection<Apartment>> {
+    return this.searchCollection('findByOwner_Id', { params: { ownerId } });
+  }
 }

@@ -20,6 +20,7 @@ const routes: Routes = [
   { path: 'about', component: AboutComponent},
   {path: 'apartments', component: ApartmentListComponent},
   {path: 'apartment/create', component: ApartmentCreateComponent},
+  {path: 'apartment/list', component: ApartmentListComponent},
   { path: '404', component: NotFoundComponent},
   { path: '', redirectTo: 'about', pathMatch: 'full'},
 ];
