@@ -81,11 +81,7 @@ export class ApartmentCreateComponent implements OnInit {
   onFileChange(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
-      // Limpiar la lista de imágenes previas
-      //this.selectedImages = [];
-
-      // Convertir los archivos a un array y procesarlos
-      Array.from(input.files).forEach((file: File) => {
+      Array.from(input.files).forEach((file) => {
         this.selectedImages.push({
           file,
           url: URL.createObjectURL(file)
@@ -93,5 +89,11 @@ export class ApartmentCreateComponent implements OnInit {
       });
     }
   }
+
+  removeImage(index: number): void {
+    URL.revokeObjectURL(this.selectedImages[index].url);
+    this.selectedImages.splice(index, 1);
+  }
+
 
 }
