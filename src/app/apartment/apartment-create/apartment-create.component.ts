@@ -75,4 +75,23 @@ export class ApartmentCreateComponent implements OnInit {
     this.errorMessageService.showErrorMessage('You are not authorized to create an apartment');
     this.router.navigate(['/apartments']);
   }
+
+  selectedImages: { file: File; url: string }[] = [];
+
+  onFileChange(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      // Limpiar la lista de imágenes previas
+      //this.selectedImages = [];
+
+      // Convertir los archivos a un array y procesarlos
+      Array.from(input.files).forEach((file: File) => {
+        this.selectedImages.push({
+          file,
+          url: URL.createObjectURL(file)
+        });
+      });
+    }
+  }
+
 }
