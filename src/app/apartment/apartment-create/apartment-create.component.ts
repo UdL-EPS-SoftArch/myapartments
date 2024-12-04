@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserService } from '../../user/user.service';
 import { AuthenticationBasicService } from '../../login-basic/authentication-basic.service';
 import { Apartment } from '../apartment';
-import { Room } from '../../room/room';
 import { User } from '../../login-basic/user';
 import { FormsModule } from '@angular/forms';
 import { ErrorMessageService } from '../../error-handler/error-message.service';
@@ -25,7 +23,6 @@ export class ApartmentCreateComponent implements OnInit {
   constructor(
     private router: Router,
     private authenticationService: AuthenticationBasicService,
-    private userService: UserService,
     private errorMessageService: ErrorMessageService,
     private apartmentService: ApartmentService
   ) {}
@@ -44,21 +41,8 @@ export class ApartmentCreateComponent implements OnInit {
     this.apartment.owner = this.user;
     this.apartment.registrationDate = new Date();
 
-    // TODO: Remove this Room mock
-    const room: Room = new Room({
-      surface: 0,
-      isOccupied: false,
-      hasWindow: false,
-      hasDesk: false,
-      hasBed: false,
-      ownerId: this.user.username
-    });
-    this.apartment.rooms = [room];
-
-    this.apartmentService.createResource({ body: this.apartment }).subscribe(
-      () => {
-        // TODO: Redirect to the apartment detail page
-        this.router.navigate(['/apartments']);
+    this.apartmentService.createResource({ body: this.apartment }).subscribe(() => {
+        this.router.navigate(['/apartment' + this.apartment.id]);
       },
       (error) => {
         console.error('Error creating apartment:', error);
