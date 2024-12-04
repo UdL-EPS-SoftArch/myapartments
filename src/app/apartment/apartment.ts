@@ -1,6 +1,5 @@
 import { HateoasResource, Resource } from '@lagoshny/ngx-hateoas-client';
 import { User } from '../login-basic/user';
-import { Room } from '../room/room';
 
 @HateoasResource('apartments')
 export class Apartment extends Resource {
@@ -13,7 +12,6 @@ export class Apartment extends Resource {
   country: string = '';
   description?: string = '';
   owner: User = new User();
-  rooms: Room[] = [];
   detail: string = '';
   note?: string = '';
   registrationDate?: Date = new Date();
