@@ -1,9 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import { Router} from '@angular/router';
-import { User } from '../../login-basic/user';
+import {ActivatedRoute, Router} from '@angular/router';
 import { ApartmentService } from '../apartment.service';
 import { ErrorMessageService } from '../../error-handler/error-message.service';
-import {Apartment} from '../apartment';
+import {User} from '../../login-basic/user';
 
 @Component({
   selector: 'app-apartment-delete',
@@ -13,59 +12,50 @@ import {Apartment} from '../apartment';
   styleUrl: './apartment-delete.component.css'
 })
 export class ApartmentDeleteComponent implements OnInit {
-  public apartmentId: number | null = null;
-  public apartment: Apartment | null = null;
-  public user: User = new User();
+  public apartmentId: string;
+  public user: User;
 
   constructor(
+    private route: ActivatedRoute,
     private router: Router,
     private apartmentService: ApartmentService,
     private errorMessageService: ErrorMessageService
   ) {}
 
   ngOnInit(): void {
-    if (this.apartmentId !== null) {
-      this.loadApartment();
+    this.apartmentId = this.route.snapshot.paramMap.get('id') || '';
+    if (this.isAuthorised()) {
+      this.removeApartment();
+
+    } else {
+      this.onUnauthorised();
     }
   }
 
-  loadApartment(): void { // Busquem l'apartament per a poder eliminar-lo
-    if (this.apartmentId === null) {
-      this.errorMessageService.showErrorMessage('No apartment selected for deletion.');
-      return;
-    }
-
+  private removeApartment(): void {
     this.apartmentService.getResource(this.apartmentId).subscribe(
       (apartment) => {
-        this.apartment = apartment
+        this.apartmentService.deleteResource(apartment).subscribe(
+          () => {
+            this.router.navigate(['/apartments']);
+          },
+          () => {
+            this.errorMessageService.showErrorMessage('Failed to delete apartment. Please try again.');
+          }
+        );
       },
-      (error) => {
-        console.error('Error finding apartment:', error);
-        this.errorMessageService.showErrorMessage('Could not find apartment for deletion.');
-      }
-    );
-  }
-
-  onDelete(): void {  // Eliminem l'apartament anteriorment buscat
-    if (!this.apartmentId) {
-      this.errorMessageService.showErrorMessage("No apartment selected for deletion.");
-      return;
-    }
-
-    //const apartmentToDelete: Apartment = { id: this.apartmentId } as Apartment;
-
-    this.apartmentService.deleteResource(this.apartment!).subscribe(
       () => {
-        this.router.navigate(['/apartments']);
-      },
-      (error) => {
-        console.error('Error deleting apartment', error);
-        this.errorMessageService.showErrorMessage('Failed to delete apartment. Please try again.');
+        this.errorMessageService.showErrorMessage('Failed to load apartment for deletion.');
       }
     );
   }
 
-  onCancel(): void {  // Cancel·lem l'eliminació
+  private isAuthorised(): boolean {
+    return this.user.getRoles().includes('admin') || this.user.getRoles().includes('owner');
+  }
+
+  onUnauthorised(): void {
+    this.errorMessageService.showErrorMessage('You are not authorized to create an apartment');
     this.router.navigate(['/apartments']);
   }
 }

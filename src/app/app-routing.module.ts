@@ -21,7 +21,7 @@ const routes: Routes = [
   { path: 'about', component: AboutComponent},
   {path: 'apartments', component: ApartmentListComponent},
   {path: 'apartment/create', component: ApartmentCreateComponent},
-  {path: 'apartment/delete', component: ApartmentDeleteComponent},
+  {path: 'apartment/:id/delete', component: ApartmentDeleteComponent},
   { path: '404', component: NotFoundComponent},
   { path: '', redirectTo: 'about', pathMatch: 'full'},
 ];
