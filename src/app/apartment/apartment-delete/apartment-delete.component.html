@@ -1,1 +1,11 @@
-<p>apartment-delete works!</p>
+<div class="delete-container">
+  <h3>Confirm Apartment Deletion</h3>
+  <p *ngIf="!apartment">Loading apartment details...</p>
+  <div *ngIf="apartment">
+    <p>Are you sure you want to delete the apartment named <strong>{{ apartmentId }}</strong>?</p>
+    <div class="buttons">
+      <button (click)="onDelete()">Delete</button>
+      <button (click)="onCancel()">Cancel</button>
+    </div>
+  </div>
+</div>
