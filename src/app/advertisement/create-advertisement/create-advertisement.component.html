@@ -1,1 +1,10 @@
-<p>create-advertisement works!</p>
+<div *ngIf="isAuthorized" class="container mt-5 w-50 p-3">
+    <div class="alert alert-success" role="alert">
+      You are authorized to create advertisement.
+    </div>
+  </div>
+<div *ngIf="!isAuthorized" class="container mt-5 w-50 p-3">
+    <div class="alert alert-danger" role="alert">
+      You are not authorized to create an apartment.
+    </div>
+  </div>
