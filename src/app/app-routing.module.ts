@@ -10,6 +10,7 @@ import { UserEditComponent } from './user/user-edit/user-edit.component';
 import { UserDeleteComponent } from './user/user-delete/user-delete.component';
 import {ApartmentListComponent} from './apartment/apartment-list/apartment-list.component';
 import {ApartmentCreateComponent} from './apartment/apartment-create/apartment-create.component';
+import { CreateAdvertisementComponent } from './advertisement/create-advertisement/create-advertisement.component';
 
 const routes: Routes = [
   { path: 'users/create', component: UserRegisterComponent},
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'about', component: AboutComponent},
   {path: 'apartments', component: ApartmentListComponent},
   {path: 'apartment/create', component: ApartmentCreateComponent},
+  {path: 'advertisement/create', component: CreateAdvertisementComponent},
   { path: '404', component: NotFoundComponent},
   { path: '', redirectTo: 'about', pathMatch: 'full'},
 ];
