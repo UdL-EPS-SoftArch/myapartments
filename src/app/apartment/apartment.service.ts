@@ -34,4 +34,27 @@ export class ApartmentService extends HateoasResourceOperation<Apartment> {
   public findByAddress(address: string): Observable<ResourceCollection<Apartment>> {
     return this.searchCollection("findByAddress", { params: { address: address } });
   }
+
+  public isApartmentOwnedByUser(owner: User, userApartment: Apartment): Observable<boolean> {
+    return new Observable<boolean>((observer) => {
+      this.findByOwner(owner).subscribe({
+        next: (resourceCollection: ResourceCollection<Apartment>) => {
+          const apartments = Object.values(resourceCollection).flat();
+
+          const isOwned = apartments.some((apartment: Apartment) =>
+            apartment.id === userApartment.id
+          );
+
+          observer.next(isOwned);
+          observer.complete();
+        },
+        error: (err) => {
+          console.error('Error checking ownership:', err);
+          observer.next(false);
+          observer.complete();
+        },
+      });
+    });
+  }
+
 }

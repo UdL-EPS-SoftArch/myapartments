@@ -13,6 +13,7 @@ import {CommonModule} from '@angular/common';
 import {User} from '../../login-basic/user';
 import { AuthenticationBasicService } from '../../login-basic/authentication-basic.service';
 import {ErrorMessageService} from '../../error-handler/error-message.service';
+import {ResourceCollection} from '@lagoshny/ngx-hateoas-client';
 
 @Component({
   selector: 'app-apartment-update',
@@ -47,6 +48,12 @@ export class ApartmentUpdateComponent implements OnInit {
     this.isAuthorized = this.isAuthorised();
     this.apartmentId = this.activatedRoute.snapshot.paramMap.get('id') || '';
 
+    if (!this.isAuthorized) {
+      this.onUnauthorised();
+      return;
+    }
+
+
 
     this.apartmentService
       .getResource(this.apartmentId)
@@ -58,6 +65,15 @@ export class ApartmentUpdateComponent implements OnInit {
       )
       .subscribe((_apartment) => {
         if (_apartment) {
+          if(!this.user.getRoles().includes('admin')) {
+            this.apartmentService.isApartmentOwnedByUser(this.user, _apartment).subscribe((isOwned) => {
+              if (!isOwned) {
+                this.onUnauthorised();
+                return;
+              }
+            });
+          }
+
           this.apartment = _apartment;
           this.setUpForm();
         }
@@ -125,7 +141,7 @@ export class ApartmentUpdateComponent implements OnInit {
   }
 
   onUnauthorised(): void {
-    this.errorMessageService.showErrorMessage('You are not authorized to create an apartment');
+    this.errorMessageService.showErrorMessage('You are not authorized');
     this.router.navigate(['/apartments']);
   }
 
@@ -152,5 +168,6 @@ export class ApartmentUpdateComponent implements OnInit {
     URL.revokeObjectURL(this.selectedImages[index].url);
     this.selectedImages.splice(index, 1);
   }
+
 
 }
