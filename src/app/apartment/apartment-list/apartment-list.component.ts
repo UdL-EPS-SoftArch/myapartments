@@ -12,47 +12,52 @@ import { ErrorMessageService } from '../../error-handler/error-message.service';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './apartment-list.component.html',
-  styleUrl: './apartment-list.component.css'
+  styleUrls: ['./apartment-list.component.css']
 })
 export class ApartmentListComponent implements OnInit {
 
-  public apartments: Apartment[] = [];
+  public apartments: Apartment[] = []; // Almacena la lista de apartamentos
   public currentUser: User = new User();
   public isShowed: boolean = false;
-  
-constructor(
-  private router: Router,
-  private apartmentService: ApartmentService,
-  private authenticationService: AuthenticationBasicService,
-  private errorMessageService: ErrorMessageService,
-) {}
 
+  constructor(
+    private router: Router,
+    private apartmentService: ApartmentService,
+    private authenticationService: AuthenticationBasicService,
+    private errorMessageService: ErrorMessageService,
+  ) {}
 
-ngOnInit(): void {
-  // Obtener el usuario actual desde el servicio de usuario
-  this.currentUser = this.authenticationService.getCurrentUser();
-  this.isShowed = this.isOwner();
+  ngOnInit(): void {
+    this.currentUser = this.authenticationService.getCurrentUser();
+    this.isShowed = this.isOwner();
 
-  if(!this.isShowed){
-    this.onNotShowed();
-    return;
+    if (!this.isShowed) {
+      this.onNotShowed();
+      return;
+    }
+
+    if (this.currentUser) {
+      // Llama al servicio para obtener los apartamentos del usuario actual
+      this.apartmentService.findByOwner(this.currentUser).subscribe({
+        next: (resourceCollection) => {
+          this.apartments = resourceCollection.resources || []; // Asegúrate de asignar un arreglo
+        },
+        error: (err) => {
+          console.error('Error fetching apartments:', err);
+          this.errorMessageService.showErrorMessage('Failed to load apartments');
+        },
+      });
+    } else {
+      console.log('User not authenticated');
+    }
   }
-  if (this.currentUser) {
-    // Si hay un usuario, obtener los apartamentos del dueño
-    this.apartmentService.findByOwner(this.currentUser);
-  } else {
-    // Si no hay usuario, puedes redirigir a la página de inicio de sesión
-    console.log('User not authenticated');
+
+  private isOwner(): boolean {
+    return this.currentUser.getRoles().includes('owner');
   }
-}
 
-private isOwner(): boolean {
-  return this.currentUser.getRoles().includes('owner');
-}
-
-onNotShowed(): void {
-  this.errorMessageService.showErrorMessage('You are not an owner');
-  this.router.navigate(['/apartments']);
-}
-
+  private onNotShowed(): void {
+    this.errorMessageService.showErrorMessage('You are not an owner');
+    this.router.navigate(['/apartments']);
+  }
 }
