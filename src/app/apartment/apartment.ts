@@ -20,4 +20,12 @@ export class Apartment extends Resource {
     super();
     Object.assign(this, values);
   }
+
+  getIdFromLinks(): string {
+    if (this._links?.self?.href) {
+      return this._links.self.href.split('/').pop() || '';
+    }
+    return this.id;
+  }
+
 }

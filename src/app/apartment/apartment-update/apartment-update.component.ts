@@ -13,7 +13,6 @@ import {CommonModule} from '@angular/common';
 import {User} from '../../login-basic/user';
 import { AuthenticationBasicService } from '../../login-basic/authentication-basic.service';
 import {ErrorMessageService} from '../../error-handler/error-message.service';
-import {ResourceCollection} from '@lagoshny/ngx-hateoas-client';
 
 @Component({
   selector: 'app-apartment-update',
@@ -65,6 +64,7 @@ export class ApartmentUpdateComponent implements OnInit {
       )
       .subscribe((_apartment) => {
         if (_apartment) {
+          _apartment.id = _apartment.getIdFromLinks()
           if(!this.user.getRoles().includes('admin')) {
             this.apartmentService.isApartmentOwnedByUser(this.user, _apartment).subscribe((isOwned) => {
               if (!isOwned) {
@@ -81,12 +81,12 @@ export class ApartmentUpdateComponent implements OnInit {
       });
 
     this.apartmentForm = this.formBuilder.group({
-      name: new FormControl('', [Validators.required, Validators.minLength(3)]),
-      floor: new FormControl('', [Validators.required, Validators.min(0)]),
-      address: new FormControl('', [Validators.required]),
-      postalCode: new FormControl('', [Validators.required, Validators.pattern('^[0-9]{5}$')]),
-      city: new FormControl('', [Validators.required]),
-      country: new FormControl('', [Validators.required]),
+      name: new FormControl('', { validators: [Validators.required, Validators.minLength(3)]}),
+      floor: new FormControl('', { validators: [Validators.required, Validators.min(0)]}),
+      address: new FormControl('',{ validators:  [Validators.required]}),
+      postalCode: new FormControl('', { validators: [Validators.required, Validators.pattern('^[0-9]{5}$')]}),
+      city: new FormControl('',{ validators:  [Validators.required]}),
+      country: new FormControl('', { validators:  [Validators.required]}),
       description: new FormControl(''),
     });
 
@@ -116,21 +116,19 @@ export class ApartmentUpdateComponent implements OnInit {
     if (!this.isAuthorized) {
       this.onUnauthorised();
       return;
-    }/*
-    console.log(this.apartment.postalCode)
+    }
     if (this.apartmentForm.invalid) {
       for (const controlName in this.apartmentForm.controls) {
         const control = this.apartmentForm.controls[controlName];
         if (control.invalid) {
-          console.log(`El campo ${controlName} no es válido.`);
-          console.log(control.errors); // Muestra los errores del campo
+          console.log(`Field ${controlName} is not valid.`);
+          console.log(control.errors);
         }
       }
       this.errorMessageService.showErrorMessage('Invalid form');
 
-
       return;
-    }*/
+    }
 
 
     this.apartmentService.updateResource(this.apartment)
@@ -147,7 +145,7 @@ export class ApartmentUpdateComponent implements OnInit {
 
 
   onCancel(): void {
-    this.router.navigate(['/about']);
+    this.router.navigate(['/apartments']);
   }
 
   selectedImages: { file: File; url: string }[] = [];
