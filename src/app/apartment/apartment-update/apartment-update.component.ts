@@ -118,14 +118,34 @@ export class ApartmentUpdateComponent implements OnInit {
       return;
     }
     if (this.apartmentForm.invalid) {
+      this.errorMessageService.showErrorMessage('Invalid form');
+
       for (const controlName in this.apartmentForm.controls) {
         const control = this.apartmentForm.controls[controlName];
         if (control.invalid) {
+          this.errorMessageService.showErrorMessage(`Invalid form: field ${controlName} is not valid.`);
+
+          for(const errorType in control.errors){
+            if(errorType == "required"){
+              this.errorMessageService.showErrorMessage(`Invalid form: field ${controlName} is required.`);
+            }
+            else if(errorType == "minlength"){
+              this.errorMessageService.showErrorMessage(`Invalid form: field ${controlName} requires a minimum length of 3.`);
+            }
+            else if(errorType == "min"){
+              this.errorMessageService.showErrorMessage(`Invalid form: field ${controlName} requires a value equals or grater than 0.`);
+            }
+            else if(errorType == "pattern"){
+              this.errorMessageService.showErrorMessage(`Invalid form: field ${controlName} requires a 5 digit number.`);
+            }
+          }
           console.log(`Field ${controlName} is not valid.`);
           console.log(control.errors);
         }
       }
+/*
       this.errorMessageService.showErrorMessage('Invalid form');
+*/
 
       return;
     }
