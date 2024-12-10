@@ -1,0 +1,59 @@
+<div class="row">
+    <app-ad-search class="col-lg-6 col-md-6 col-sm-12 col-xs-12" (emitResults)="filterAds($event)"></app-ad-search>
+    <app-ad-filter class="col-lg-6 col-md-6 col-sm-12 col-xs-12" (emitResults)="reBindAds($event)"></app-ad-filter>
+  </div>
+  <div class="row">
+    <hr class="my-3">
+  </div>
+  <div class="row">
+    <div class="card col-lg-4 col-md-6 col-sm-12 col-xs-12" *ngFor="let advertisement of advertisements">
+      <div class="card-block">
+        <div class="card-header row m-1 text-center">
+          <h5>Advertisement</h5>
+        </div>
+        <div class="card-body row m-1">
+          <div class="col-md-6 p-3">
+            <h6 class="card-subtitle text-muted">Title</h6>
+            <p class="card-text">{{advertisement.title}}</p>
+          </div>
+          <div class="col-md-6 p-3">
+            <h6 class="card-subtitle text-muted">Price</h6>
+            <p class="card-text">{{advertisement.price | currency}}</p>
+          </div>
+          <div class="col-md-6 p-3">
+            <h6 class="card-subtitle text-muted">Zip Code</h6>
+            <p class="card-text">{{advertisement.zipCode}}</p>
+          </div>
+          <div class="col-md-6 p-3">
+            <h6 class="card-subtitle text-muted">Country</h6>
+            <p class="card-text">{{advertisement.country}}</p>
+          </div>
+          <div class="col-md-6 p-3">
+            <h6 class="card-subtitle text-muted">Address</h6>
+            <p class="card-text">{{advertisement.address}}</p>
+          </div>
+          <div class="col-md-6 p-3">
+            <h6 class="card-subtitle text-muted">Creation Date</h6>
+            <p class="card-text">{{advertisement.creationDate | date: 'dd/MM/yyyy HH:mm:ss'}}</p>
+          </div>
+          <div class="col-lg-12 col-md-12 p-3">
+            <h6 class="card-subtitle text-muted">Description</h6>
+            <p class="card-text">{{advertisement.description}}</p>
+          </div>
+        </div>
+        <div class="card-footer text-right row">
+          <div class="btn-group" role="group" aria-label="Advertisement Actions">
+            <button type="button" *ngIf="canEdit(advertisement)" [routerLink]="[advertisement.id + '/edit']" class="btn col-6 m-1 btn-outline-success">Edit</button>
+            <button type="button" [routerLink]="[advertisement.id + '/detail']" class="btn col-6 m-1 btn-outline-primary">Detail</button>
+            <button type="button" *ngIf="isAdmin()" [routerLink]="[advertisement.id + '/delete']" class="btn col-6 m-1 btn-outline-danger">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <hr class="my-3">
+  </div>
+  <ngb-pagination class="d-flex justify-content-center" [(page)]="page" [pageSize]="pageSize" [collectionSize]="totalAdvertisements" (pageChange)="changePage()">
+  </ngb-pagination>
+  
