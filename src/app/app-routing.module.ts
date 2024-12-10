@@ -11,6 +11,8 @@ import { UserDeleteComponent } from './user/user-delete/user-delete.component';
 import {ApartmentListComponent} from './apartment/apartment-list/apartment-list.component';
 import {ApartmentCreateComponent} from './apartment/apartment-create/apartment-create.component';
 import { CreateAdvertisementComponent } from './advertisement/create-advertisement/create-advertisement.component';
+import { AdvertismentListComponent } from './advertisment/advertisment-list/advertisment-list.component';
+
 
 const routes: Routes = [
   { path: 'users/create', component: UserRegisterComponent},
@@ -24,6 +26,7 @@ const routes: Routes = [
   {path: 'advertisement/create', component: CreateAdvertisementComponent},
   { path: '404', component: NotFoundComponent},
   { path: '', redirectTo: 'about', pathMatch: 'full'},
+  { path: 'advertisments', component: AdvertismentListComponent}
 ];
 
 @NgModule({
