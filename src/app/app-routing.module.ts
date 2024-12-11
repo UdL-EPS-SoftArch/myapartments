@@ -12,6 +12,8 @@ import {ApartmentListComponent} from './apartment/apartment-list/apartment-list.
 import {ApartmentCreateComponent} from './apartment/apartment-create/apartment-create.component';
 import {ApartmentUpdateComponent} from './apartment/apartment-update/apartment-update.component';
 import {ApartmentDeleteComponent} from './apartment/apartment-delete/apartment-delete.component';
+import {VisitStatusComponent} from './visit/visit-status/visit-status.component';
+
 
 const routes: Routes = [
   { path: 'users/create', component: UserRegisterComponent},
@@ -24,6 +26,7 @@ const routes: Routes = [
   { path: 'apartment/create', component: ApartmentCreateComponent},
   { path: 'apartment/:id/update', component: ApartmentUpdateComponent},
   { path: 'apartment/:id/delete', component: ApartmentDeleteComponent},
+  { path: 'visit/:id/status', component: VisitStatusComponent},
   { path: '404', component: NotFoundComponent},
   { path: '', redirectTo: 'about', pathMatch: 'full'},
 ];
