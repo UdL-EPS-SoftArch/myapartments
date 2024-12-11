@@ -25,7 +25,8 @@ export class ApartmentListComponent implements OnInit {
     private apartmentService: ApartmentService,
     private authenticationService: AuthenticationBasicService,
     private errorMessageService: ErrorMessageService,
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.currentUser = this.authenticationService.getCurrentUser();
@@ -39,7 +40,9 @@ export class ApartmentListComponent implements OnInit {
     if (this.currentUser) {
       // Llama al servicio para obtener los apartamentos del usuario actual
       this.apartmentService.findByOwner(this.currentUser).subscribe({
+
         next: (resourceCollection) => {
+
           this.apartments = resourceCollection.resources || []; // Asegúrate de asignar un arreglo
         },
         error: (err) => {
@@ -59,5 +62,17 @@ export class ApartmentListComponent implements OnInit {
   private onNotShowed(): void {
     this.errorMessageService.showErrorMessage('You are not an owner');
     this.router.navigate(['/apartments']);
+  }
+
+  deleteApartment(apartmentId: string): void {
+    const match = apartmentId.match(/\/(\d+)$/);
+    if (match) {
+      const id = match[1];
+      console.log('Apartment ID:', id);
+
+      this.router.navigate([`/apartment/${id}/delete`]);
+    } else {
+      console.error('No valid ID found in the URL');
+    }
   }
 }

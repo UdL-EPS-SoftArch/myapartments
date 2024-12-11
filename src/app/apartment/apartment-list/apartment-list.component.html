@@ -26,8 +26,10 @@
         </div>
 
         <div *ngIf="apartment.note" class="note">
-          <p><strong>Nota:</strong> {{ apartment.note }}</p>
+          <p><strong>Nota:</strong> {{ apartment.note }} </p>
         </div>
+
+        <button (click)="deleteApartment(apartment.getSelfLinkHref())">Eliminar</button>
       </div>
     </div>
   </div>
