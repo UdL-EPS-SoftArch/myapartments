@@ -1,0 +1,18 @@
+<h1>VISIT STATUS</h1>
+
+<table class="status-table">
+  <thead>
+  <tr>
+    <th>Status</th>
+    <th>Date & Time</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <span class="status" [ngClass]="visit.status.toLowerCase()">
+          {{ visit.status }}
+    </span>
+    <td>{{ visit.visitDate}}</td>
+  </tr>
+  </tbody>
+</table>
