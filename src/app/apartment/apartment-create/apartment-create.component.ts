@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { ErrorMessageService } from '../../error-handler/error-message.service';
 import { CommonModule } from '@angular/common';
 import { ApartmentService } from '../apartment.service';
+import { ApartmentDetails } from '../apartment-details';
 
 @Component({
   selector: 'app-apartment-create',
@@ -40,6 +41,7 @@ export class ApartmentCreateComponent implements OnInit {
 
     this.apartment.owner = this.user;
     this.apartment.registrationDate = new Date();
+    this.apartment.apartmentDetails = new ApartmentDetails();
 
     this.apartmentService.createResource({ body: this.apartment }).subscribe(() => {
         this.router.navigate(['/apartment' + this.apartment.id]);
@@ -78,6 +80,4 @@ export class ApartmentCreateComponent implements OnInit {
     URL.revokeObjectURL(this.selectedImages[index].url);
     this.selectedImages.splice(index, 1);
   }
-
-
 }
