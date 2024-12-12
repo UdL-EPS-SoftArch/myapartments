@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-12">
-    <div class="card" *ngFor="let advertisement of advertisements">
+    <div class="card" *ngFor="let ad of advertisements">
       <div class="card-block">
         <div class="card-header row m-1 text-center">
           <h5>Advertisement</h5>
@@ -8,38 +8,34 @@
         <div class="card-body row m-1">
           <div class="col-md-6 p-3">
             <h6 class="card-subtitle text-muted">Title</h6>
-            <p class="card-text">{{ advertisement.title }}</p>
+            <p class="card-text">{{ ad.title }}</p>
           </div>
           <div class="col-md-6 p-3">
             <h6 class="card-subtitle text-muted">Price</h6>
-            <p class="card-text">{{ advertisement.price | currency }}</p>
+            <p class="card-text">{{ ad.price | currency }}</p>
           </div>
           <div class="col-md-6 p-3">
             <h6 class="card-subtitle text-muted">Zip Code</h6>
-            <p class="card-text">{{ advertisement.zipCode }}</p>
+            <p class="card-text">{{ ad.zipCode }}</p>
           </div>
           <div class="col-md-6 p-3">
             <h6 class="card-subtitle text-muted">Country</h6>
-            <p class="card-text">{{ advertisement.country }}</p>
+            <p class="card-text">{{ ad.country }}</p>
           </div>
           <div class="col-md-6 p-3">
             <h6 class="card-subtitle text-muted">Address</h6>
-            <p class="card-text">{{ advertisement.address }}</p>
+            <p class="card-text">{{ ad.address }}</p>
           </div>
           <div class="col-md-6 p-3">
             <h6 class="card-subtitle text-muted">Creation Date</h6>
-            <p class="card-text">{{ advertisement.creationDate | date: 'dd/MM/yyyy HH:mm:ss' }}</p>
+            <p class="card-text">{{ ad.creationDate | date: 'dd/MM/yyyy HH:mm:ss' }}</p>
           </div>
-          <div class="col-lg-12 col-md-12 p-3">
+          <div class="col-12 p-3">
             <h6 class="card-subtitle text-muted">Description</h6>
-            <p class="card-text">{{ advertisement.description }}</p>
+            <p class="card-text">{{ ad.description }}</p>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-
-<div class="row">
-  <hr class="my-3">
 </div>
