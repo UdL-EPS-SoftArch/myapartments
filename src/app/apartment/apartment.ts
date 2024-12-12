@@ -1,5 +1,6 @@
 import { HateoasResource, Resource } from '@lagoshny/ngx-hateoas-client';
 import { User } from '../login-basic/user';
+import { ApartmentDetails } from './apartment-details';
 
 @HateoasResource('apartments')
 export class Apartment extends Resource {
@@ -15,9 +16,18 @@ export class Apartment extends Resource {
   detail: string = '';
   note?: string = '';
   registrationDate?: Date = new Date();
+  apartmentDetails: ApartmentDetails = new ApartmentDetails();
 
   constructor(values: object = {}) {
     super();
     Object.assign(this, values);
   }
+
+  getIdFromLinks(): string {
+    if (this._links?.self?.href) {
+      return this._links.self.href.split('/').pop() || '';
+    }
+    return this.id;
+  }
+
 }

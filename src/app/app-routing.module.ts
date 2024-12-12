@@ -13,6 +13,10 @@ import {ApartmentCreateComponent} from './apartment/apartment-create/apartment-c
 import { CreateAdvertisementComponent } from './advertisement/create-advertisement/create-advertisement.component';
 import { AdvertisementListComponent } from './advertisement/advertisment-list/advertisement-list.component';
 import {DeleteAdvertisementComponent} from './advertisement/advertisement-delete/advertisement-delete.component';
+import {ApartmentUpdateComponent} from './apartment/apartment-update/apartment-update.component';
+import {ApartmentDeleteComponent} from './apartment/apartment-delete/apartment-delete.component';
+import {VisitStatusComponent} from './visit/visit-status/visit-status.component';
+
 
 
 const routes: Routes = [
@@ -25,6 +29,11 @@ const routes: Routes = [
   {path: 'apartments', component: ApartmentListComponent},
   {path: 'apartment/create', component: ApartmentCreateComponent},
   {path: 'advertisement/create', component: CreateAdvertisementComponent},
+  { path: 'apartments', component: ApartmentListComponent},
+  { path: 'apartment/create', component: ApartmentCreateComponent},
+  { path: 'apartment/:id/update', component: ApartmentUpdateComponent},
+  { path: 'apartment/:id/delete', component: ApartmentDeleteComponent},
+  { path: 'visit/:id/status', component: VisitStatusComponent},
   { path: '404', component: NotFoundComponent},
   { path: '', redirectTo: 'about', pathMatch: 'full'},
   { path: 'advertisements', component: AdvertisementListComponent},
