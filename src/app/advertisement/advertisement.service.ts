@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { HateoasResourceOperation, ResourceCollection } from '@lagoshny/ngx-hateoas-client';
+import { HateoasResourceOperation, PagedResourceCollection, ResourceCollection } from '@lagoshny/ngx-hateoas-client';
 import { Advertisement } from './advertisement';
 
 @Injectable({
@@ -16,8 +16,8 @@ export class AdvertisementService extends HateoasResourceOperation<Advertisement
     return this.searchCollection('findByTitle', { params: { text: query } });
   }
 
-  public getAllAdvertisements(): Observable<ResourceCollection<Advertisement>> {
-    return this.getCollection();
+  public getAllAdvertisements(): Observable<PagedResourceCollection<Advertisement>> {
+    return this.getPage();
   }
 
   public getAdvertisementById(advertisementId: number): Observable<Advertisement> {
