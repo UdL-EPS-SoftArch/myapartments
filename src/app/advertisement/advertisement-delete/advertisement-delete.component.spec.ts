@@ -25,7 +25,7 @@ describe('DeleteAdvertisementComponent', () => {
 
     fixture = TestBed.createComponent(DeleteAdvertisementComponent);
     component = fixture.componentInstance;
-    advertisementService = TestBed.inject(AdvertisementService) as any;
+    advertisementService = TestBed.inject(AdvertisementService) as unknown as AdvertisementServiceMock;
     fixture.detectChanges();
   });
 
