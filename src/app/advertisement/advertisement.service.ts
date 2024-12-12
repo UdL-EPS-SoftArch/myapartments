@@ -27,4 +27,22 @@ export class AdvertisementService extends HateoasResourceOperation<Advertisement
   public getAdvertisementByUrl(advertisementUrl: string): Observable<Advertisement> {
     return this.http.get<Advertisement>(advertisementUrl);
   }
+
+  public deleteAdvertisement(advertisementId: number): Observable<Advertisement> {
+    const advertisement = new Advertisement();
+    advertisement.id = advertisementId;
+    const deleteUrl = `http://localhost:8080/advertisements/${advertisementId}`;
+    console.log('Deleting advertisement from URL: ', deleteUrl);
+    advertisement.uri = deleteUrl;
+    advertisement['_links'] = {
+      self: { href: advertisement.uri }
+    };
+
+    return this.deleteResource(advertisement);
+  }
+
+
+
+
+
 }
