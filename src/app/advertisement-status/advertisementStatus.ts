@@ -7,6 +7,6 @@ export class AdvertisementStatus extends Resource {
     name: string = '';
     constructor(values: object = {}) {
         super();
-        Object.assign(this as any, values);
+        Object.assign(this , values);
     }
 }

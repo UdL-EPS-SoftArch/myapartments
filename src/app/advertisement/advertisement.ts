@@ -20,6 +20,6 @@ export class Advertisement extends Resource {
 
     constructor(values: object = {}) {
         super();
-        Object.assign(this as any, values);
+        Object.assign(this , values);
     }
 }

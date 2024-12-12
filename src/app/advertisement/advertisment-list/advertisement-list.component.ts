@@ -21,10 +21,10 @@ export class AdvertisementListComponent implements OnInit {
 
   loadAdvertisements() {
     this.advertisementService.getAllAdvertisements().subscribe({
-      next: (response: any) => {
+      next: (response) => {
         this.advertisements = response.resources;
       },
-      error: (err: any) => {
+      error: (err) => {
         console.error('Error al cargar los anuncios:', err);
       }
     });
