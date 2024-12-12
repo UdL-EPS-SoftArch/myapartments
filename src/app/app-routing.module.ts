@@ -12,6 +12,7 @@ import {ApartmentListComponent} from './apartment/apartment-list/apartment-list.
 import {ApartmentCreateComponent} from './apartment/apartment-create/apartment-create.component';
 import { CreateAdvertisementComponent } from './advertisement/create-advertisement/create-advertisement.component';
 import { AdvertisementListComponent } from './advertisement/advertisment-list/advertisement-list.component';
+import {DeleteAdvertisementComponent} from './advertisement/advertisement-delete/advertisement-delete.component';
 
 
 const routes: Routes = [
@@ -26,7 +27,9 @@ const routes: Routes = [
   {path: 'advertisement/create', component: CreateAdvertisementComponent},
   { path: '404', component: NotFoundComponent},
   { path: '', redirectTo: 'about', pathMatch: 'full'},
-  { path: 'advertisements', component: AdvertisementListComponent}
+  { path: 'advertisements', component: AdvertisementListComponent},
+  { path: 'advertisement/:id/delete', component: DeleteAdvertisementComponent, canActivate: [LoggedInGuard] },
+
 ];
 
 @NgModule({
