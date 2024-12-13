@@ -1,0 +1,16 @@
+<div class="container w-10 p-3">
+  <h4 class="mb-1">List of Rooms</h4>
+
+  <div *ngIf="rooms.length > 0" class="list-group">
+    <div *ngFor="let room of rooms; let i = index" class="list-group-item">
+      <h5 class="mb-1">Room {{ i + 1 }}</h5>
+      <p class="mb-1">Surface: {{ room.surface }} m²</p>
+      <small *ngIf="room.isOccupied">Occupied</small>
+      <small *ngIf="!room.isOccupied">Available</small>
+    </div>
+  </div>
+
+  <div *ngIf="rooms.length === 0" class="alert alert-info" role="alert">
+    No rooms available for this apartment.
+  </div>
+</div>
