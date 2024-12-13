@@ -1,1 +1,35 @@
-<p>apartment-list works!</p>
+<div class="apartment-list-container">
+    <h2> My apartments</h2>
+
+    <div *ngIf="apartments.length === 0" class="no-apartments">
+      <p>No hay apartamentos disponibles.</p>
+    </div>
+
+    <div *ngIf="apartments.length > 0" class="apartments">
+      <div *ngFor="let apartment of apartments" class="apartment-card">
+        <hr>
+        <h3>{{ apartment.name }}</h3>
+        <p><strong>Dirección:</strong> {{ apartment.address }}, {{ apartment.city }}, {{ apartment.country }}</p>
+        <p><strong>Piso:</strong> {{ apartment.floor }}</p>
+        <p><strong>Código Postal:</strong> {{ apartment.postalCode }}</p>
+        <p><strong>Fecha de Registro:</strong> {{ apartment.registrationDate | date }}</p>
+
+        <div *ngIf="apartment.description" class="description">
+          <p><strong>Descripción:</strong> {{ apartment.description }}</p>
+        </div>
+
+        <div *ngIf="apartment.rooms && apartment.rooms.length > 0" class="rooms">
+          <p><strong>Habitaciones:</strong></p>
+          <ul>
+            <li *ngFor="let room of apartment.rooms"></li>
+          </ul>
+        </div>
+
+        <div *ngIf="apartment.note" class="note">
+          <p><strong>Nota:</strong> {{ apartment.note }} </p>
+        </div>
+
+        <button (click)="deleteApartment(apartment.getSelfLinkHref())">Eliminar</button>
+      </div>
+    </div>
+  </div>

@@ -63,4 +63,7 @@ export class ApartmentService extends HateoasResourceOperation<Apartment> {
       });
     });
   }
+  getApartmentsByOwner(ownerId: string): Observable<ResourceCollection<Apartment>> {
+    return this.searchCollection('findByOwner_Id', { params: { ownerId } });
+  }
 }
