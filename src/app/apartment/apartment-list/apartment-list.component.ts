@@ -65,14 +65,14 @@ export class ApartmentListComponent implements OnInit {
   }
 
   deleteApartment(apartmentId: string): void {
-    const match = apartmentId.match(/\/(\d+)$/);
-    if (match) {
-      const id = match[1];
-      console.log('Apartment ID:', id);
-
-      this.router.navigate([`/apartment/${id}/delete`]);
+    if (apartmentId) {
+      console.log('Apartment ID:', apartmentId);
+      this.router.navigate([`/apartment/${apartmentId}/delete`]);
     } else {
-      console.error('No valid ID found in the URL');
+      console.error('Invalid apartment ID');
     }
+  }
+  createApartment(): void {
+    this.router.navigate(['/apartment/create']);
   }
 }
