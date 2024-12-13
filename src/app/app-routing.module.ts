@@ -10,6 +10,7 @@ import { UserEditComponent } from './user/user-edit/user-edit.component';
 import { UserDeleteComponent } from './user/user-delete/user-delete.component';
 import {ApartmentListComponent} from './apartment/apartment-list/apartment-list.component';
 import {ApartmentCreateComponent} from './apartment/apartment-create/apartment-create.component';
+import {ApartmentDetailComponent} from './apartment/apartment-detail/apartment-detail.component';
 
 const routes: Routes = [
   { path: 'users/create', component: UserRegisterComponent},
@@ -18,8 +19,9 @@ const routes: Routes = [
   { path: 'users/:id', component: UserDetailComponent, canActivate: [LoggedInGuard]},
   { path: 'users', component: UserListComponent, canActivate: [LoggedInGuard]},
   { path: 'about', component: AboutComponent},
-  {path: 'apartments', component: ApartmentListComponent},
-  {path: 'apartment/create', component: ApartmentCreateComponent},
+  { path: 'apartments', component: ApartmentListComponent},
+  { path: 'apartment/create', component: ApartmentCreateComponent},
+  { path: 'apartment/:id', component: ApartmentDetailComponent},
   { path: '404', component: NotFoundComponent},
   { path: '', redirectTo: 'about', pathMatch: 'full'},
 ];
