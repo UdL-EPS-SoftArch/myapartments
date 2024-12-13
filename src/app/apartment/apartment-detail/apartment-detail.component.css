@@ -5,3 +5,15 @@ p {
 img {
   border-radius: 5px;
 }
+
+.btn-dark {
+  border-radius: 20px;
+  padding: 7px 19px;
+  margin-right: 15px;
+  margin-bottom: 7px;
+}
+
+.btn-dark:hover {
+  cursor: auto;
+  background-color: #212529;
+}

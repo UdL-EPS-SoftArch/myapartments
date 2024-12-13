@@ -12,9 +12,16 @@
     <div class="row align-items-stretch">
       <div class="col">
         <p>{{ apartment.description }}</p>
-        <p>{{ apartment.floor }}</p>
+
+
+        <div class="mt-4">
+          <span class="btn btn-dark">Planta {{ apartment.floor }}</span>
+        </div>
+
+        <!--
         <p>{{ room.isOccupied }}</p>
         <p>...</p>
+        -->
       </div>
 
       <div class="col h-100">
