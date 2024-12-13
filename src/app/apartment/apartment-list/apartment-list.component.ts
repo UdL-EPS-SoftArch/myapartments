@@ -1,78 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { Apartment } from '../apartment';
-import { ApartmentService } from '../apartment.service';
-import { Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { User } from '../../login-basic/user';
-import { AuthenticationBasicService } from '../../login-basic/authentication-basic.service';
-import { ErrorMessageService } from '../../error-handler/error-message.service';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-apartment-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './apartment-list.component.html',
-  styleUrls: ['./apartment-list.component.css']
+  styleUrl: './apartment-list.component.css'
 })
-export class ApartmentListComponent implements OnInit {
+export class ApartmentListComponent {
 
-  public apartments: Apartment[] = []; // Almacena la lista de apartamentos
-  public currentUser: User = new User();
-  public isShowed: boolean = false;
-
-  constructor(
-    private router: Router,
-    private apartmentService: ApartmentService,
-    private authenticationService: AuthenticationBasicService,
-    private errorMessageService: ErrorMessageService,
-  ) {
-  }
-
-  ngOnInit(): void {
-    this.currentUser = this.authenticationService.getCurrentUser();
-    this.isShowed = this.isOwner();
-
-    if (!this.isShowed) {
-      this.onNotShowed();
-      return;
-    }
-
-    if (this.currentUser) {
-      // Llama al servicio para obtener los apartamentos del usuario actual
-      this.apartmentService.findByOwner(this.currentUser).subscribe({
-
-        next: (resourceCollection) => {
-
-          this.apartments = resourceCollection.resources || []; // Asegúrate de asignar un arreglo
-        },
-        error: (err) => {
-          console.error('Error fetching apartments:', err);
-          this.errorMessageService.showErrorMessage('Failed to load apartments');
-        },
-      });
-    } else {
-      console.log('User not authenticated');
-    }
-  }
-
-  private isOwner(): boolean {
-    return this.currentUser.getRoles().includes('owner');
-  }
-
-  private onNotShowed(): void {
-    this.errorMessageService.showErrorMessage('You are not an owner');
-    this.router.navigate(['/apartments']);
-  }
-
-  deleteApartment(apartmentId: string): void {
-    const match = apartmentId.match(/\/(\d+)$/);
-    if (match) {
-      const id = match[1];
-      console.log('Apartment ID:', id);
-
-      this.router.navigate([`/apartment/${id}/delete`]);
-    } else {
-      console.error('No valid ID found in the URL');
-    }
-  }
 }
