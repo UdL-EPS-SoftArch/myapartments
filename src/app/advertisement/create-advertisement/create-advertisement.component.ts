@@ -9,6 +9,8 @@ import { Advertisement } from '../advertisement';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AdvertisementService } from '../advertisement.service';
 import { ApartmentService } from '../../apartment/apartment.service';
+import { AdvertisementStatus } from '../../advertisement-status/advertisementStatus';
+import { AdvertisementStatusService } from '../../advertisement-status/advertisementStatus.service';
 
 @Component({
   selector: 'app-create-advertisement',
@@ -21,6 +23,7 @@ export class CreateAdvertisementComponent implements OnInit{
   public user: User = new User();
   public isAuthorized: boolean = false;
   private id = '';
+  private initialStatus: AdvertisementStatus = new AdvertisementStatus();
 
 
   constructor(
@@ -28,11 +31,11 @@ export class CreateAdvertisementComponent implements OnInit{
     private router: Router,
     private apartmentService:ApartmentService,
     private advertisementService: AdvertisementService,
+    private advertisementStatusService: AdvertisementStatusService,
     private authenticationService: AuthenticationBasicService,
     private errorMessageService: ErrorMessageService,
   ) {}
 
-  
   isAuthorised(): boolean {
     return this.user.getRoles().includes('admin') || this.user.getRoles().includes('owner');
   }
@@ -46,19 +49,22 @@ export class CreateAdvertisementComponent implements OnInit{
     this.id = this.route.snapshot.paramMap.get('id') || '';
     this.user = this.authenticationService.getCurrentUser();
     this.isAuthorized = this.isAuthorised();
-    
+    this.advertisementStatusService.findByStatus('Available').subscribe(
+      (status) => {
+        this.initialStatus = status.resources[0];
+      }
+    );
   }
-  
-  
+
   onSubmit(): void {
     if (!this.isAuthorized) {
       this.onUnauthorised();
       return;
-    };
+    }
+
     if (this.advertisement?.expirationDate) {
-      
-      const expirationDate = new Date(this.advertisement.expirationDate); 
-      const currentTime = new Date(); 
+      const expirationDate = new Date(this.advertisement.expirationDate);
+      const currentTime = new Date();
       expirationDate.setUTCHours(
         currentTime.getUTCHours(),
         currentTime.getUTCMinutes(),
@@ -66,37 +72,25 @@ export class CreateAdvertisementComponent implements OnInit{
         currentTime.getUTCMilliseconds()
       );
       this.advertisement.expirationDate = expirationDate;
-  
-  }
-  
+    }
+
     const apartmentId = this.id;
     this.apartmentService.getResource(apartmentId).subscribe({
-      next: (apartment) => {
-        this.advertisement.apartment = '/apartment/' + this.id;
-        this.advertisement.adStatus = '/advertisementStatuses/1';
-        this.advertisementService.createResource({ body: this.advertisement }).subscribe(() => {
-          this.router.navigate(['/advertisement' + '1']);
-        },
-        (error) => {
-          console.error('Error creating apartment:', error);
-          this.errorMessageService.showErrorMessage('Failed to create apartment. Please try again.');
-        }
-      );
+      next: (apartment: Apartment) => {
+        this.advertisement.apartment = apartment;
+        this.advertisement.adStatus = this.initialStatus;
+        this.advertisementService.createResource({ body: this.advertisement }).subscribe({
+          next: (advertisement) => {
+            this.router.navigate([advertisement.uri]);
+          },
+          error: (error) => {
+            console.error('Error creating apartment:', error);
+            this.errorMessageService.showErrorMessage('Failed to create apartment. Please try again.');
+          }
+        });
       },
       error: (err) => {
         console.error(err);
       },
     });
-    this.advertisement.creationDate = new Date();
-
-    this.advertisementService.createResource({ body: this.advertisement }).subscribe(() => {
-        this.router.navigate(['/advertisement' + this.advertisement]);
-      },
-      (error) => {
-        console.error('Error creating apartment:', error);
-        this.errorMessageService.showErrorMessage('Failed to create apartment. Please try again.');
-      }
-    );
-    
-
 }}
