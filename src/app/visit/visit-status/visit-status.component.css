@@ -57,12 +57,16 @@ h1 {
   margin-right: 8px;
 }
 
-/* Colores según el estado */
+/* Colores segÃºn el estado */
 .status.pending::before {
   background-color: #f1c40f; /* Amarillo */
 }
 
 .status.rejected::before {
+  background-color: #e74c3c; /* Rojo */
+}
+
+.status.cancelled::before {
   background-color: #e74c3c; /* Rojo */
 }
 
