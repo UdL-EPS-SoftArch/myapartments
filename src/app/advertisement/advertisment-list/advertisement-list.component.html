@@ -1,41 +1,58 @@
 <div class="row">
-  <div class="col-12">
-    <div class="card" *ngFor="let ad of advertisements">
+  <!-- mostrar la carga -->
+  <div *ngIf="loading" class="col-12">
+    <div class="alert alert-info text-center">
+      Loading advertisements...
+    </div>
+  </div>
+
+  <div *ngIf="!loading && advertisements.length > 0" class="col-12">
+    <div class="card" *ngFor="let advertisement of advertisements">
       <div class="card-block">
-        <div class="card-header row m-1 text-center">
-          <h5>Advertisement</h5>
+        <div class="card-header row m-1 text-center" aria-labelledby="advertisement-{{ advertisement.id }}">
+          <h5 id="advertisement-{{ advertisement.id }}">Advertisement</h5>
         </div>
         <div class="card-body row m-1">
-          <div class="col-md-6 p-3">
+          <div class="col-12 col-md-6 p-3">
             <h6 class="card-subtitle text-muted">Title</h6>
-            <p class="card-text">{{ ad.title }}</p>
+            <p class="card-text">{{ advertisement.title }}</p>
           </div>
-          <div class="col-md-6 p-3">
+          <div class="col-12 col-md-6 p-3">
             <h6 class="card-subtitle text-muted">Price</h6>
-            <p class="card-text">{{ ad.price | currency }}</p>
+            <p class="card-text">{{ advertisement.price | currency }}</p>
           </div>
-          <div class="col-md-6 p-3">
+          <div class="col-12 col-md-6 p-3">
             <h6 class="card-subtitle text-muted">Zip Code</h6>
-            <p class="card-text">{{ ad.zipCode }}</p>
+            <p class="card-text">{{ advertisement.zipCode }}</p>
           </div>
-          <div class="col-md-6 p-3">
+          <div class="col-12 col-md-6 p-3">
             <h6 class="card-subtitle text-muted">Country</h6>
-            <p class="card-text">{{ ad.country }}</p>
+            <p class="card-text">{{ advertisement.country }}</p>
           </div>
-          <div class="col-md-6 p-3">
+          <div class="col-12 col-md-6 p-3">
             <h6 class="card-subtitle text-muted">Address</h6>
-            <p class="card-text">{{ ad.address }}</p>
+            <p class="card-text">{{ advertisement.address }}</p>
           </div>
-          <div class="col-md-6 p-3">
+          <div class="col-12 col-md-6 p-3">
             <h6 class="card-subtitle text-muted">Creation Date</h6>
-            <p class="card-text">{{ ad.creationDate | date: 'dd/MM/yyyy HH:mm:ss' }}</p>
+            <p class="card-text">{{ advertisement.creationDate | date: 'dd/MM/yyyy HH:mm:ss' }}</p>
+          </div>
+          <div class="col-12 p-3" *ngIf="advertisement.expirationDate">
+            <h6 class="card-subtitle text-muted">Expiration Date</h6>
+            <p class="card-text">{{ advertisement.expirationDate | date: 'dd/MM/yyyy HH:mm:ss' }}</p>
           </div>
           <div class="col-12 p-3">
             <h6 class="card-subtitle text-muted">Description</h6>
-            <p class="card-text">{{ ad.description }}</p>
+            <p class="card-text">{{ advertisement.description }}</p>
           </div>
         </div>
       </div>
+    </div>
+  </div>
+
+  <div *ngIf="!loading && advertisements.length === 0" class="col-12">
+    <div class="alert alert-warning text-center">
+      No advertisements found.
     </div>
   </div>
 </div>
