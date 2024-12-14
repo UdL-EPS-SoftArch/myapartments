@@ -16,8 +16,10 @@ import { ApartmentCreateComponent } from './apartment/apartment-create/apartment
 import { ApartmentUpdateComponent } from './apartment/apartment-update/apartment-update.component';
 import { ApartmentDeleteComponent } from './apartment/apartment-delete/apartment-delete.component';
 import { VisitStatusComponent } from './visit/visit-status/visit-status.component';
+import { VisitCancelComponent } from './visit/visit-cancel/visit-cancel.component';
 import { RoomListComponent } from './room/room-list/room-list.component';
 import { RoomCreateComponent } from './room/room-create/room-create.component';
+
 
 const routes: Routes = [
   { path: 'users/create', component: UserRegisterComponent},
@@ -34,6 +36,7 @@ const routes: Routes = [
   { path: 'apartment/:id/update', component: ApartmentUpdateComponent},
   { path: 'apartment/:id/delete', component: ApartmentDeleteComponent},
   { path: 'visit/:id/status', component: VisitStatusComponent},
+  { path: 'visit/:id/cancel', component:VisitCancelComponent},
   { path: 'rooms', component: RoomListComponent},
   { path: 'room/create', component: RoomCreateComponent},
   { path: '404', component: NotFoundComponent},
