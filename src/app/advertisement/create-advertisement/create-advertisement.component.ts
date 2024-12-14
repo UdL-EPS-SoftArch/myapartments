@@ -80,7 +80,7 @@ export class CreateAdvertisementComponent implements OnInit{
         this.advertisement.apartment = apartment;
         this.advertisement.adStatus = this.initialStatus;
         this.advertisementService.createResource({ body: this.advertisement }).subscribe({
-          next: (advertisement) => {
+          next: () => {
             this.router.navigate(['/advertisements']);
           },
           error: (error) => {
