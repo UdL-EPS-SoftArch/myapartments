@@ -81,7 +81,7 @@ export class CreateAdvertisementComponent implements OnInit{
         this.advertisement.adStatus = this.initialStatus;
         this.advertisementService.createResource({ body: this.advertisement }).subscribe({
           next: (advertisement) => {
-            this.router.navigate([advertisement.uri]);
+            this.router.navigate(['/advertisements']);
           },
           error: (error) => {
             console.error('Error creating apartment:', error);
