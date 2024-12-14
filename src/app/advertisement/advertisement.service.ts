@@ -41,8 +41,9 @@ export class AdvertisementService extends HateoasResourceOperation<Advertisement
     return this.deleteResource(advertisement);
   }
 
-
-
+  public findByApartment(query: string): Observable<ResourceCollection<Advertisement>> {
+    return this.searchCollection('findByApartment', { params: { text: query } });
+  }
 
 
 }
