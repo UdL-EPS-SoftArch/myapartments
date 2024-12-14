@@ -59,7 +59,7 @@ export class MyAdvertisementComponent implements OnInit{
 
       next: (resourceCollection) => {
 
-        this.apartments = resourceCollection.resources || []; // Asegúrate de asignar un arreglo
+        this.apartments = resourceCollection.resources || [];
       },
       error: (err) => {
         console.error('Error fetching apartments:', err);
@@ -68,18 +68,17 @@ export class MyAdvertisementComponent implements OnInit{
     });
   }
   getAdvertisement(apartment: Apartment): Advertisement[]{
-    let roomList: Advertisement[] = [];
-    this.advertisementService.findByApartment(apartment).subscribe({
+    let advertisementsList: Advertisement[] = [];
+    this.advertisementService.findByApartment(apartment.id.toString()).subscribe({
       next: (resourceCollection) => {
-
-        roomList = resourceCollection.resources || [];
+        advertisementsList = resourceCollection.resources || [];
       },
       error: (err) => {
         console.error('Error fetching apartments:', err);
         this.errorMessageService.showErrorMessage('Failed to load apartments');
       },
     });
-    return roomList;
+    return advertisementsList;
   }
 
 }

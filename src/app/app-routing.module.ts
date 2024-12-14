@@ -19,6 +19,7 @@ import { VisitStatusComponent } from './visit/visit-status/visit-status.componen
 import { VisitCancelComponent } from './visit/visit-cancel/visit-cancel.component';
 import { RoomListComponent } from './room/room-list/room-list.component';
 import { RoomCreateComponent } from './room/room-create/room-create.component';
+import {MyAdvertisementComponent} from './advertisement/my-advertisement-list/my-advertisement.component';
 
 
 const routes: Routes = [
@@ -31,6 +32,7 @@ const routes: Routes = [
   { path: 'advertisement/create', component: CreateAdvertisementComponent},
   { path: 'advertisements', component: AdvertisementListComponent},
   { path: 'advertisement/:id/delete', component: DeleteAdvertisementComponent, canActivate: [LoggedInGuard] },
+  { path: 'myAdvertisement', component: MyAdvertisementComponent},
   { path: 'apartments', component: ApartmentListComponent},
   { path: 'apartment/create', component: ApartmentCreateComponent},
   { path: 'apartment/:id/update', component: ApartmentUpdateComponent},
