@@ -4,20 +4,22 @@ import { AdvertisementStatus } from "../advertisement-status/advertisementStatus
 
 @HateoasResource('advertisements')
 export class Advertisement extends Resource {
-    title: string = ''; 
-    description: string = ''; 
-    price: number = 0.01; 
-    zipCode: string = ''; 
-    country: string = ''; 
-    address: string = ''; 
-    creationDate: Date = new Date(); 
-    expirationDate?: Date; 
-  
-    adStatus: string = ''; 
-    apartment: string = ''; 
-  
+    id: number = 0;
+    title: string = '';
+    description: string = '';
+    price: number = 0.01;
+    zipCode: string = '';
+    country: string = '';
+    address: string = '';
+    creationDate: Date = new Date();
+    expirationDate?: Date;
+    uri?: string;
+
+    adStatus: AdvertisementStatus | number = 0;
+    apartment: Apartment | number = 0;
+
     constructor(values: object = {}) {
         super();
-        Object.assign(this as any, values);
+        Object.assign(this , values);
     }
 }
