@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { Advertisement } from '../advertisement';
 import { AdvertisementService } from '../advertisement.service';
 import { CommonModule } from '@angular/common';
+import {Apartment} from '../../apartment/apartment';
 
 @Component({
   selector: 'app-advertisement-list',
@@ -12,21 +13,44 @@ import { CommonModule } from '@angular/common';
 })
 export class AdvertisementListComponent implements OnInit {
   advertisements: Advertisement[] = [];
+  @Input() maxAdvertisements: number = 10;
+  @Input() apartment: Apartment;
+  loading: boolean = false; // flag of charge
 
-  constructor(private advertisementService: AdvertisementService) {}
+  constructor(private advertisementService: AdvertisementService) {
+  }
 
   ngOnInit() {
     this.loadAdvertisements();
   }
 
   loadAdvertisements() {
-    this.advertisementService.getAllAdvertisements().subscribe({
-      next: (response) => {
-        this.advertisements = response.resources;
-      },
-      error: (err) => {
-        console.error('Error al cargar los anuncios:', err);
-      }
-    });
+    this.loading = true;
+    if (this.apartment) {
+      this.advertisementService.findByApartment(this.apartment).subscribe({
+        next: (collection) => {
+          this.advertisements = this.limitAds(collection.resources);
+          this.loading = false;
+        },
+        error: (err) => {
+          console.error('Error fetching advertisements by apartment:', err)
+          this.loading = false;
+        }
+      });
+    } else { // all advertisements
+      this.advertisementService.getAllAdvertisements().subscribe({
+        next: (collection) => {
+          this.advertisements = this.limitAds(collection.resources);
+          this.loading = false;
+        },
+        error: (err) => {
+          console.error('Error fetching advertisements:', err)
+          this.loading = false;
+        },
+      });
+    }
+  }
+  private limitAds(ads: Advertisement[]): Advertisement[] {
+    return this.maxAdvertisements === -1 ? ads : ads.slice(0, this.maxAdvertisements);
   }
 }
