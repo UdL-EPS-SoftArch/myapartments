@@ -1,5 +1,5 @@
 import { HateoasResource, Resource } from '@lagoshny/ngx-hateoas-client';
-import { Apartment } from "./../apartment/apartment";
+import { Apartment } from '../apartment/apartment';
 
 @HateoasResource('rooms')
 export class Room extends Resource {
@@ -9,12 +9,20 @@ export class Room extends Resource {
   hasWindow: boolean = false;
   hasDesk: boolean = false;
   hasBed: boolean = false;
-  apart: Apartment | undefined;
+  apart: Apartment = new Apartment;
   ownerId?: string;
   uri: string = '';
 
   constructor(values: object = {}) {
     super();
     Object.assign(this, values);
+  }
+
+
+  getRoomIdFromLinks(): string {
+    if (this._links?.self?.href) {
+      return this._links.self.href.split('/').pop() || ''; // Último segmento
+    }
+    return this.id || '';
   }
 }

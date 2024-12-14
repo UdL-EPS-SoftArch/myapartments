@@ -1,19 +1,117 @@
 /* You can add global styles to this file, and also import other style files */
 
 #spinner {
-  display: inline-block;
-  width: 50px;
-  height: 50px;
-  border: 3px solid rgba(0,0,0,.3);
-  border-radius: 50%;
-  border-top-color: #fff;
-  animation: spin 1s ease-in-out infinite;
-  -webkit-animation: spin 1s ease-in-out infinite;
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(0, 0, 0, 0);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 1s ease-in-out infinite;
+    -webkit-animation: spin 1s ease-in-out infinite;
 }
 
 @keyframes spin {
-  to { -webkit-transform: rotate(360deg); }
+    to {
+        -webkit-transform: rotate(360deg);
+    }
 }
+
 @-webkit-keyframes spin {
-  to { -webkit-transform: rotate(360deg); }
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+
+/*Create button style*/
+
+.createButton {
+    border: 0;
+    background-image: linear-gradient( 150deg, #9500, #008000, #ADFF2F);
+    border-radius: 8px;
+    color: #008000;
+    display: flex;
+    font-size: 16px;
+    padding: 4px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.createButton .createSpan {
+    background-color: #fff;
+    padding: 3px 16px;
+    border-radius: 6px;
+    transition: .3s;
+}
+
+.createButton:hover .createSpan {
+    background: none;
+    color: #fff;
+}
+
+.createButton:active {
+    transform: scale(0, 4)
+}
+
+
+/*Delete button style*/
+
+.deleteButton {
+    border: 0;
+    background-image: linear-gradient( 150deg, #9500, #B22222, #FF8C00);
+    border-radius: 8px;
+    color: #B22222;
+    display: flex;
+    font-size: 16px;
+    padding: 4px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.deleteButton .deleteSpan {
+    background-color: #fff;
+    padding: 3px 16px;
+    border-radius: 6px;
+    transition: .3s;
+}
+
+.deleteButton:hover .deleteSpan {
+    background: none;
+    color: #fff;
+}
+
+.deleteButton:active {
+    transform: scale(0, 4)
+}
+
+
+/*update button style*/
+
+.updateButton {
+    border: 0;
+    background-image: linear-gradient( 150deg, #9500, #8B4513, #D2B48C);
+    border-radius: 8px;
+    color: #8B4513;
+    display: flex;
+    font-size: 16px;
+    padding: 4px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.updateButton .updateSpan {
+    background-color: #fff;
+    padding: 3px 16px;
+    border-radius: 6px;
+    transition: .3s;
+}
+
+.updateButton:hover .updateSpan {
+    background: none;
+    color: #fff;
+}
+
+.updateButton:active {
+    transform: scale(0, 4)
 }
