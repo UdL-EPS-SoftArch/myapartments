@@ -72,6 +72,15 @@ export class ApartmentListComponent implements OnInit {
       console.error('Invalid apartment ID');
     }
   }
+
+  updateApartment(apartmentId:  string): void {
+    if (apartmentId) {
+      console.log('Apartment ID:', apartmentId);
+      this.router.navigate([`/apartment/${apartmentId}/update`]);
+    } else {
+      console.error('Invalid apartment ID');
+    }
+  }
   createApartment(): void {
     this.router.navigate(['/apartment/create']);
   }

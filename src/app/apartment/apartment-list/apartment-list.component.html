@@ -18,6 +18,7 @@
                     <th>Description</th>
                     <th>Note</th>
                     <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -31,7 +32,10 @@
                     <td>{{ apartment.description || 'N/A' }}</td>
                     <td>{{ apartment.note || 'N/A' }}</td>
                     <td>
-                        <button class="btn btn-danger btn-sm" (click)="deleteApartment(apartment.getIdFromLinks())">Delete</button>
+                        <button class="deleteButton" (click)="deleteApartment(apartment.getIdFromLinks())"><span class = "deleteSpan">Delete</span></button>
+                    </td>
+                    <td>
+                        <button class="updateButton" (click)="updateApartment(apartment.getIdFromLinks())"><span class = "updateSpan">Edit</span></button>
                     </td>
                 </tr>
             </tbody>
