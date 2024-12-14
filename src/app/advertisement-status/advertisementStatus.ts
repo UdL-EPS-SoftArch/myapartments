@@ -1,10 +1,11 @@
 
 import { HateoasResource, Resource } from "@lagoshny/ngx-hateoas-client";
 
-@HateoasResource('advertisement-status')
+@HateoasResource('advertisementStatuses')
 export class AdvertisementStatus extends Resource {
-    id: number = 0;
     name: string = '';
+    uri: string = '';
+
     constructor(values: object = {}) {
         super();
         Object.assign(this , values);
