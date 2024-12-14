@@ -17,6 +17,7 @@ import { ApartmentUpdateComponent } from './apartment/apartment-update/apartment
 import { ApartmentDeleteComponent } from './apartment/apartment-delete/apartment-delete.component';
 import { VisitStatusComponent } from './visit/visit-status/visit-status.component';
 import { RoomListComponent } from './room/room-list/room-list.component';
+import {VisitCancelComponent} from './visit/visit-cancel/visit-cancel.component';
 
 const routes: Routes = [
   { path: 'users/create', component: UserRegisterComponent},
