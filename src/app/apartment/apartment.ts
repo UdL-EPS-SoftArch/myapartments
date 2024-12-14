@@ -15,6 +15,7 @@ export class Apartment extends Resource {
   detail: string = '';
   note?: string = '';
   registrationDate?: Date = new Date();
+  uri: string = '';
 
   constructor(values: object = {}) {
     super();

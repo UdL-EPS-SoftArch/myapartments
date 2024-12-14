@@ -7,7 +7,7 @@ import { Advertisement } from './advertisement';
 @Injectable({
   providedIn: 'root'
 })
-export class PetService extends HateoasResourceOperation<Advertisement> {
+export class AdvertisementService extends HateoasResourceOperation<Advertisement> {
   constructor(private http: HttpClient) {
     super(Advertisement);
   }
