@@ -108,4 +108,12 @@ export class RoomListComponent implements OnInit {
   getAparmentName(Apart: Apartment): string {
       return Apart.getName();
   }
+  deleteApartment(roomId: string): void {
+    if (roomId) {
+      console.log('Room ID:', roomId);
+      this.router.navigate([`/room/${roomId}/delete`]);
+    } else {
+      console.error('Invalid room ID');
+    }
+  }
 }

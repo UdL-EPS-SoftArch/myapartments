@@ -6,7 +6,7 @@
             <thead class="thead-dark">
                 <tr>
                     <th>ID</th>
-                    <th>Apartment Id</th>
+                    <th>Apartment Name</th>
                     <th>Bed</th>
                     <th>Window</th>
                     <th>Desk</th>
@@ -23,6 +23,7 @@
                     <td>{{ room.hasDesk }}</td>
                     <td>{{ room.isOccupied }}</td>
                     <td>{{ room.surface}}</td>
+                    <td><button class="deleteButton" (click)="deleteRoom(room.getRoomIdFromLinks())"><span class="deleteSpan">Delete</span></button></td>
                 </tr>
             </tbody>
         </table>
