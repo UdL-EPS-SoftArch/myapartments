@@ -116,4 +116,12 @@ export class RoomListComponent implements OnInit {
       console.error('Invalid room ID');
     }
   }
+  updateRoom(roomId: string): void {
+    if (roomId) {
+      console.log('Room ID:', roomId);
+      this.router.navigate([`/room/update/${roomId}`]);
+    } else {
+      console.error('Invalid room ID');
+    }
+  }
 }
