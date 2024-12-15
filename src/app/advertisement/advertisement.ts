@@ -4,7 +4,6 @@ import { AdvertisementStatus } from "../advertisement-status/advertisementStatus
 
 @HateoasResource('advertisements')
 export class Advertisement extends Resource {
-    id: number = 0;
     title: string = '';
     description: string = '';
     price: number = 0.01;
