@@ -92,10 +92,16 @@ export class RoomListComponent implements OnInit {
 
   getRooms(apartment: Apartment): Observable<Room[]> {
     return this.roomService.findByApartment(apartment).pipe(
-      map((resourceCollection) => resourceCollection.resources || [])
+      map((resourceCollection) => {
+        const rooms = resourceCollection.resources || [];
+        // Ensure each room has the correct 'apart' property assigned
+        rooms.forEach(room => {
+          room.apart = apartment; // Assign the apartment to each room
+        });
+        return rooms;
+      })
     );
   }
-
   createRoom(): void {
     this.router.navigate(['/room/create']);
   }

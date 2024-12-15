@@ -6,7 +6,7 @@
             <thead class="thead-dark">
                 <tr>
                     <th>ID</th>
-                    <th>Apartment name</th>
+                    <th>Apartment Id</th>
                     <th>Bed</th>
                     <th>Window</th>
                     <th>Desk</th>
@@ -17,7 +17,7 @@
             <tbody>
                 <tr *ngFor="let room of rooms">
                     <td>{{ room.getRoomIdFromLinks() }}</td>
-                    <td>{{ room.apart.name }}</td>
+                    <td>{{ room.apart.getName() }}</td>
                     <td>{{ room.hasBed}}</td>
                     <td>{{ room.hasWindow }}</td>
                     <td>{{ room.hasDesk }}</td>
