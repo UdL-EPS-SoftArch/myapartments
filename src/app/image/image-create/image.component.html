@@ -1,0 +1,45 @@
+<div class="container mt-4">
+  <h3 class="mb-3">Upload Images for Apartment</h3>
+
+  <div class="mb-3">
+    <label for="imageUpload" class="form-label">Select images (PNG, JPG)</label>
+    <input
+      type="file"
+      id="imageUpload"
+      (change)="onFileSelected($event)"
+      accept="image/png, image/jpeg"
+      multiple
+      class="form-control"
+    />
+  </div>
+
+  <!-- Image gallery -->
+  <div *ngIf="selectedImages.length > 0" class="image-gallery mt-4">
+    <h5>Selected Images:</h5>
+    <div class="d-flex flex-wrap gap-3">
+      <div class="image-wrapper position-relative" *ngFor="let image of selectedImages; let i = index">
+
+        <img [src]="getObjectURL(image)" alt="Selected Image" class="img-thumbnail" />
+
+        <span
+          class="remove-icon position-absolute top-0 end-0 bg-danger text-white rounded-circle"
+          (click)="removeImage(i)"
+          title="Remove Image"
+        >
+          &times;
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="footer-button">
+  <button
+    type="button"
+    class="btn btn-primary btn-lg"
+    (click)="onSubmit()"
+  >
+    Save Images
+  </button>
+</div>

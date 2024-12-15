@@ -1,0 +1,16 @@
+@if (errorFetchMsg){
+<div class="alert alert-danger" role="alert">
+  {{ errorFetchMsg }}
+</div>
+}
+@else {
+
+<app-visit-status></app-visit-status>
+@if(visit.status !== "CANCELLED"){
+<div class="d-flex justify-content-center">
+  <button type="button" (click)="onCancel()" class="btn btn-danger mt-3" style="border-radius: 50px; padding: 10px 20px;">
+    Cancel
+  </button>
+</div>
+}
+}

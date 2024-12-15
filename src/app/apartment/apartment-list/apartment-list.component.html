@@ -1,1 +1,45 @@
-<p>apartment-list works!</p>
+<div class="apartment-list-container">
+    <h2> My apartments</h2>
+
+    <div *ngIf="apartments.length === 0" class="no-apartments">
+        <p>No hay apartamentos disponibles.</p>
+    </div>
+
+    <div *ngIf="apartments.length > 0" class="table-responsive">
+        <table class="table table-striped table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Floor</th>
+                    <th>Postal Code</th>
+                    <th>Registration date</th>
+                    <th>Description</th>
+                    <th>Note</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let apartment of apartments">
+                    <td>{{ apartment.getIdFromLinks() }}</td>
+                    <td>{{ apartment.name }}</td>
+                    <td>{{ apartment.address }}, {{ apartment.city }}, {{ apartment.country }}</td>
+                    <td>{{ apartment.floor }}</td>
+                    <td>{{ apartment.postalCode }}</td>
+                    <td>{{ apartment.registrationDate | date }}</td>
+                    <td>{{ apartment.description || 'N/A' }}</td>
+                    <td>{{ apartment.note || 'N/A' }}</td>
+                    <td>
+                        <button class="deleteButton" (click)="deleteApartment(apartment.getIdFromLinks())"><span class = "deleteSpan">Delete</span></button>
+                    </td>
+                    <td>
+                        <button class="updateButton" (click)="updateApartment(apartment.getIdFromLinks())"><span class = "updateSpan">Edit</span></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <button class="createButton" (click)="createApartment()"><span class="createSpan">Create</span></button>
+    </div>
+</div>
