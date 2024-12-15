@@ -4,44 +4,44 @@
     <form (ngSubmit)="onSubmit()" #roomForm="ngForm">
         <div class="mb-3">
             <label for="name" class="form-label">Select apartment</label>
-            <select class="form-select" id="apartmentSelect" required [(ngModel)]="apartmentId" (ngModelChange)="onApartmentChange()">
-      <option value="" disabled>Select...</option>
-      <option *ngFor="let apartment_value of apartments" [value]="apartment_value.id">
-          {{ apartment_value.name }}
-      </option>
-    </select>
+            <select class="form-select" id="apartmentSelect" required [(ngModel)]="this.apartmentId">
+                <option value="" disabled>Select...</option>
+                <option *ngFor="let apartment_value of apartments" [value]="apartment_value.id">
+                    {{ apartment_value.name }}
+                </option>
+            </select>
         </div>
         <div class="mb-3">
             <label for="name" class="form-label">Is ocuppied ?</label>
-            <select class="form-control" id="trueFalseSelectOcupied" required [(ngModel)]="room.isOccupied">
-      <option value="" disabled>Select...</option>
-      <option [value]="true">True</option>
-      <option [value]="false">False</option>
-    </select>
+            <select class="form-select" id="trueFalseSelectOcupied" required [(ngModel)]="this.room.isOccupied">
+              <option value="" disabled>Select...</option>
+              <option [value]="true">True</option>
+              <option [value]="false">False</option>
+            </select>
         </div>
         <div class="mb-3">
             <label for="name" class="form-label">Has bed ?</label>
-            <select class="form-control" id="trueFalseSelectHasBed" required [(ngModel)]="room.hasBed">
-      <option value="" disabled>Select...</option>
-      <option [value]="true">True</option>
-      <option [value]="false">False</option>
-    </select>
+            <select class="form-select" id="trueFalseSelectHasBed" required [(ngModel)]="this.room.hasBed">
+              <option value="" disabled>Select...</option>
+              <option [value]="true">True</option>
+              <option [value]="false">False</option>
+            </select>
         </div>
         <div class="mb-3">
             <label for="name" class="form-label">Has window ?</label>
-            <select class="form-control" id="trueFalseSelectHasWindow" required [(ngModel)]="room.hasWindow">
-      <option value="" disabled>Select...</option>
-      <option [value]="true">True</option>
-      <option [value]="false">False</option>
-    </select>
+            <select class="form-select" id="trueFalseSelectHasWindow" required [(ngModel)]="this.room.hasWindow">
+              <option value="" disabled>Select...</option>
+              <option [value]="true">True</option>
+              <option [value]="false">False</option>
+            </select>
         </div>
         <div class="mb-3">
             <label for="name" class="form-label">Has desk ?</label>
-            <select class="form-control" id="trueFalseSelectHasDesk" required [(ngModel)]="room.hasDesk">
-      <option value="" disabled>Select...</option>
-      <option [value]="true">True</option>
-      <option [value]="false">False</option>
-    </select>
+            <select class="form-select" id="trueFalseSelectHasDesk" required [(ngModel)]="this.room.hasDesk">
+              <option value="" disabled>Select...</option>
+              <option [value]="true">True</option>
+              <option [value]="false">False</option>
+            </select>
         </div>
 
 

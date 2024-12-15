@@ -1,8 +1,13 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { RoomService } from '../room.service';
 import { Room } from '../room';
 import { Apartment } from '../../apartment/apartment';
 import { CommonModule } from '@angular/common';
+import { ApartmentService } from '../../apartment/apartment.service';
+import { User } from '../../login-basic/user';
+import { ErrorMessageService } from '../../error-handler/error-message.service';
+import { AuthenticationBasicService } from '../../login-basic/authentication-basic.service';
 
 @Component({
   selector: 'app-room-list',
@@ -12,25 +17,76 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./room-list.component.css']
 })
 export class RoomListComponent implements OnInit {
-  @Input() apartment!: Apartment;
-  // Max number of rooms to show, set to -1 to show all
-  @Input() maxRooms: number = 10;
-  rooms: Room[] = [];
 
-  constructor(private roomService: RoomService) {}
+  public apartments: Apartment[] = [];
+  public currentUser:  User = new User();
+  public rooms: Room[] = [];
+  public isShowed: boolean = false;
 
+
+
+
+  constructor(
+    private router: Router,
+    private roomService: RoomService,
+    private apartmentService: ApartmentService,
+    private errorMessageService: ErrorMessageService,
+    private authenticationService: AuthenticationBasicService,
+
+  ) {
+  }
   ngOnInit(): void {
-    if (this.apartment) {
-      this.roomService.findByApartment(this.apartment).subscribe({
-        next: (collection) => {
-          if (this.maxRooms === -1) {
-            this.rooms = collection.resources;
-          } else {
-            this.rooms = collection.resources.slice(0, this.maxRooms);
-          }
-        },
-        error: (err) => console.error('Error fetching rooms:', err),
-      });
+    this.currentUser = this.authenticationService.getCurrentUser();
+    this.isShowed = this.isOwner();
+
+    if (!this.isShowed) {
+      this.onNotShowed();
     }
+    if (this.currentUser) {
+      this.getAparments();
+      for( const apartment of this.apartments ){
+        apartment.id = apartment.getIdFromLinks();
+        this.rooms.concat(this.getRooms(apartment));
+      }
+
+    } else {
+      console.log('User not authenticated');
+    }
+  }
+  private isOwner(): boolean {
+    return this.currentUser.getRoles().includes('owner');
+  }
+
+  private onNotShowed(): void {
+    this.errorMessageService.showErrorMessage('You are not an owner');
+    this.router.navigate(['/apartments']);
+  }
+
+  getAparments(): void{
+    this.apartmentService.findByOwner(this.currentUser).subscribe({
+
+      next: (resourceCollection) => {
+
+        this.apartments = resourceCollection.resources || []; // Asegúrate de asignar un arreglo
+      },
+      error: (err) => {
+        console.error('Error fetching apartments:', err);
+        this.errorMessageService.showErrorMessage('Failed to load apartments');
+      },
+    });
+  }
+  getRooms(apartment: Apartment): Room[]{
+    let roomList: Room[] = [];
+    this.roomService.findByApartment(apartment).subscribe({
+      next: (resourceCollection) => {
+
+        roomList = resourceCollection.resources || []; // Asegúrate de asignar un arreglo
+      },
+      error: (err) => {
+        console.error('Error fetching apartments:', err);
+        this.errorMessageService.showErrorMessage('Failed to load apartments');
+      },
+    });
+    return roomList;
   }
 }

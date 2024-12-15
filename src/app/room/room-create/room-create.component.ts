@@ -46,8 +46,7 @@ export class RoomCreateComponent implements OnInit {
       return;
     }
 
-    this.room.apart = this.apartment;
-
+    this.room.apart = this.apartments.find(apart => apart.id === this.apartmentId) as Apartment;
     this.roomService.createResource({body: this.room}).subscribe(() => {
       this.router.navigate(['/room' + this.room.id])
       },
@@ -57,26 +56,12 @@ export class RoomCreateComponent implements OnInit {
     );
 
   }
-  onApartmentChange(): void {
-    this.setApartment(this.apartmentId);
-  }
 
 
 
 
   private canCreate(): boolean {
     return this.user.getRoles().includes('owner');
-  }
-
-  setApartment( apartmentId: string): void {
-    this.apartmentService.findById(apartmentId).subscribe({
-      next: (response) => {
-        this.apartment = response.resources[0];
-      },
-      error: (err) => {
-        console.error('Error fetching apartment:', err);
-      }
-    });
   }
 
   getOwnersApartment(): void{
