@@ -13,8 +13,6 @@ import { Room } from '../room';
 import { AuthenticationBasicService } from '../../login-basic/authentication-basic.service';
 import { ErrorMessageService } from '../../error-handler/error-message.service';
 import { CommonModule } from '@angular/common';
-import {ApartmentService} from '../../apartment/apartment.service';
-import {Apartment} from '../../apartment/apartment';
 
 @Component({
   selector: 'app-room-update',
@@ -38,7 +36,6 @@ export class RoomUpdateComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private errorMessageService: ErrorMessageService,
     private authenticationService: AuthenticationBasicService,
-    private apartmentServices: ApartmentService,
   ) {}
 
   ngOnInit(): void {
