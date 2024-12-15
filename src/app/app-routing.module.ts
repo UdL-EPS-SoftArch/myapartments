@@ -40,7 +40,7 @@ const routes: Routes = [
   { path: 'visit/:id/cancel', component:VisitCancelComponent},
   { path: 'rooms', component: RoomListComponent},
   { path: 'room/create', component: RoomCreateComponent},
-  { path: 'room/delete', component: RoomDeleteComponent},
+  { path: 'room/:id/delete', component: RoomDeleteComponent},
   { path: '404', component: NotFoundComponent},
   { path: '', redirectTo: 'about', pathMatch: 'full'}
 ];
