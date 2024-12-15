@@ -13,6 +13,8 @@ import { Room } from '../room';
 import { AuthenticationBasicService } from '../../login-basic/authentication-basic.service';
 import { ErrorMessageService } from '../../error-handler/error-message.service';
 import { CommonModule } from '@angular/common';
+import {ApartmentService} from '../../apartment/apartment.service';
+import {Apartment} from '../../apartment/apartment';
 
 @Component({
   selector: 'app-room-update',
@@ -28,6 +30,7 @@ export class RoomUpdateComponent implements OnInit {
   public roomId: string = '';
   public isLoading: boolean = false;
   public isAuthorized: boolean = false;
+  public apartment: Apartment = new Apartment();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -36,6 +39,7 @@ export class RoomUpdateComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private errorMessageService: ErrorMessageService,
     private authenticationService: AuthenticationBasicService,
+    private apartmentServices: ApartmentService,
   ) {}
 
   ngOnInit(): void {
@@ -79,7 +83,7 @@ export class RoomUpdateComponent implements OnInit {
       hasWindow: this.room.hasWindow || false,
       hasDesk: this.room.hasDesk || false,
       hasBed: this.room.hasBed || false,
-      apartName: this.room.apart?.name || '', // Asigna el nombre del apartamento
+      apartName: this.room.apart || '', // Asigna el nombre del apartamento
     });
   }
 

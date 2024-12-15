@@ -42,7 +42,7 @@ const routes: Routes = [
   { path: 'room/create', component: RoomCreateComponent},
   { path: '404', component: NotFoundComponent},
   { path: '', redirectTo: 'about', pathMatch: 'full'},
-  { path: 'room/update/:id', component: RoomUpdateComponent },
+  { path: 'room/update/:id', component: RoomUpdateComponent }
 ];
 
 @NgModule({

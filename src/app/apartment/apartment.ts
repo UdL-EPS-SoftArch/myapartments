@@ -30,4 +30,8 @@ export class Apartment extends Resource {
     return this.id;
   }
 
+  getName(): string {
+    return this.name;
+  }
+
 }
