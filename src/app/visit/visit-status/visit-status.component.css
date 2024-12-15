@@ -1,0 +1,75 @@
+h1 {
+  text-align: center;
+  color: #2c3e50;
+  font-family: 'Arial', sans-serif;
+  margin-bottom: 20px;
+}
+
+.status-table {
+  width: 80%;
+  margin: 0 auto;
+  border-collapse: collapse;
+  font-family: 'Arial', sans-serif;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+}
+
+.status-table th, .status-table td {
+  padding: 12px 15px;
+  text-align: center;
+}
+
+.status-table th {
+  background-color: #49565a;
+  color: white;
+  text-transform: uppercase;
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+.status-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.status-table tr:hover {
+  background-color: #eaf3fc;
+}
+
+.status-table td {
+  font-size: 14px;
+  color: #2c3e50;
+}
+/* Estilo para el status */
+.status {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  text-transform: capitalize;
+  justify-content: center;
+}
+
+.status::before {
+  content: '';
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+/* Colores segÃºn el estado */
+.status.pending::before {
+  background-color: #f1c40f; /* Amarillo */
+}
+
+.status.rejected::before {
+  background-color: #e74c3c; /* Rojo */
+}
+
+.status.cancelled::before {
+  background-color: #e74c3c; /* Rojo */
+}
+
+.status.accepted::before {
+  background-color: #2ecc71; /* Verde */
+}
