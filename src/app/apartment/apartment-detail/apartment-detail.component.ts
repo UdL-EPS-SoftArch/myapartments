@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Apartment } from '../apartment';
 import {ApartmentService} from '../apartment.service';
 import {User} from '../../login-basic/user';
@@ -14,7 +14,7 @@ import {NgbCarouselModule} from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './apartment-detail.component.html',
   styleUrl: './apartment-detail.component.css'
 })
-export class ApartmentDetailComponent {
+export class ApartmentDetailComponent implements OnInit {
   apartment: Apartment = new Apartment();
   owner: User = new User();
   room: Room = new Room();
