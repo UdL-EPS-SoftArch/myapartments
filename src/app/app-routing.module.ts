@@ -32,7 +32,7 @@ const routes: Routes = [
   { path: 'advertisement/create', component: CreateAdvertisementComponent},
   { path: 'advertisements', component: AdvertisementListComponent},
   { path: 'advertisement/:id/delete', component: DeleteAdvertisementComponent, canActivate: [LoggedInGuard] },
-  { path: 'myAdvertisement', component: MyAdvertisementComponent},
+  { path: 'advertisements/myAdvertisement', component: MyAdvertisementComponent},
   { path: 'apartments', component: ApartmentListComponent},
   { path: 'apartment/create', component: ApartmentCreateComponent},
   { path: 'apartment/:id/update', component: ApartmentUpdateComponent},

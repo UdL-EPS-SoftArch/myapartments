@@ -80,5 +80,8 @@ export class MyAdvertisementComponent implements OnInit{
     });
     return advertisementsList;
   }
+  navigateToCreate(): void {
+    this.router.navigate(['/advertisement/create']);
+  }
 
 }

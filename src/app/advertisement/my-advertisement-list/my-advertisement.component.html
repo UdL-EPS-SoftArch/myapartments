@@ -1,58 +1,45 @@
 <div class="container mt-4">
-  <h2 class="text-center mb-4">My Advertisements</h2>
-
+  <h2 class="text-center mb-4">My Advertisements list</h2>
   <div *ngIf="!isShowed" class="alert alert-warning" role="alert">
     You are not an owner. Redirecting to apartments...
   </div>
-
-  <div *ngIf="advertisements.length === 0 && isShowed" class="text-center my-4">
-    <div class="spinner-border" role="status">
-      <span class="visually-hidden">Loading advertisements...</span>
-    </div>
+  <div class="text-end mb-4">
+    <button class="btn btn-primary" (click)="navigateToCreate()">
+      Create New Advertisement
+    </button>
   </div>
-
   <div class="row">
     <div class="col-12" *ngFor="let ad of advertisements">
       <div class="card mb-4">
         <div class="card-block">
-          <!-- Card Header -->
           <div class="card-header row m-1 text-center">
             <h5>Advertisement</h5>
           </div>
-
           <div class="card-body row m-1">
-            <!-- Título -->
             <div class="col-md-6 p-3">
               <h6 class="card-subtitle text-muted">Title</h6>
               <p class="card-text">{{ ad.title }}</p>
             </div>
-
             <div class="col-md-6 p-3">
               <h6 class="card-subtitle text-muted">Price</h6>
               <p class="card-text">{{ ad.price | currency }}</p>
             </div>
-
-            <!-- Zip Code -->
             <div class="col-md-6 p-3">
               <h6 class="card-subtitle text-muted">Zip Code</h6>
               <p class="card-text">{{ ad.zipCode }}</p>
             </div>
-
             <div class="col-md-6 p-3">
               <h6 class="card-subtitle text-muted">Country</h6>
               <p class="card-text">{{ ad.country }}</p>
             </div>
-
             <div class="col-md-6 p-3">
               <h6 class="card-subtitle text-muted">Address</h6>
               <p class="card-text">{{ ad.address }}</p>
             </div>
-
             <div class="col-md-6 p-3">
               <h6 class="card-subtitle text-muted">Creation Date</h6>
               <p class="card-text">{{ ad.creationDate | date: 'dd/MM/yyyy HH:mm:ss' }}</p>
             </div>
-
             <div class="col-12 p-3">
               <h6 class="card-subtitle text-muted">Description</h6>
               <p class="card-text">{{ ad.description }}</p>
@@ -62,7 +49,6 @@
       </div>
     </div>
   </div>
-
   <div *ngIf="advertisements.length === 0 && isShowed" class="alert alert-info mt-4" role="alert">
     You currently have no advertisements.
   </div>

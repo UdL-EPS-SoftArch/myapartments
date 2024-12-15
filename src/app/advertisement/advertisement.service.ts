@@ -42,7 +42,7 @@ export class AdvertisementService extends HateoasResourceOperation<Advertisement
   }
 
   public findByApartment(apartmentId: string): Observable<ResourceCollection<Advertisement>> {
-    return this.searchCollection('findByApartment', { params: { text: apartmentId } });
+    return this.searchCollection('findByApartment', { params: { apart: apartmentId } });
   }
 
 }
