@@ -4,10 +4,17 @@
     <span class="navbar-toggler-icon"></span>
   </button>
 
+
     <div class="collapse navbar-collapse" id="navbarContent" [ngbCollapse]="isCollapsed">
         <ul class="navbar-nav">
+          
             <li class="nav-item" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{ exact: true }">
                 <a class="nav-link" [routerLink]="['/about']">About</a>
+            </li>
+          
+            <!--LIST ADVERTISEMENTS-->
+            <li class="nav-item" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{ exact: true }">
+              <a class="nav-link" [routerLink]="['/advertisements']">Advertisements List</a>
             </li>
 
             <!--LIST APARTMENT-->
