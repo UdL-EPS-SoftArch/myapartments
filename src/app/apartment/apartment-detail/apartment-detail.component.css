@@ -17,3 +17,15 @@ img {
   cursor: auto;
   background-color: #212529;
 }
+
+.contact-box {
+  background-color: #c7c8c9;
+  color: black;
+  padding: 15px 25px 0 25px;
+  border-radius: 4px;
+}
+
+.hr-bottom {
+  margin-bottom: 40px;
+  margin-top: 16vh;
+}

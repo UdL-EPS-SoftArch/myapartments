@@ -13,15 +13,9 @@
       <div class="col">
         <p>{{ apartment.description }}</p>
 
-
         <div class="mt-4">
           <span class="btn btn-dark">Planta {{ apartment.floor }}</span>
         </div>
-
-        <!--
-        <p>{{ room.isOccupied }}</p>
-        <p>...</p>
-        -->
       </div>
 
       <div class="col h-100">
@@ -31,11 +25,6 @@
               <div class="picsum-img-wrapper">
                 <img class="img-fluid" [src]="images[0]" alt="Random first slide" />
               </div>
-              <!--
-              <div class="carousel-caption">
-                <h3>First slide label</h3>
-                <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-              </div> -->
             </ng-template>
             <ng-template ngbSlide>
               <div class="picsum-img-wrapper">
@@ -53,11 +42,16 @@
     </div>
   </div>
 
-  <div>
+
+
+  <div style="margin-bottom: 15px">
+    <hr class="hr-bottom">
     <h3>Contact</h3>
-    <div>
-      <p>{{ owner.username }}</p>
-      <p>{{ owner.email }}</p>
+    <p>Envia'm un correu electrònic si tens alguna pregunta sobre el pis o vols ficar-te en contacte amb mi per acordar una visita :)</p>
+
+    <div class="d-flex justify-content-between align-items-center contact-box">
+      <p>Username: <strong>{{ owner.username }}</strong></p>
+      <p>Email: <strong>{{ owner.email }}</strong></p>
     </div>
   </div>
 </div>
