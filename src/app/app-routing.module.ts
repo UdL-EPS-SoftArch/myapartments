@@ -19,6 +19,7 @@ import { VisitStatusComponent } from './visit/visit-status/visit-status.componen
 import { VisitCancelComponent } from './visit/visit-cancel/visit-cancel.component';
 import { RoomListComponent } from './room/room-list/room-list.component';
 import { RoomCreateComponent } from './room/room-create/room-create.component';
+import {RoomUpdateComponent} from './room/room-update/room-update.component';
 
 
 const routes: Routes = [
@@ -40,7 +41,8 @@ const routes: Routes = [
   { path: 'rooms', component: RoomListComponent},
   { path: 'room/create', component: RoomCreateComponent},
   { path: '404', component: NotFoundComponent},
-  { path: '', redirectTo: 'about', pathMatch: 'full'}
+  { path: '', redirectTo: 'about', pathMatch: 'full'},
+  { path: 'room/update/:id', component: RoomUpdateComponent },
 ];
 
 @NgModule({
