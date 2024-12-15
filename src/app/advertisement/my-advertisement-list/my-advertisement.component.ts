@@ -8,6 +8,9 @@ import { User } from '../../login-basic/user';
 import {ApartmentService} from '../../apartment/apartment.service';
 import {AuthenticationBasicService} from '../../login-basic/authentication-basic.service';
 import { ErrorMessageService } from '../../error-handler/error-message.service';
+import { forkJoin, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
 @Component({
   selector: 'app-my-advertisement',
   standalone: true,
@@ -36,15 +39,11 @@ export class MyAdvertisementComponent implements OnInit{
     }
     if (this.currentUser) {
       this.getAparments();
-      for( const apartment of this.apartments ){
-        apartment.id = apartment.getIdFromLinks();
-        this.advertisements.concat(this.getAdvertisement(apartment));
-      }
-
     } else {
       console.log('User not authenticated');
     }
   }
+
   private isOwner(): boolean {
     return this.currentUser.getRoles().includes('owner');
   }
@@ -54,32 +53,46 @@ export class MyAdvertisementComponent implements OnInit{
     this.router.navigate(['/apartments']);
   }
 
-  getAparments(): void{
+  getAparments(): void {
     this.apartmentService.findByOwner(this.currentUser).subscribe({
-
       next: (resourceCollection) => {
-
         this.apartments = resourceCollection.resources || [];
+        if (this.apartments.length > 0) {
+          this.loadAdvertisementsForApartments();
+        }
       },
       error: (err) => {
         console.error('Error fetching apartments:', err);
         this.errorMessageService.showErrorMessage('Failed to load apartments');
-      },
+      }
     });
   }
-  getAdvertisement(apartment: Apartment): Advertisement[]{
-    let advertisementsList: Advertisement[] = [];
-    this.advertisementService.findByApartment(apartment.id.toString()).subscribe({
-      next: (resourceCollection) => {
-        advertisementsList = resourceCollection.resources || [];
+
+  loadAdvertisementsForApartments(): void {
+    const AdvertisementsRequests: Observable<Advertisement[]>[] = this.apartments.map((apartment) => {
+      apartment.id = apartment.getIdFromLinks();
+      apartment.owner = this.currentUser;
+      return this.getAdvertisements(apartment);
+    });
+
+    forkJoin(AdvertisementsRequests).subscribe({
+      next: (AdvertisementsArray) => {
+        this.advertisements = AdvertisementsArray.flat();
+        console.log(this.advertisements);
       },
       error: (err) => {
-        console.error('Error fetching apartments:', err);
-        this.errorMessageService.showErrorMessage('Failed to load apartments');
-      },
+        console.error('Error fetching Advertisement:', err);
+        this.errorMessageService.showErrorMessage('Failed to load Advertisement');
+      }
     });
-    return advertisementsList;
   }
+
+  getAdvertisements(apartment: Apartment): Observable<Advertisement[]> {
+    return this.advertisementService.findByApartment(apartment).pipe(
+      map((resourceCollection) => resourceCollection.resources || [])
+    );
+  }
+
   navigateToCreate(): void {
     this.router.navigate(['/advertisement/create']);
   }

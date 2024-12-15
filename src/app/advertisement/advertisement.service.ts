@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { HateoasResourceOperation, PagedResourceCollection, ResourceCollection } from '@lagoshny/ngx-hateoas-client';
 import { Advertisement } from './advertisement';
+import {Apartment} from '../apartment/apartment';
 
 @Injectable({
   providedIn: 'root'
@@ -41,8 +42,8 @@ export class AdvertisementService extends HateoasResourceOperation<Advertisement
     return this.deleteResource(advertisement);
   }
 
-  public findByApartment(apartmentId: string): Observable<ResourceCollection<Advertisement>> {
-    return this.searchCollection('findByApartment', { params: { apart: apartmentId } });
+  public findByApartment(apartment: Apartment): Observable<ResourceCollection<Advertisement>> {
+    return this.searchCollection('findByApartment', { params: { apartment: apartment } });
   }
 
 }
