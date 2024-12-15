@@ -30,7 +30,6 @@ export class RoomUpdateComponent implements OnInit {
   public roomId: string = '';
   public isLoading: boolean = false;
   public isAuthorized: boolean = false;
-  public apartment: Apartment = new Apartment();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -53,7 +52,6 @@ export class RoomUpdateComponent implements OnInit {
       hasWindow: new FormControl(false),
       hasDesk: new FormControl(false),
       hasBed: new FormControl(false),
-      apartName: new FormControl({ value: '', disabled: true }, { validators: [Validators.required] }),
     });
 
     // Cargar la habitación desde el servicio
@@ -83,7 +81,6 @@ export class RoomUpdateComponent implements OnInit {
       hasWindow: this.room.hasWindow || false,
       hasDesk: this.room.hasDesk || false,
       hasBed: this.room.hasBed || false,
-      apartName: this.room.apart || '', // Asigna el nombre del apartamento
     });
   }
 
