@@ -19,6 +19,7 @@ import { VisitStatusComponent } from './visit/visit-status/visit-status.componen
 import { VisitCancelComponent } from './visit/visit-cancel/visit-cancel.component';
 import { RoomListComponent } from './room/room-list/room-list.component';
 import { RoomCreateComponent } from './room/room-create/room-create.component';
+import {VisitAcceptComponent} from './visit/visit-accept/visit-accept.component';
 
 
 const routes: Routes = [
@@ -37,6 +38,7 @@ const routes: Routes = [
   { path: 'apartment/:id/delete', component: ApartmentDeleteComponent},
   { path: 'visit/:id/status', component: VisitStatusComponent},
   { path: 'visit/:id/cancel', component:VisitCancelComponent},
+  { path: 'visit/:id/accept', component:VisitAcceptComponent},
   { path: 'rooms', component: RoomListComponent},
   { path: 'room/create', component: RoomCreateComponent},
   { path: '404', component: NotFoundComponent},

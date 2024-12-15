@@ -6,11 +6,14 @@ import {VisitService} from '../visit.service';
 import {ErrorMessageService} from '../../error-handler/error-message.service';
 import {AuthenticationBasicService} from '../../login-basic/authentication-basic.service';
 import {catchError, of} from 'rxjs';
+import {VisitStatusComponent} from '../visit-status/visit-status.component';
 
 @Component({
   selector: 'app-visit-accept',
   standalone: true,
-  imports: [],
+  imports: [
+    VisitStatusComponent
+  ],
   templateUrl: './visit-accept.component.html',
   styleUrl: './visit-accept.component.css'
 })
@@ -68,5 +71,29 @@ export class VisitAcceptComponent  implements OnInit{
   onUnauthorised(): void {
     this.errorMessageService.showErrorMessage('You are not authorized');
     this.router.navigate(['/about']);
+  }
+
+  onReject() {
+    if (!this.isAuthorized) {
+      this.onUnauthorised();
+      return;
+    }
+    this.visit.status = "REJECTED"
+    this.visitService.updateResource(this.visit)
+      .subscribe(() => {
+        window.location.reload();
+      })
+  }
+
+  onAccept(){
+    if (!this.isAuthorized) {
+      this.onUnauthorised();
+      return;
+    }
+    this.visit.status = "ACCEPTED"
+    this.visitService.updateResource(this.visit)
+      .subscribe(() => {
+        window.location.reload();
+      })
   }
 }
