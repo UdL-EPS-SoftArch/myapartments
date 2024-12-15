@@ -67,7 +67,7 @@ export class VisitCancelComponent implements OnInit{
   }
 
   private isAuthorised(): boolean {
-    return this.user.getRoles().includes('user');
+    return this.user.getRoles().includes('admin') || this.user.getRoles().includes('user');
   }
 
   onUnauthorised(): void {

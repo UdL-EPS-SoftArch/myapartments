@@ -65,7 +65,7 @@ export class VisitAcceptComponent  implements OnInit{
   }
 
   private isAuthorised(): boolean {
-    return this.user.getRoles().includes('owner');
+    return this.user.getRoles().includes('admin') || this.user.getRoles().includes('owner');
   }
 
   onUnauthorised(): void {
