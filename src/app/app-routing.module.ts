@@ -19,9 +19,8 @@ import { VisitStatusComponent } from './visit/visit-status/visit-status.componen
 import { VisitCancelComponent } from './visit/visit-cancel/visit-cancel.component';
 import { RoomListComponent } from './room/room-list/room-list.component';
 import { RoomCreateComponent } from './room/room-create/room-create.component';
-import {MyAdvertisementComponent} from './advertisement/my-advertisement-list/my-advertisement.component';
-
-
+import { MyAdvertisementComponent } from './advertisement/my-advertisement-list/my-advertisement.component';
+import { ImageCreateComponent } from './image/image-create/image.component';
 
 const routes: Routes = [
   { path: 'users/create', component: UserRegisterComponent},
@@ -38,6 +37,7 @@ const routes: Routes = [
   { path: 'apartment/create', component: ApartmentCreateComponent},
   { path: 'apartment/:id/update', component: ApartmentUpdateComponent},
   { path: 'apartment/:id/delete', component: ApartmentDeleteComponent},
+  { path: 'apartment/:id/images', component: ImageCreateComponent},
   { path: 'visit/:id/status', component: VisitStatusComponent},
   { path: 'visit/:id/cancel', component:VisitCancelComponent},
   { path: 'rooms', component: RoomListComponent},

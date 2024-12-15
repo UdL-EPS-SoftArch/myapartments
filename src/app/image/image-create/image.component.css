@@ -1,0 +1,57 @@
+.image-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.image-wrapper {
+  width: 150px;
+  height: 150px;
+  overflow: hidden;
+  position: relative;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.image-wrapper img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.remove-icon {
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.remove-icon:hover {
+  background-color: #c82333;
+}
+
+.footer-button {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px;
+  background-color: #f8f9fa;
+  display: flex;
+  justify-content: center;
+  z-index: 10;
+}
+
+.container {
+  padding-bottom: 80px;
+}
+
+
+.image-gallery {
+  margin-bottom: 60px;
+}
