@@ -8,6 +8,8 @@ import { ApartmentService } from '../../apartment/apartment.service';
 import { User } from '../../login-basic/user';
 import { ErrorMessageService } from '../../error-handler/error-message.service';
 import { AuthenticationBasicService } from '../../login-basic/authentication-basic.service';
+import { forkJoin, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-room-list',
@@ -19,12 +21,9 @@ import { AuthenticationBasicService } from '../../login-basic/authentication-bas
 export class RoomListComponent implements OnInit {
 
   public apartments: Apartment[] = [];
-  public currentUser:  User = new User();
+  public currentUser: User = new User();
   public rooms: Room[] = [];
   public isShowed: boolean = false;
-
-
-
 
   constructor(
     private router: Router,
@@ -32,9 +31,8 @@ export class RoomListComponent implements OnInit {
     private apartmentService: ApartmentService,
     private errorMessageService: ErrorMessageService,
     private authenticationService: AuthenticationBasicService,
+  ) {}
 
-  ) {
-  }
   ngOnInit(): void {
     this.currentUser = this.authenticationService.getCurrentUser();
     this.isShowed = this.isOwner();
@@ -44,15 +42,11 @@ export class RoomListComponent implements OnInit {
     }
     if (this.currentUser) {
       this.getAparments();
-      for( const apartment of this.apartments ){
-        apartment.id = apartment.getIdFromLinks();
-        this.rooms.concat(this.getRooms(apartment));
-      }
-
     } else {
       console.log('User not authenticated');
     }
   }
+
   private isOwner(): boolean {
     return this.currentUser.getRoles().includes('owner');
   }
@@ -62,31 +56,50 @@ export class RoomListComponent implements OnInit {
     this.router.navigate(['/apartments']);
   }
 
-  getAparments(): void{
+  getAparments(): void {
     this.apartmentService.findByOwner(this.currentUser).subscribe({
-
       next: (resourceCollection) => {
-
-        this.apartments = resourceCollection.resources || []; // Asegúrate de asignar un arreglo
+        this.apartments = resourceCollection.resources || [];
+        if (this.apartments.length > 0) {
+          this.loadRoomsForApartments();
+        }
       },
       error: (err) => {
         console.error('Error fetching apartments:', err);
         this.errorMessageService.showErrorMessage('Failed to load apartments');
-      },
+      }
     });
   }
-  getRooms(apartment: Apartment): Room[]{
-    let roomList: Room[] = [];
-    this.roomService.findByApartment(apartment).subscribe({
-      next: (resourceCollection) => {
 
-        roomList = resourceCollection.resources || []; // Asegúrate de asignar un arreglo
+  loadRoomsForApartments(): void {
+    const roomRequests: Observable<Room[]>[] = this.apartments.map((apartment) => {
+      apartment.id = apartment.getIdFromLinks();
+      apartment.owner = this.currentUser;
+      return this.getRooms(apartment);
+    });
+
+    forkJoin(roomRequests).subscribe({
+      next: (roomsArray) => {
+        this.rooms = roomsArray.flat();
+        console.log(this.rooms);
       },
       error: (err) => {
-        console.error('Error fetching apartments:', err);
-        this.errorMessageService.showErrorMessage('Failed to load apartments');
-      },
+        console.error('Error fetching rooms:', err);
+        this.errorMessageService.showErrorMessage('Failed to load rooms');
+      }
     });
-    return roomList;
+  }
+
+  getRooms(apartment: Apartment): Observable<Room[]> {
+    return this.roomService.findByApartment(apartment).pipe(
+      map((resourceCollection) => resourceCollection.resources || [])
+    );
+  }
+
+  createRoom(): void {
+    this.router.navigate(['/room/create']);
+  }
+  getAparmentName(Apart: Apartment): string {
+      return Apart.getName();
   }
 }
