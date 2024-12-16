@@ -19,8 +19,10 @@ import { VisitStatusComponent } from './visit/visit-status/visit-status.componen
 import { VisitCancelComponent } from './visit/visit-cancel/visit-cancel.component';
 import { RoomListComponent } from './room/room-list/room-list.component';
 import { RoomCreateComponent } from './room/room-create/room-create.component';
-import {RoomUpdateComponent} from './room/room-update/room-update.component';
-
+import { RoomUpdateComponent } from './room/room-update/room-update.component';
+import { RoomDeleteComponent } from './room/room-delete/room-delete.component';
+import { MyAdvertisementComponent } from './advertisement/my-advertisement-list/my-advertisement.component';
+import { ImageCreateComponent } from './image/image-create/image.component';
 
 const routes: Routes = [
   { path: 'users/create', component: UserRegisterComponent},
@@ -29,20 +31,22 @@ const routes: Routes = [
   { path: 'users/:id', component: UserDetailComponent, canActivate: [LoggedInGuard]},
   { path: 'users', component: UserListComponent, canActivate: [LoggedInGuard]},
   { path: 'about', component: AboutComponent},
-  { path: 'advertisement/create', component: CreateAdvertisementComponent},
+  { path: 'advertisement/:id/create', component: CreateAdvertisementComponent},
   { path: 'advertisements', component: AdvertisementListComponent},
   { path: 'advertisement/:id/delete', component: DeleteAdvertisementComponent, canActivate: [LoggedInGuard] },
+  { path: 'advertisements/myAdvertisement', component: MyAdvertisementComponent},
   { path: 'apartments', component: ApartmentListComponent},
   { path: 'apartment/create', component: ApartmentCreateComponent},
   { path: 'apartment/:id/update', component: ApartmentUpdateComponent},
   { path: 'apartment/:id/delete', component: ApartmentDeleteComponent},
+  { path: 'apartment/:id/images', component: ImageCreateComponent},
   { path: 'visit/:id/status', component: VisitStatusComponent},
   { path: 'visit/:id/cancel', component:VisitCancelComponent},
   { path: 'rooms', component: RoomListComponent},
   { path: 'room/create', component: RoomCreateComponent},
+  { path: 'room/update/:id', component: RoomUpdateComponent},
   { path: '404', component: NotFoundComponent},
   { path: '', redirectTo: 'about', pathMatch: 'full'},
-  { path: 'room/update/:id', component: RoomUpdateComponent }
 ];
 
 @NgModule({
