@@ -1,0 +1,51 @@
+<div *ngIf="isAuthorized" class="container mt-5 w-50 p-3">
+  <h1 class="mb-4">Update Room</h1>
+
+  <div *ngIf="isLoading" class="d-flex justify-content-center align-items-center">
+    <div class="spinner-border" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+
+  <div *ngIf="!isLoading && errorFetchMsg" class="alert alert-danger" role="alert">
+    {{ errorFetchMsg }}
+  </div>
+
+  <form *ngIf="!isLoading && !errorFetchMsg" (ngSubmit)="onSubmit()" [formGroup]="roomForm">
+    <div class="mb-3">
+      <label for="surface" class="form-label">Surface</label>
+      <input type="number" formControlName="surface" class="form-control" id="surface" required>
+      <div *ngIf="roomForm.get('surface')?.invalid && roomForm.get('surface')?.touched" class="text-danger">
+        Surface is required and must be at least 0.
+      </div>
+    </div>
+
+    <div class="mb-3 form-check">
+      <input type="checkbox" formControlName="isOccupied" class="form-check-input" id="isOccupied">
+      <label class="form-check-label" for="isOccupied">Is Occupied</label>
+    </div>
+
+    <div class="mb-3 form-check">
+      <input type="checkbox" formControlName="hasWindow" class="form-check-input" id="hasWindow">
+      <label class="form-check-label" for="hasWindow">Has Window</label>
+    </div>
+
+    <div class="mb-3 form-check">
+      <input type="checkbox" formControlName="hasDesk" class="form-check-input" id="hasDesk">
+      <label class="form-check-label" for="hasDesk">Has Desk</label>
+    </div>
+
+    <div class="mb-3 form-check">
+      <input type="checkbox" formControlName="hasBed" class="form-check-input" id="hasBed">
+      <label class="form-check-label" for="hasBed">Has Bed</label>
+    </div>
+    <button type="submit" class="btn btn-primary mt-3">Submit</button>
+    <button type="button" (click)="onCancel()" class="btn btn-danger mt-3 ms-2">Cancel</button>
+  </form>
+</div>
+
+<div *ngIf="!isAuthorized" class="container mt-5 w-50 p-3">
+  <div class="alert alert-danger" role="alert">
+    You are not authorized to update this room.
+  </div>
+</div>

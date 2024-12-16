@@ -18,7 +18,6 @@ export class Room extends Resource {
     Object.assign(this, values);
   }
 
-
   getRoomIdFromLinks(): string {
     if (this._links?.self?.href) {
       return this._links.self.href.split('/').pop() || ''; // Último segmento

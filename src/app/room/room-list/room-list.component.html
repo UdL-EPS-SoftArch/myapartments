@@ -24,6 +24,8 @@
                     <td>{{ room.isOccupied }}</td>
                     <td>{{ room.surface}}</td>
                     <td><button class="deleteButton" (click)="deleteRoom(room.getRoomIdFromLinks())"><span class="deleteSpan">Delete</span></button></td>
+                    <td><button class="updateButton" (click)="updateRoom(room.getRoomIdFromLinks())"><span class="updateSpan">Edit</span></button></td>
+
                 </tr>
             </tbody>
         </table>

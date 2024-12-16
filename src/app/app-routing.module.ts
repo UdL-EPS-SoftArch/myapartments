@@ -19,7 +19,7 @@ import { VisitStatusComponent } from './visit/visit-status/visit-status.componen
 import { VisitCancelComponent } from './visit/visit-cancel/visit-cancel.component';
 import { RoomListComponent } from './room/room-list/room-list.component';
 import { RoomCreateComponent } from './room/room-create/room-create.component';
-import { RoomDeleteComponent } from './room/room-delete/room-delete.component';
+import { RoomUpdateComponent } from './room/room-update/room-update.component';
 import { MyAdvertisementComponent } from './advertisement/my-advertisement-list/my-advertisement.component';
 import { ImageCreateComponent } from './image/image-create/image.component';
 
@@ -43,9 +43,9 @@ const routes: Routes = [
   { path: 'visit/:id/cancel', component:VisitCancelComponent},
   { path: 'rooms', component: RoomListComponent},
   { path: 'room/create', component: RoomCreateComponent},
-  { path: 'room/:id/delete', component: RoomDeleteComponent},
+  { path: 'room/update/:id', component: RoomUpdateComponent},
   { path: '404', component: NotFoundComponent},
-  { path: '', redirectTo: 'about', pathMatch: 'full'}
+  { path: '', redirectTo: 'about', pathMatch: 'full'},
 ];
 
 @NgModule({
