@@ -1,0 +1,57 @@
+<div>
+  <div style="margin-bottom: 30px">
+    <div class="d-flex justify-content-between align-items-center">
+      <h1>{{ apartment.name }}</h1>
+      <p class="m-0">Data de creació: {{ date }}</p>
+    </div>
+    <p>{{ apartment.address }}, {{ apartment.postalCode }} {{ apartment.city }}, {{ apartment.country }}</p>
+    <hr>
+  </div>
+
+  <div style="margin-bottom: 30px">
+    <div class="row align-items-stretch">
+      <div class="col">
+        <p>{{ apartment.description }}</p>
+
+        <div class="mt-4">
+          <span class="btn btn-dark">Planta {{ apartment.floor }}</span>
+        </div>
+      </div>
+
+      <div class="col h-100">
+        @if (images) {
+          <ngb-carousel>
+            <ng-template ngbSlide>
+              <div class="picsum-img-wrapper">
+                <img class="img-fluid" [src]="images[0]" alt="Random first slide" />
+              </div>
+            </ng-template>
+            <ng-template ngbSlide>
+              <div class="picsum-img-wrapper">
+                <img class="img-fluid" [src]="images[1]" alt="Random second slide" />
+              </div>
+            </ng-template>
+            <ng-template ngbSlide>
+              <div class="picsum-img-wrapper">
+                <img class="img-fluid" [src]="images[2]" alt="Random third slide" />
+              </div>
+            </ng-template>
+          </ngb-carousel>
+        }
+      </div>
+    </div>
+  </div>
+
+
+
+  <div style="margin-bottom: 15px">
+    <hr class="hr-bottom">
+    <h3>Contact</h3>
+    <p>Envia'm un correu electrònic si tens alguna pregunta sobre el pis o vols ficar-te en contacte amb mi per acordar una visita :)</p>
+
+    <div class="d-flex justify-content-between align-items-center contact-box">
+      <p>Username: <strong>{{ owner.username }}</strong></p>
+      <p>Email: <strong>{{ owner.email }}</strong></p>
+    </div>
+  </div>
+</div>

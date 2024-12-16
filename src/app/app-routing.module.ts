@@ -13,6 +13,7 @@ import { AdvertisementListComponent } from './advertisement/advertisment-list/ad
 import { DeleteAdvertisementComponent } from './advertisement/advertisement-delete/advertisement-delete.component';
 import { ApartmentListComponent } from './apartment/apartment-list/apartment-list.component';
 import { ApartmentCreateComponent } from './apartment/apartment-create/apartment-create.component';
+import { ApartmentDetailComponent } from './apartment/apartment-detail/apartment-detail.component';
 import { ApartmentUpdateComponent } from './apartment/apartment-update/apartment-update.component';
 import { ApartmentDeleteComponent } from './apartment/apartment-delete/apartment-delete.component';
 import { VisitStatusComponent } from './visit/visit-status/visit-status.component';
@@ -23,6 +24,7 @@ import { VisitAcceptComponent } from './visit/visit-accept/visit-accept.componen
 import { RoomUpdateComponent } from './room/room-update/room-update.component';
 import { MyAdvertisementComponent } from './advertisement/my-advertisement-list/my-advertisement.component';
 import { ImageCreateComponent } from './image/image-create/image.component';
+
 
 const routes: Routes = [
   { path: 'users/create', component: UserRegisterComponent},
@@ -37,6 +39,7 @@ const routes: Routes = [
   { path: 'advertisements/myAdvertisement', component: MyAdvertisementComponent},
   { path: 'apartments', component: ApartmentListComponent},
   { path: 'apartment/create', component: ApartmentCreateComponent},
+  { path: 'apartment/:id', component: ApartmentDetailComponent},
   { path: 'apartment/:id/update', component: ApartmentUpdateComponent},
   { path: 'apartment/:id/delete', component: ApartmentDeleteComponent},
   { path: 'apartment/:id/images', component: ImageCreateComponent},
