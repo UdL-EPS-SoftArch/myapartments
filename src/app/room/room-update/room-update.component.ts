@@ -13,6 +13,7 @@ import { Room } from '../room';
 import { AuthenticationBasicService } from '../../login-basic/authentication-basic.service';
 import { ErrorMessageService } from '../../error-handler/error-message.service';
 import { CommonModule } from '@angular/common';
+import { Apartment } from '../../apartment/apartment';
 
 @Component({
   selector: 'app-room-update',
@@ -57,6 +58,8 @@ export class RoomUpdateComponent implements OnInit {
       .subscribe(
         (_room) => {
           this.room = _room;
+          this.room.getRelation<Apartment>('apart').subscribe(
+            (apartment) => this.room.apart = apartment);
           this.setUpForm();
           this.isAuthorized = this.isAuthorised();
           if (!this.isAuthorized) {
