@@ -1,16 +1,37 @@
 <div class="container w-10 p-3">
-  <h4 class="mb-1">List of Rooms</h4>
+    <h4 class="mb-1">List of Rooms</h4>
 
-  <div *ngIf="rooms.length > 0" class="list-group">
-    <div *ngFor="let room of rooms; let i = index" class="list-group-item">
-      <h5 class="mb-1">Room {{ i + 1 }}</h5>
-      <p class="mb-1">Surface: {{ room.surface }} m²</p>
-      <small *ngIf="room.isOccupied">Occupied</small>
-      <small *ngIf="!room.isOccupied">Available</small>
+    <div *ngIf="rooms.length > 0" class="list-group">
+        <table class="table table-striped table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Apartment Name</th>
+                    <th>Bed</th>
+                    <th>Window</th>
+                    <th>Desk</th>
+                    <th>Ocuppied</th>
+                    <th>Surface</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let room of rooms">
+                    <td>{{ room.getRoomIdFromLinks() }}</td>
+                    <td>{{ room.apart.getName() }}</td>
+                    <td>{{ room.hasBed}}</td>
+                    <td>{{ room.hasWindow }}</td>
+                    <td>{{ room.hasDesk }}</td>
+                    <td>{{ room.isOccupied }}</td>
+                    <td>{{ room.surface}}</td>
+                    <td><button class="deleteButton" (click)="deleteRoom(room.getRoomIdFromLinks())"><span class="deleteSpan">Delete</span></button></td>
+                    <td><button class="updateButton" (click)="updateRoom(room.getRoomIdFromLinks())"><span class="updateSpan">Edit</span></button></td>
+
+                </tr>
+            </tbody>
+        </table>
     </div>
-  </div>
-
-  <div *ngIf="rooms.length === 0" class="alert alert-info" role="alert">
-    No rooms available for this apartment.
-  </div>
+    <button class="createButton" (click)="createRoom()"><span class="createSpan">Create</span></button>
+    <div *ngIf="rooms.length === 0" class="alert alert-info" role="alert">
+        No rooms available for this apartment.
+    </div>
 </div>

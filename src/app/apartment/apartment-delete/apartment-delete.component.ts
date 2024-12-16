@@ -77,7 +77,7 @@ export class ApartmentDeleteComponent implements OnInit {
   }
 
   onUnauthorised(): void {
-    this.errorMessageService.showErrorMessage('You are not authorized to create an apartment');
+    this.errorMessageService.showErrorMessage('You are not authorized to delete an apartment');
     this.router.navigate(['/apartments']);
   }
 }

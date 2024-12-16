@@ -8,12 +8,12 @@ import { ErrorMessageService } from '../../error-handler/error-message.service';
 import { CommonModule } from '@angular/common';
 import { ApartmentService } from '../apartment.service';
 import { ApartmentDetails } from '../apartment-details';
-import { RoomListComponent } from '../../room/room-list/room-list.component';
+/*import { RoomListComponent } from '../../room/room-list/room-list.component';*/
 
 @Component({
   selector: 'app-apartment-create',
   standalone: true,
-  imports: [FormsModule, CommonModule, RoomListComponent],
+  imports: [FormsModule, CommonModule, /*RoomListComponent*/],
   templateUrl: './apartment-create.component.html',
   styleUrls: ['./apartment-create.component.css']
 })
@@ -45,7 +45,7 @@ export class ApartmentCreateComponent implements OnInit {
     this.apartment.apartmentDetails = new ApartmentDetails();
 
     this.apartmentService.createResource({ body: this.apartment }).subscribe(() => {
-        this.router.navigate(['/apartment' + this.apartment.id]);
+        this.router.navigate(['/apart' + this.apartment.id]);
       },
       (error) => {
         console.error('Error creating apartment:', error);
@@ -61,24 +61,5 @@ export class ApartmentCreateComponent implements OnInit {
   onUnauthorised(): void {
     this.errorMessageService.showErrorMessage('You are not authorized to create an apartment');
     this.router.navigate(['/apartments']);
-  }
-
-  selectedImages: { file: File; url: string }[] = [];
-
-  onFileChange(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files.length > 0) {
-      Array.from(input.files).forEach((file) => {
-        this.selectedImages.push({
-          file,
-          url: URL.createObjectURL(file)
-        });
-      });
-    }
-  }
-
-  removeImage(index: number): void {
-    URL.revokeObjectURL(this.selectedImages[index].url);
-    this.selectedImages.splice(index, 1);
   }
 }

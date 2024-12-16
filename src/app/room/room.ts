@@ -9,7 +9,7 @@ export class Room extends Resource {
   hasWindow: boolean = false;
   hasDesk: boolean = false;
   hasBed: boolean = false;
-  apart: Apartment = new Apartment;
+  apart: Apartment = new Apartment();
   ownerId?: string;
   uri: string = '';
 
@@ -17,7 +17,6 @@ export class Room extends Resource {
     super();
     Object.assign(this, values);
   }
-
 
   getRoomIdFromLinks(): string {
     if (this._links?.self?.href) {

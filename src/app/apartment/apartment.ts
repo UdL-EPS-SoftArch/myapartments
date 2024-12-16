@@ -16,6 +16,7 @@ export class Apartment extends Resource {
   detail: string = '';
   note?: string = '';
   registrationDate?: Date = new Date();
+  uri: string = '';
   apartmentDetails: ApartmentDetails = new ApartmentDetails();
 
   constructor(values: object = {}) {
@@ -28,6 +29,10 @@ export class Apartment extends Resource {
       return this._links.self.href.split('/').pop() || '';
     }
     return this.id;
+  }
+
+  getName(): string {
+    return this.name;
   }
 
 }
