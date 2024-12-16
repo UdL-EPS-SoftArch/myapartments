@@ -16,6 +16,7 @@ export class Apartment extends Resource {
   detail: string = '';
   note?: string = '';
   registrationDate?: Date = new Date();
+  uri: string = '';
   apartmentDetails: ApartmentDetails = new ApartmentDetails();
 
   constructor(values: object = {}) {
