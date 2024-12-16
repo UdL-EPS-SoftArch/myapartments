@@ -20,7 +20,6 @@ import { VisitCancelComponent } from './visit/visit-cancel/visit-cancel.componen
 import { RoomListComponent } from './room/room-list/room-list.component';
 import { RoomCreateComponent } from './room/room-create/room-create.component';
 import { RoomUpdateComponent } from './room/room-update/room-update.component';
-import { RoomDeleteComponent } from './room/room-delete/room-delete.component';
 import { MyAdvertisementComponent } from './advertisement/my-advertisement-list/my-advertisement.component';
 import { ImageCreateComponent } from './image/image-create/image.component';
 
