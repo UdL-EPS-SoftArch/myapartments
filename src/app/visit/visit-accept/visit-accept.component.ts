@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Visit} from '../visit';
 import {User} from '../../login-basic/user';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -9,20 +9,20 @@ import {catchError, of} from 'rxjs';
 import {VisitStatusComponent} from '../visit-status/visit-status.component';
 
 @Component({
-  selector: 'app-visit-cancel',
+  selector: 'app-visit-accept',
   standalone: true,
   imports: [
-    VisitStatusComponent ],
-  templateUrl: './visit-cancel.component.html',
-  styleUrl: './visit-cancel.component.css'
+    VisitStatusComponent
+  ],
+  templateUrl: './visit-accept.component.html',
+  styleUrl: './visit-accept.component.css'
 })
-export class VisitCancelComponent implements OnInit{
+export class VisitAcceptComponent  implements OnInit{
   public visit: Visit = new Visit()
   public user: User = new User();
   public visitId: string = '';
   public errorFetchMsg: string = '';
   public isAuthorized: boolean = false;
-
 
 
   constructor(
@@ -35,18 +35,17 @@ export class VisitCancelComponent implements OnInit{
 
 
   ngOnInit(): void {
+
     this.visit = new Visit()
 
     this.visitId = this.activatedRoute.snapshot.paramMap.get('id') || '';
     this.user = this.authenticationService.getCurrentUser();
     this.isAuthorized = this.isAuthorised();
 
-
     if (!this.isAuthorized) {
       this.onUnauthorised();
       return;
     }
-
 
     this.visitService
       .getResource(this.visitId)
@@ -63,11 +62,10 @@ export class VisitCancelComponent implements OnInit{
 
         }
       });
-
   }
 
   private isAuthorised(): boolean {
-    return this.user.getRoles().includes('admin') || this.user.getRoles().includes('user');
+    return this.user.getRoles().includes('admin') || this.user.getRoles().includes('owner');
   }
 
   onUnauthorised(): void {
@@ -75,12 +73,24 @@ export class VisitCancelComponent implements OnInit{
     this.router.navigate(['/about']);
   }
 
-  onCancel(): void{
+  onReject() {
     if (!this.isAuthorized) {
       this.onUnauthorised();
       return;
     }
-    this.visit.status = "CANCELLED"
+    this.visit.status = "REJECTED"
+    this.visitService.updateResource(this.visit)
+      .subscribe(() => {
+        window.location.reload();
+      })
+  }
+
+  onAccept(){
+    if (!this.isAuthorized) {
+      this.onUnauthorised();
+      return;
+    }
+    this.visit.status = "ACCEPTED"
     this.visitService.updateResource(this.visit)
       .subscribe(() => {
         window.location.reload();

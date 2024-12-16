@@ -1,0 +1,23 @@
+@if (errorFetchMsg){
+  <div class="alert alert-danger" role="alert">
+    {{ errorFetchMsg }}
+  </div>
+}
+@else {
+
+  <app-visit-status></app-visit-status>
+
+  <div class="d-flex justify-content-center">
+    @if(visit.status !== "REJECTED" && visit.status !== "CANCELLED"){
+    <button type="button" (click)="onReject()" class="btn btn-danger mt-3 me-3" style="border-radius: 50px; padding: 10px 20px;">
+      Reject
+    </button>
+    }
+    @if(visit.status !== "ACCEPTED" && visit.status !== "CANCELLED"){
+    <button type="button" (click)="onAccept()" class="btn btn-success mt-3" style="border-radius: 50px; padding: 10px 20px;">
+      Accept
+    </button>
+    }
+  </div>
+
+}
