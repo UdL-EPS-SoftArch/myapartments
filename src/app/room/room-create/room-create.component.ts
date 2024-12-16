@@ -9,6 +9,7 @@ import { AuthenticationBasicService } from '../../login-basic/authentication-bas
 import { ErrorMessageService } from '../../error-handler/error-message.service';
 import { RoomService } from '../room.service';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-room-create',
   standalone: true,
@@ -19,7 +20,6 @@ import { Router } from '@angular/router';
 export class RoomCreateComponent implements OnInit {
   public user: User =  new User();
   public room: Room = new Room();
-  public apartment: Apartment = new Apartment();
   public apartmentId: string = '';
   public canCreateRoom:  boolean = false
   public apartments: Apartment[] = [];
@@ -31,6 +31,7 @@ export class RoomCreateComponent implements OnInit {
     private authenticationService: AuthenticationBasicService,
     private errorMessageService: ErrorMessageService,
     private apartmentService: ApartmentService,
+    private location: Location,
   ) {}
 
 
@@ -46,8 +47,7 @@ export class RoomCreateComponent implements OnInit {
       return;
     }
 
-    this.room.apart = this.apartment;
-
+    this.room.apart = this.apartments.find(apart => apart.id === this.apartmentId) as Apartment;
     this.roomService.createResource({body: this.room}).subscribe(() => {
       this.router.navigate(['/room' + this.room.id])
       },
@@ -55,10 +55,8 @@ export class RoomCreateComponent implements OnInit {
         console.error('Error creating room:', error);
       }
     );
+    this.location.back();
 
-  }
-  onApartmentChange(): void {
-    this.setApartment(this.apartmentId);
   }
 
 
@@ -66,17 +64,6 @@ export class RoomCreateComponent implements OnInit {
 
   private canCreate(): boolean {
     return this.user.getRoles().includes('owner');
-  }
-
-  setApartment( apartmentId: string): void {
-    this.apartmentService.findById(apartmentId).subscribe({
-      next: (response) => {
-        this.apartment = response.resources[0];
-      },
-      error: (err) => {
-        console.error('Error fetching apartment:', err);
-      }
-    });
   }
 
   getOwnersApartment(): void{
