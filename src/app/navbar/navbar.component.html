@@ -7,30 +7,20 @@
 
     <div class="collapse navbar-collapse" id="navbarContent" [ngbCollapse]="isCollapsed">
         <ul class="navbar-nav">
-          
+
             <li class="nav-item" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{ exact: true }">
                 <a class="nav-link" [routerLink]="['/about']">About</a>
             </li>
-          
+
             <!--LIST ADVERTISEMENTS-->
             <li class="nav-item" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{ exact: true }">
-              <a class="nav-link" [routerLink]="['/advertisements']">Advertisements List</a>
+              <a class="nav-link" [routerLink]="['/advertisements']">Advertisements</a>
             </li>
 
-            <!--LIST APARTMENT-->
+            <!--LIST APARTMENTS-->
             <li class="nav-item" *ngIf="isRole('owner')" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{ exact: true }">
-                <a class="nav-link" [routerLink]="['/apartments']">Apartments list</a>
+                <a class="nav-link" [routerLink]="['/apartments']">Apartments</a>
             </li>
-
-            <!--CREATE APARTMENT-->
-            <li class="nav-item" *ngIf="isRole('owner')" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{ exact: true }">
-                <a class="nav-link" [routerLink]="['/apartment/create']">Create apartment</a>
-            </li>
-            <!--LIST ROOM-->
-            <li class="nav-item" *ngIf="isRole('owner')" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{ exact: true }">
-                <a class="nav-link" [routerLink]="['/rooms']">Rooms list</a>
-            </li>
-
 
             <li class="nav-item" *ngIf="isRole('user')" ngbDropdown>
                 <a class="nav-link dropdown-toggle" id="playerDropdown" role="button" aria-haspopup="true" aria-expanded="false" ngbDropdownToggle>Users</a>
