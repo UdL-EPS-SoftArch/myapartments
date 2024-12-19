@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { RoomService } from '../room.service';
 import { Room } from '../room';
@@ -42,8 +42,6 @@ export class RoomListComponent implements OnInit {
     }
     if (this.currentUser) {
       this.getAparments();
-    } else {
-      console.log('User not authenticated');
     }
   }
 
@@ -64,8 +62,7 @@ export class RoomListComponent implements OnInit {
           this.loadRoomsForApartments();
         }
       },
-      error: (err) => {
-        console.error('Error fetching apartments:', err);
+      error: () => {
         this.errorMessageService.showErrorMessage('Failed to load apartments');
       }
     });
@@ -83,8 +80,7 @@ export class RoomListComponent implements OnInit {
         this.rooms = roomsArray.flat();
         console.log(this.rooms);
       },
-      error: (err) => {
-        console.error('Error fetching rooms:', err);
+      error: () => {
         this.errorMessageService.showErrorMessage('Failed to load rooms');
       }
     });

@@ -23,14 +23,16 @@
                     <td>{{ room.hasDesk }}</td>
                     <td>{{ room.isOccupied }}</td>
                     <td>{{ room.surface}}</td>
-                    <td><button class="deleteButton" (click)="deleteRoom(room.getRoomIdFromLinks())"><span class="deleteSpan">Delete</span></button></td>
-                    <td><button class="updateButton" (click)="updateRoom(room.getRoomIdFromLinks())"><span class="updateSpan">Edit</span></button></td>
+                    <td><button class="btn btn-danger mt-3" (click)="deleteRoom(room.getRoomIdFromLinks())"><span class="deleteSpan">Delete</span></button></td>
+                    <td><button class="btn btn-secondary" (click)="updateRoom(room.getRoomIdFromLinks())"><span class="updateSpan">Edit</span></button></td>
 
                 </tr>
             </tbody>
         </table>
     </div>
-    <button class="createButton" (click)="createRoom()"><span class="createSpan">Create</span></button>
+    <button class="btn btn-primary mt-3 mb-3" (click)="createRoom()">
+      <span>Create</span>
+    </button>
     <div *ngIf="rooms.length === 0" class="alert alert-info" role="alert">
         No rooms available for this apartment.
     </div>
