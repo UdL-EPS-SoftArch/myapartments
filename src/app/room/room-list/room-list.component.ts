@@ -24,6 +24,7 @@ export class RoomListComponent implements OnInit {
   public currentUser: User = new User();
   public rooms: Room[] = [];
   public isShowed: boolean = false;
+  public isLoading: boolean = true; 
 
   constructor(
     private router: Router,
@@ -42,6 +43,7 @@ export class RoomListComponent implements OnInit {
     }
     if (this.currentUser) {
       this.getAparments();
+      this.isLoading = false; 
     }
   }
 
@@ -107,7 +109,7 @@ export class RoomListComponent implements OnInit {
   deleteRoom(roomId: string): void {
     if (roomId) {
       console.log('Room ID:', roomId);
-      this.router.navigate([`/room/${roomId}/delete`]);
+      this.router.navigate([`/room/delete/${roomId}`]);
     } else {
       console.error('Invalid room ID');
     }

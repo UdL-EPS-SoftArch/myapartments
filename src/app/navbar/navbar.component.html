@@ -22,6 +22,11 @@
                 <a class="nav-link" [routerLink]="['/apartments']">Apartments</a>
             </li>
 
+            <!--LIST ROOMS-->
+            <li class="nav-item" *ngIf="isRole('owner')" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{ exact: true }">
+                <a class="nav-link" [routerLink]="['/rooms']">Rooms</a>
+            </li>
+
             <li class="nav-item" *ngIf="isRole('user')" ngbDropdown>
                 <a class="nav-link dropdown-toggle" id="playerDropdown" role="button" aria-haspopup="true" aria-expanded="false" ngbDropdownToggle>Users</a>
                 <div class="dropdown-menu" aria-labelledby="playDropdown" ngbDropdownMenu>

@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Room } from '../room';
 import { Apartment } from '../../apartment/apartment'
 import { ApartmentService } from '../../apartment/apartment.service'
@@ -9,11 +8,13 @@ import { AuthenticationBasicService } from '../../login-basic/authentication-bas
 import { ErrorMessageService } from '../../error-handler/error-message.service';
 import { RoomService } from '../room.service';
 import { Router } from '@angular/router';
-import { Location } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
+
 @Component({
   selector: 'app-room-create',
   standalone: true,
   imports: [CommonModule, FormsModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './room-create.component.html',
   styleUrl: './room-create.component.css'
 })
@@ -23,6 +24,7 @@ export class RoomCreateComponent implements OnInit {
   public apartmentId: string = '';
   public canCreateRoom:  boolean = false
   public apartments: Apartment[] = [];
+  public isLoading: boolean = true;
 
 
   constructor(
@@ -71,13 +73,19 @@ export class RoomCreateComponent implements OnInit {
 
       next: (resourceCollection) => {
 
-        this.apartments = resourceCollection.resources || []; // Asegúrate de asignar un arreglo
+        this.apartments = resourceCollection.resources || [];
+        this.isLoading = false;  // Asegúrate de asignar un arreglo
       },
       error: (err) => {
         console.error('Error fetching apartments:', err);
         this.errorMessageService.showErrorMessage('Failed to load apartments');
+        this.isLoading = false; 
       },
     });
   }
+  trackByApartmentId(index: number, apartment: Apartment): string {
+    return apartment.id;  // Ensure this is a unique identifier for the apartment
+  }
+  
 
 }

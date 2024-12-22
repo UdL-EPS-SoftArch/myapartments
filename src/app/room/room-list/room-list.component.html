@@ -2,7 +2,12 @@
     <h4 class="mb-1">List of Rooms</h4>
 
     <div *ngIf="rooms.length > 0" class="list-group">
-        <table class="table table-striped table-bordered">
+        <div *ngIf="isLoading" class="text-center">
+            <div class="spinner-border" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+        <table *ngIf="!isLoading" class="table table-striped table-bordered">
             <thead class="thead-dark">
                 <tr>
                     <th>ID</th>
@@ -21,9 +26,9 @@
                     <td>{{ room.hasBed}}</td>
                     <td>{{ room.hasWindow }}</td>
                     <td>{{ room.hasDesk }}</td>
-                    <td>{{ room.isOccupied }}</td>
+                    <td>{{ room.occupied }}</td>
                     <td>{{ room.surface}}</td>
-                    <td><button class="btn btn-danger mt-3" (click)="deleteRoom(room.getRoomIdFromLinks())"><span class="deleteSpan">Delete</span></button></td>
+                    <td><button class="btn btn-danger" (click)="deleteRoom(room.getRoomIdFromLinks())"><span class="deleteSpan">Delete</span></button></td>
                     <td><button class="btn btn-secondary" (click)="updateRoom(room.getRoomIdFromLinks())"><span class="updateSpan">Edit</span></button></td>
 
                 </tr>

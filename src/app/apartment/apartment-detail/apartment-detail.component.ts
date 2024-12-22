@@ -46,7 +46,7 @@ export class ApartmentDetailComponent implements OnInit {
     this.owner.email = "owner01@gmail.com";
 
     // Mock Room (TODO: add more fields)
-    this.room.isOccupied = false;
+    this.room.occupied = false;
 
     //Formatted Date
     this.date = this.apartment.registrationDate.toLocaleDateString('es-ES');

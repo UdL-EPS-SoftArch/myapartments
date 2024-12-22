@@ -20,6 +20,7 @@ import { VisitStatusComponent } from './visit/visit-status/visit-status.componen
 import { VisitCancelComponent } from './visit/visit-cancel/visit-cancel.component';
 import { RoomListComponent } from './room/room-list/room-list.component';
 import { RoomCreateComponent } from './room/room-create/room-create.component';
+import { RoomDeleteComponent } from './room/room-delete/room-delete.component';
 import { VisitAcceptComponent } from './visit/visit-accept/visit-accept.component';
 import { RoomUpdateComponent } from './room/room-update/room-update.component';
 import { MyAdvertisementComponent } from './advertisement/my-advertisement-list/my-advertisement.component';
@@ -49,6 +50,7 @@ const routes: Routes = [
   { path: 'rooms', component: RoomListComponent},
   { path: 'room/create', component: RoomCreateComponent},
   { path: 'room/update/:id', component: RoomUpdateComponent},
+  { path: 'room/delete/:id', component: RoomDeleteComponent},
   { path: '404', component: NotFoundComponent},
   { path: '', redirectTo: 'about', pathMatch: 'full'},
 ];
