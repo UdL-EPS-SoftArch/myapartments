@@ -67,13 +67,18 @@ export class RoomCreateComponent implements OnInit {
     this.room.hasDesk = this.roomForm.value.hasDesk;
     this.room.hasBed = this.roomForm.value.hasBed;
 
-    this.roomService.createResource({ body: this.room }).subscribe(() => {
-      this.router.navigate(['/room' + this.room.id]);
-    }, (error) => {
-      console.error('Error creating room:', error);
+    this.roomService.createResource({ body: this.room }).subscribe({
+      next: () => {
+        this.router.navigate(['/room/' + this.room.id]);
+      },
+      error: (error) => {
+        console.error('Error creating room:', error);
+        this.errorMessageService.showErrorMessage('Failed to create room');
+      },
+      complete: () => {
+        this.location.back();
+      }
     });
-
-    this.location.back();
   }
 
   private canCreate(): boolean {
