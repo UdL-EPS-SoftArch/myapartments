@@ -1,23 +1,23 @@
 <nav>
   <ul>
-    
+
       <li *ngFor="let item of menuItems" *ngIf="hasAccess(item)">
         <a [routerLink]="item.link" *ngIf="!item.submenu">{{ item.label }}</a>
 
-       
+
         <div *ngIf="item.submenu">
           <span>{{ item.label }}</span>
           <ul>
             <li *ngFor="let subItem of item.submenu" *ngIf="hasAccess(subItem)">
               <a [routerLink]="subItem.link" *ngIf="!subItem.submenu">{{ subItem.label }}</a>
 
-              
+
               <div *ngIf="subItem.submenu">
                 <span>{{ subItem.label }}</span>
                 <ul>
                   <li *ngFor="let nestedItem of subItem.submenu" *ngIf="hasAccess(nestedItem)">
                     <a [routerLink]="nestedItem.link">{{ nestedItem.label }}</a>
-                
+
                   </li>
                 </ul>
               </div>
@@ -26,8 +26,7 @@
         </div>
       </li>
     </ul>
- 
+
 </nav>
 
-  
-  
+

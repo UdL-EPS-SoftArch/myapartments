@@ -2,7 +2,7 @@
     <h2> My apartments</h2>
 
     <div *ngIf="apartments.length === 0" class="no-apartments">
-        <p>No hay apartamentos disponibles.</p>
+        <p>There are no apartments</p>
     </div>
 
     <div *ngIf="apartments.length > 0" class="table-responsive">
@@ -23,7 +23,7 @@
             </thead>
             <tbody>
                 <tr *ngFor="let apartment of apartments">
-                    <td>{{ apartment.getIdFromLinks() }}</td>
+                  <td><a [routerLink]="['/apartment', apartment.getIdFromLinks()]">{{ apartment.getIdFromLinks() }}</a></td>
                     <td>{{ apartment.name }}</td>
                     <td>{{ apartment.address }}, {{ apartment.city }}, {{ apartment.country }}</td>
                     <td>{{ apartment.floor }}</td>
@@ -32,14 +32,20 @@
                     <td>{{ apartment.description || 'N/A' }}</td>
                     <td>{{ apartment.note || 'N/A' }}</td>
                     <td>
-                        <button class="deleteButton" (click)="deleteApartment(apartment.getIdFromLinks())"><span class = "deleteSpan">Delete</span></button>
+                        <button class="btn btn-danger mt-3" [routerLink]="['/apartment/', apartment.getIdFromLinks(), 'delete']">
+                          <span>Delete</span>
+                        </button>
                     </td>
                     <td>
-                        <button class="updateButton" (click)="updateApartment(apartment.getIdFromLinks())"><span class = "updateSpan">Edit</span></button>
+                        <button class="btn btn-primary mt-3" [routerLink]="['/apartment/', apartment.getIdFromLinks(), 'update']">
+                          <span>Edit</span>
+                        </button>
                     </td>
                 </tr>
             </tbody>
         </table>
-        <button class="createButton" (click)="createApartment()"><span class="createSpan">Create</span></button>
+        <button class="btn btn-success mt-3" [routerLink]="['/apartment/create']">
+          <span>Create</span>
+        </button>
     </div>
 </div>

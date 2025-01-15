@@ -30,11 +30,10 @@
             <label for="description" class="form-label">Description</label>
             <textarea class="form-control" id="description" rows="3" required [(ngModel)]="apartment.description" name="description" style="resize: vertical; min-height: 100px; max-height: 300px;"></textarea>
         </div>
-        <!-- <app-room-list [apartment]="apartment" [maxRooms]="5"></app-room-list>
-    <div class="mb-3">
-      <a href="/room/create"><button type="button" class="btn btn-secondary">Add Room</button></a>
-    </div> -->
-
+        <!--<app-room-list [apartment]="apartment" [maxRooms]="5"></app-room-list>-->
+        <div class="mb-3">
+          <a href="/room/create"><button type="button" class="btn btn-secondary">Add Room</button></a>
+        </div>
         <button type="submit" class="btn btn-primary mt-3">Submit</button>
     </form>
 </div>
