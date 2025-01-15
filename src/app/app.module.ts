@@ -25,10 +25,6 @@ import {LoggedInGuard} from './login-basic/loggedin.guard';
 import {UserService} from './user/user.service';
 import {DeleteAdvertisementComponent} from './advertisement/advertisement-delete/advertisement-delete.component';
 
-
-
-  
-
 @NgModule({ declarations: [
         AppComponent,
         NavbarComponent,
@@ -57,10 +53,7 @@ import {DeleteAdvertisementComponent} from './advertisement/advertisement-delete
         { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
         AuthenticationBasicService, LoggedInGuard, UserService,
         provideHttpClient(withInterceptorsFromDi())
-        
-    ] 
-     }
-     )
+    ] })
 export class AppModule {
   constructor(hateoasConfig: NgxHateoasClientConfigurationService) {
     hateoasConfig.configure({

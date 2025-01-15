@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthenticationBasicService } from '../login-basic/authentication-basic.service';
 
 @Component({
   selector: 'app-navbar',
@@ -6,56 +7,56 @@ import { Component } from '@angular/core';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
-  // Simulate user role - this would typically come from a service or API
-  userRole: string = 'admin'; // Change to 'demo' or 'owner' for testing
+  public isCollapsed = true;
+
+  constructor(private authenticationService: AuthenticationBasicService) {}
 
   // Navbar menu items
   menuItems = [
     {
-      label: 'Home',
-      link: '/home',
-      roles: ['admin', 'demo', 'owner'] // Visible to all
+      label: 'About',
+      link: '/about',
+      roles: ['admin', 'demo', 'owner'], // Visible to all
+      submenu: []
     },
     {
-      label: 'Management',
-      roles: ['admin', 'demo', 'owner'], // Visible to all
+      label: 'Apartments',
+      link: '',
+      roles: ['admin', 'user', 'owner'], //  Visible to all
       submenu: [
-        {
-          label: 'Apartments',
-          roles: ['admin', 'owner'], // Admin and owner only
-          submenu: [
-            { label: 'List', link: '/apartments/list', roles: ['admin', 'owner'] },
-            { label: 'Create', link: '/apartments/create', roles: ['admin', 'owner'] }
-          ]
-        },
-        {
-          label: 'Advertisements',
-          roles: ['admin', 'demo'], // Admin and demo only
-          submenu: [
-            { label: 'List', link: '/advertisements/list', roles: ['admin', 'demo'] },
-            { label: 'Create', link: '/advertisements/create', roles: ['admin', 'demo'] }
-          ]
-        }
+        { label: 'List', link: '/apartments', roles: ['admin', 'user', 'owner'], submenu: [] },
+        { label: 'Create', link: '/apartment/create', roles: ['admin', 'owner'], submenu: [] } // Just admin and owner
+      ]
+    },
+    {
+      label: 'Advertisements',
+      link: '',
+      roles: ['admin', 'user', 'owner'], //  Visible to all
+      submenu: [
+        { label: 'List', link: '/advertisements', roles: ['admin', 'user', 'owner'], submenu: [] },
+      ]
+    },
+    {
+      label: 'Users',
+      link: '',
+      roles: ['admin'], // Admin only
+      submenu: [
+        { label: 'List', link: '/advertisements/list', roles: ['admin'], submenu: [] }
       ]
     }
   ];
 
   //to check if a menu item is visible based on the user's role
   hasAccess(item: any): boolean {
-    return item.roles.includes(this.userRole);
+    return item.roles.some((role: string) =>
+      this.authenticationService.getCurrentUser().getRoles().includes(role));
+  }
+
+  isLogged(): boolean {
+    return this.authenticationService.isLoggedIn();
+  }
+
+  isRole(role: string): boolean {
+    return this.authenticationService.isRole(role);
   }
 }
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { VisitStatusComponent } from '../visit/visit-status/visit-status.component';
-import { AuthenticationBasicService } from '../login-basic/authentication-basic.service';
-
-@NgModule({
-  declarations: [NavbarComponent],
-  imports: [CommonModule],
-  providers: [AuthenticationBasicService], // Add service here if not added
-})
-export class VisitModule {}
-
-
-

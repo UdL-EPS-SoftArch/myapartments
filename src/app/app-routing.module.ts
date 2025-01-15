@@ -51,18 +51,10 @@ const routes: Routes = [
   { path: 'room/update/:id', component: RoomUpdateComponent},
   { path: '404', component: NotFoundComponent},
   { path: '', redirectTo: 'about', pathMatch: 'full'},
-
 ];
-
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
-
-export interface User {
-  id: number;
-  username: string;
-  role: 'admin' | 'demo' | 'owner';
-}

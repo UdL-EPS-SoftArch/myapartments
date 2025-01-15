@@ -1,32 +1,36 @@
-<nav>
-  <ul>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand ms-3" [routerLink]="['/about']"><b>My</b>Apartments</a>
+    <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="navbarContent" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-      <li *ngFor="let item of menuItems" *ngIf="hasAccess(item)">
-        <a [routerLink]="item.link" *ngIf="!item.submenu">{{ item.label }}</a>
+  <div class="collapse navbar-collapse" id="navbarContent" [ngbCollapse]="isCollapsed">
+      <ul class="navbar-nav">
+        <ng-container *ngFor="let item of menuItems">
+          <li *ngIf="hasAccess(item)" class="nav-item" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{ exact: true }" ngbDropdown>
+            <a *ngIf="!item['submenu'].length" class="nav-link" [routerLink]="item['link']">{{ item['label'] }}</a>
+            <a *ngIf="item['submenu'].length" class="nav-link dropdown-toggle" [id]="item['label'] + 'Dropdown'" role="button"
+               aria-haspopup="true" aria-expanded="false" ngbDropdownToggle>{{ item['label'] }}</a>
+            <div *ngIf="item['submenu'].length" class="dropdown-menu"
+                 [attr.aria-labelledby]="item['label'] + 'Dropdown'" ngbDropdownMenu>
+              <a *ngFor="let subItem of item['submenu']" [routerLink]="subItem['link']" class="dropdown-item" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{ exact: true }">{{ subItem['label'] }}</a>
+            </div>
+          </li>
+        </ng-container>
+      </ul>
+      <ul class="navbar-nav ms-auto me-3" app-login-navbar></ul>
+  </div>
 
-
-        <div *ngIf="item.submenu">
-          <span>{{ item.label }}</span>
-          <ul>
-            <li *ngFor="let subItem of item.submenu" *ngIf="hasAccess(subItem)">
-              <a [routerLink]="subItem.link" *ngIf="!subItem.submenu">{{ subItem.label }}</a>
-
-
-              <div *ngIf="subItem.submenu">
-                <span>{{ subItem.label }}</span>
-                <ul>
-                  <li *ngFor="let nestedItem of subItem.submenu" *ngIf="hasAccess(nestedItem)">
-                    <a [routerLink]="nestedItem.link">{{ nestedItem.label }}</a>
-
-                  </li>
-                </ul>
-              </div>
-            </li>
-          </ul>
+  <!--
+      <li class="nav-item" *ngIf="isRole('user')" ngbDropdown>
+        <a class="nav-link dropdown-toggle" id="playerDropdown" role="button"
+           aria-haspopup="true" aria-expanded="false" ngbDropdownToggle>Users</a>
+        <div class="dropdown-menu" aria-labelledby="playDropdown" ngbDropdownMenu>
+          <a class="dropdown-item" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{ exact: true }"
+             [routerLink]="['/users']"><span class="fas fa-user-circle"></span> List</a>
         </div>
       </li>
-    </ul>
-
+   -->
 </nav>
 
 
