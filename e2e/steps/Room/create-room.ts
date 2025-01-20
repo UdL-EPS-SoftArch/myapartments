@@ -38,6 +38,7 @@ And(/^I click on create room button$/, function () {
 });
 
 And('I select "NEW" for "Select apartment"', () => {
+    cy.wait(1000);
     cy.get('#apartmentSelect').select('NEW');
 });
 
