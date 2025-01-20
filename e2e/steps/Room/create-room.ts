@@ -10,6 +10,7 @@ Given('I\'m in the homepage logged in as owner with username {string} and passwo
 });
 
 Given('The test apartment', () => {
+    cy.wait(500);
     cy.visit('http://localhost:4200/apartment/create');
     cy.get('#name').clear().type('NEW');
 
