@@ -49,7 +49,7 @@ cy.contains('button', buttonName)
     .should('be.visible')
     .click();
 });
-Then('I should see a new room with apartment "This apartment is static DO NOT TOUCH", is occupied "True", has bed "True", has window "True", has desk "True" and Surface "45"', () => {
+Then('I should see a new room', () => {
     cy.get('table').should('be.visible');
     cy.get('table tbody tr').last().within(() => {
       cy.get('td').eq(1).should('contain.text', 'This apartment is static DO NOT TOUCH');

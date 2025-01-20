@@ -14,4 +14,4 @@ Feature: Create a new Room
     And I select "True" for "Has desk?"
     And I enter "45" into the "Surface" field
     And I click the "Submit" button
-    Then I've created a new room with creation user "owner", apartment "This apartment is static DO NOT TOUCH", is occupied "True", has bed "True", has window "True", has desk "True" and Surface"45"
+    Then I should see a new room
