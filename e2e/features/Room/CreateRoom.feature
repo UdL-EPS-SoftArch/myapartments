@@ -5,9 +5,10 @@ Feature: Create a new Room
 
   Scenario: Create a new room 
     Given I'm in the homepage logged in as owner with username "owner" and password "password"
+    Given The test apartment
     When  I go to the room list page
     And I click on create room button
-    And I select "This apartment is static DO NOT TOUCH" for "Select apartment"
+    And I select "NEW" for "Select apartment"
     And I select "True" for "Is occupied?"
     And I select "True" for "Has bed?"
     And I select "True" for "Has window?"

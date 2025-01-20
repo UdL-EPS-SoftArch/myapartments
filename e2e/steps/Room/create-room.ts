@@ -9,6 +9,22 @@ Given('I\'m in the homepage logged in as owner with username {string} and passwo
     cy.get('button').contains('Submit').click();
 });
 
+Given('The test apartment', () => {
+    cy.visit('http://localhost:4200/apartment/create');
+    cy.get('#name').clear().type('NEW');
+
+    cy.get('#floor').clear().type('0');
+    cy.get('#address').clear().type('0');
+    cy.get('#postalCode').clear().type('0');
+    cy.get('#city').clear().type('0');
+    cy.get('#country').clear().type('0');
+    cy.get('#description').clear().type('0');
+    
+    // Hacer clic en el botón de submit
+    cy.get('button').contains('Submit').click();
+    
+});
+
 
 When(/^I go to the room list page$/, function () {
     cy.get('.nav-link').contains('Rooms').click();
@@ -20,8 +36,8 @@ And(/^I click on create room button$/, function () {
     .click(); 
 });
 
-And('I select "This apartment is static DO NOT TOUCH" for "Select apartment"', () => {
-    cy.get('#apartmentSelect').select('This apartment is static DO NOT TOUCH');
+And('I select "NEW" for "Select apartment"', () => {
+    cy.get('#apartmentSelect').select('NEW');
 });
 
 And('I select "True" for "Is occupied?"', () => {
@@ -52,7 +68,7 @@ cy.contains('button', buttonName)
 Then('I should see a new room', () => {
     cy.get('table').should('be.visible');
     cy.get('table tbody tr').last().within(() => {
-      cy.get('td').eq(1).should('contain.text', 'This apartment is static DO NOT TOUCH');
+      cy.get('td').eq(1).should('contain.text', 'NEW');
       cy.get('td').eq(2).should('contain.text', 'true');
       cy.get('td').eq(3).should('contain.text', 'true');
       cy.get('td').eq(4).should('contain.text', 'true');
