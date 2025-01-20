@@ -38,9 +38,7 @@ And(/^I click on create room button$/, function () {
 });
 
 And('I select "NEW" for "Select apartment"', () => {
-    cy.wait(500);
-    cy.reload();
-    cy.get('#apartmentSelect').select('NEW');
+    cy.get('#apartmentSelect').should('be.visible').select('NEW');
 });
 
 And('I select "True" for "Is occupied?"', () => {
