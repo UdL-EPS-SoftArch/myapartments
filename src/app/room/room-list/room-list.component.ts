@@ -98,12 +98,11 @@ export class RoomListComponent implements OnInit {
       })
     );
   }
-  createRoom(): void {
-    this.router.navigate(['/room/create']);
-  }
+
   getAparmentName(Apart: Apartment): string {
       return Apart.getName();
   }
+
   deleteRoom(roomId: string): void {
     if (roomId) {
       console.log('Room ID:', roomId);
@@ -112,6 +111,7 @@ export class RoomListComponent implements OnInit {
       console.error('Invalid room ID');
     }
   }
+
   updateRoom(roomId: string): void {
     if (roomId) {
       console.log('Room ID:', roomId);
