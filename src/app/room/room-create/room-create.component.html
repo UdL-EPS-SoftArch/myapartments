@@ -1,64 +1,43 @@
 <div *ngIf="canCreateRoom" class="container mt-5 w-50 p-3">
   <h1 class="mb-4">Create Room</h1>
 
-  <form [formGroup]="roomForm" (ngSubmit)="onSubmit()">
-    <div *ngIf="isLoading" class="text-center">
-      <div class="spinner-border" role="status">
-        <span class="visually-hidden">Loading...</span>
+  <form (ngSubmit)="onSubmit()" #roomForm="ngForm">
+      <div class="mb-3">
+          <label for="apartmentSelect" class="form-label">Select apartment</label>
+          <select class="form-select" id="apartmentSelect" required [(ngModel)]="this.apartmentId" name="apartmentId">
+              <option value="" disabled>Select...</option>
+              <option *ngFor="let apartment_value of apartments" [value]="apartment_value.id">
+                  {{ apartment_value.name }}
+              </option>
+          </select>
       </div>
-    </div>
+      <div class="mb-3 form-check">
+          <input type="checkbox" class="form-check-input" id="isOccupied" [(ngModel)]="this.room.isOccupied" name="isOccupied">
+          <label class="form-check-label" for="isOccupied">Is occupied?</label>
+      </div>
+      <div class="mb-3 form-check">
+          <input type="checkbox" class="form-check-input" id="hasBed" [(ngModel)]="this.room.hasBed" name="hasBed">
+          <label class="form-check-label" for="hasBed">Has bed?</label>
+      </div>
+      <div class="mb-3 form-check">
+          <input type="checkbox" class="form-check-input" id="hasWindow" [(ngModel)]="this.room.hasWindow" name="hasWindow">
+          <label class="form-check-label" for="hasWindow">Has window?</label>
+      </div>
+      <div class="mb-3 form-check">
+          <input type="checkbox" class="form-check-input" id="hasDesk" [(ngModel)]="this.room.hasDesk" name="hasDesk">
+          <label class="form-check-label" for="hasDesk">Has desk?</label>
+      </div>
+      <div class="mb-3">
+          <label for="surface" class="form-label">Surface</label>
+          <input type="number" id="surfaceInput" class="form-control" [(ngModel)]="this.room.surface" name="surface">
+      </div>
 
-    <div *ngIf="!isLoading">
-      <label for="apartmentSelect" class="form-label">Selecciona apartamento</label>
-      <select class="form-select" id="apartmentSelect" formControlName="apartmentId" required>
-        <option value="" disabled>Select...</option>
-        <option *ngFor="let apartment_value of apartments; trackBy: trackByApartmentId" [value]="apartment_value.id">
-          {{ apartment_value.getName() }}
-        </option>
-      </select>
-    </div>
-
-    <div class="mb-3">
-      <label for="trueFalseSelectOcupied" class="form-label">Is occupied?</label>
-      <select class="form-select" id="trueFalseSelectOcupied" formControlName="occupied" required>
-        <option value="" disabled>Select...</option>
-        <option [value]="true">True</option>
-        <option [value]="false">False</option>
-      </select>
-    </div>
-
-    <div class="mb-3">
-      <label for="trueFalseSelectHasBed" class="form-label">Has bed?</label>
-      <select class="form-select" id="trueFalseSelectHasBed" formControlName="hasBed" required>
-        <option value="" disabled>Select...</option>
-        <option [value]="true">True</option>
-        <option [value]="false">False</option>
-      </select>
-    </div>
-
-    <div class="mb-3">
-      <label for="trueFalseSelectHasWindow" class="form-label">Has window?</label>
-      <select class="form-select" id="trueFalseSelectHasWindow" formControlName="hasWindow" required>
-        <option value="" disabled>Select...</option>
-        <option [value]="true">True</option>
-        <option [value]="false">False</option>
-      </select>
-    </div>
-
-    <div class="mb-3">
-      <label for="trueFalseSelectHasDesk" class="form-label">Has desk?</label>
-      <select class="form-select" id="trueFalseSelectHasDesk" formControlName="hasDesk" required>
-        <option value="" disabled>Select...</option>
-        <option [value]="true">True</option>
-        <option [value]="false">False</option>
-      </select>
-    </div>
-
-    <div class="mb-3">
-      <label for="surfaceInput" class="form-label">Surface</label>
-      <input type="number" id="surfaceInput" class="form-control" formControlName="surface" required />
-    </div>
-
-    <button type="submit" class="btn btn-primary mt-3">Submit</button>
+      <button type="submit" class="btn btn-primary mt-3">Create</button>
   </form>
+</div>
+
+<div *ngIf="!canCreateRoom" class="container mt-5 w-50 p-3">
+  <div class="alert alert-danger" role="alert">
+      You are not authorized to create a Room.
+  </div>
 </div>

@@ -8,12 +8,11 @@ import { ErrorMessageService } from '../../error-handler/error-message.service';
 import { CommonModule } from '@angular/common';
 import { ApartmentService } from '../apartment.service';
 import { ApartmentDetails } from '../apartment-details';
-import { RoomListComponent } from '../../room/room-list/room-list.component';
 
 @Component({
   selector: 'app-apartment-create',
   standalone: true,
-  imports: [FormsModule, CommonModule, RoomListComponent],
+  imports: [FormsModule, CommonModule],
   templateUrl: './apartment-create.component.html',
   styleUrls: ['./apartment-create.component.css']
 })
