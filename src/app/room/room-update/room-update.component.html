@@ -12,14 +12,6 @@
   </div>
 
   <form *ngIf="!isLoading && !errorFetchMsg" (ngSubmit)="onSubmit()" [formGroup]="roomForm">
-    <div class="mb-3">
-      <label for="surface" class="form-label">Surface</label>
-      <input type="number" formControlName="surface" class="form-control" id="surface" required>
-      <div *ngIf="roomForm.get('surface')?.invalid && roomForm.get('surface')?.touched" class="text-danger">
-        Surface is required and must be at least 0.
-      </div>
-    </div>
-
     <div class="mb-3 form-check">
       <input type="checkbox" formControlName="isOccupied" class="form-check-input" id="isOccupied">
       <label class="form-check-label" for="isOccupied">Is Occupied</label>
@@ -39,8 +31,17 @@
       <input type="checkbox" formControlName="hasBed" class="form-check-input" id="hasBed">
       <label class="form-check-label" for="hasBed">Has Bed</label>
     </div>
-    <button type="submit" class="btn btn-primary mt-3">Submit</button>
-    <button type="button" (click)="onCancel()" class="btn btn-danger mt-3 ms-2">Cancel</button>
+
+    <div class="mb-3">
+      <label for="surface" class="form-label">Surface</label>
+      <input type="number" formControlName="surface" class="form-control" id="surface" required>
+      <div *ngIf="roomForm.get('surface')?.invalid && roomForm.get('surface')?.touched" class="text-danger">
+        Surface is required and must be at least 0.
+      </div>
+    </div>
+
+    <button type="button" (click)="onCancel()" class="btn btn-danger mt-3">Cancel</button>
+    <button type="submit" class="btn btn-primary mt-3 ms-2">Update</button>
   </form>
 </div>
 
