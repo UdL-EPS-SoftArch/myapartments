@@ -5,6 +5,8 @@
 /tmp
 /out-tsc
 /bazel-out
+package-lock.json
+.angulardoc.json
 
 # Node
 /node_modules
