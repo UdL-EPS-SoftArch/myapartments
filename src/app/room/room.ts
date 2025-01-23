@@ -5,7 +5,7 @@ import { Apartment } from '../apartment/apartment';
 export class Room extends Resource {
   id?: string;
   surface: number = 0;
-  isOccupied: boolean = false;
+  occupied: boolean = false;
   hasWindow: boolean = false;
   hasDesk: boolean = false;
   hasBed: boolean = false;

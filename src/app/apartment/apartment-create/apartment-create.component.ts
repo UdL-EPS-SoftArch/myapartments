@@ -40,17 +40,16 @@ export class ApartmentCreateComponent implements OnInit {
     }
 
     this.apartment.owner = this.user;
-    this.apartment.registrationDate = new Date();
+    this.apartment.registrationDate = new Date().toISOString();
     this.apartment.apartmentDetails = new ApartmentDetails();
 
-    this.apartmentService.createResource({ body: this.apartment }).subscribe(() => {
-        this.router.navigate(['/apart' + this.apartment.id]);
-      },
-      (error) => {
-        console.error('Error creating apartment:', error);
-        this.errorMessageService.showErrorMessage('Failed to create apartment. Please try again.');
-      }
-    );
+    this.apartmentService.createResource({ body: this.apartment }).subscribe({
+        next: (apartment) => { this.router.navigate(['apartment/', apartment.uri.split('/').pop()]) },
+        error: (error) => {
+          console.error('Error creating apartment:', error);
+          this.errorMessageService.showErrorMessage('Failed to create apartment. Please try again.');
+        }
+    });
   }
 
   private isAuthorised(): boolean {
