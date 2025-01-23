@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Room } from '../room';
 import { Apartment } from '../../apartment/apartment'
 import { ApartmentService } from '../../apartment/apartment.service'
@@ -21,7 +21,7 @@ import { CommonModule, Location } from '@angular/common';
 export class RoomCreateComponent implements OnInit {
   public user: User = new User();
   public room: Room = new Room();
-  public roomForm: FormGroup = new FormGroup({});
+  // public roomForm: FormGroup = new FormGroup({});
   public apartmentId: string = '';
   public canCreateRoom: boolean = false;
   public apartments: Apartment[] = [];
@@ -33,18 +33,17 @@ export class RoomCreateComponent implements OnInit {
     private authenticationService: AuthenticationBasicService,
     private errorMessageService: ErrorMessageService,
     private apartmentService: ApartmentService,
-    private location: Location,
-    private formBuilder: FormBuilder,
+    private location: Location
   ) {
     // Inicializar el FormGroup
-    this.roomForm = this.formBuilder.group({
-      apartmentId: new FormControl('', Validators.required),
-      surface: new FormControl('', [Validators.required, Validators.min(0)]),
-      occupied: new FormControl(false),
-      hasWindow: new FormControl(false),
-      hasDesk: new FormControl(false),
-      hasBed: new FormControl(false),
-    });
+    // this.roomForm = this.formBuilder.group({
+    //   apartmentId: new FormControl('', Validators.required),
+    //   surface: new FormControl('', [Validators.required, Validators.min(0)]),
+    //   occupied: new FormControl(false),
+    //   hasWindow: new FormControl(false),
+    //   hasDesk: new FormControl(false),
+    //   hasBed: new FormControl(false),
+    // });
   }
 
   ngOnInit(): void {
@@ -59,17 +58,11 @@ export class RoomCreateComponent implements OnInit {
       return;
     }
 
-    // Actualiza el room con el formulario
-    this.room.apart = this.apartments.find(apart => apart.id === this.roomForm.value.apartmentId) as Apartment;
-    this.room.surface = this.roomForm.value.surface;
-    this.room.occupied = this.roomForm.value.occupied;
-    this.room.hasWindow = this.roomForm.value.hasWindow;
-    this.room.hasDesk = this.roomForm.value.hasDesk;
-    this.room.hasBed = this.roomForm.value.hasBed;
+    this.room.apart = this.apartments.find(apart => apart.id === this.apartmentId) as Apartment;
 
     this.roomService.createResource({ body: this.room }).subscribe({
-      next: () => {
-        this.router.navigate(['/room/' + this.room.id]);
+      next: (newRoom) => {
+        this.router.navigate(['/rooms/' + newRoom.uri.split('/').pop()]);
       },
       error: (error) => {
         console.error('Error creating room:', error);
@@ -88,7 +81,8 @@ export class RoomCreateComponent implements OnInit {
   getOwnersApartment(): void {
     this.apartmentService.findByOwner(this.user).subscribe({
       next: (resourceCollection) => {
-        this.apartments = resourceCollection.resources || [];
+        this.apartments = resourceCollection.resources;
+        console.log(this.apartments);
         this.isLoading = false;
       },
       error: (err) => {

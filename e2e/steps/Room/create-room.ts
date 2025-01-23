@@ -1,16 +1,6 @@
 import {Given, When, Then, And} from 'cypress-cucumber-preprocessor/steps';
-import { DataTable } from '@cucumber/cucumber';
-
-Given('I\'m in the homepage logged in as owner with username {string} and password {string}', (username, password) => {
-    cy.visit('http://localhost:4200');
-    cy.get('.nav-link').contains('Login').click();
-    cy.get('#username').type(username).blur();
-    cy.get('#password').type(password).blur();
-    cy.get('button').contains('Submit').click();
-});
 
 Given('The test apartment', () => {
-    cy.wait(500);
     cy.visit('http://localhost:4200/apartment/create');
     cy.get('#name').clear().type('NEW');
 
@@ -20,45 +10,35 @@ Given('The test apartment', () => {
     cy.get('#city').clear().type('0');
     cy.get('#country').clear().type('0');
     cy.get('#description').clear().type('0');
-    
+
     // Hacer clic en el botón de submit
     cy.get('button').contains('Submit').click();
-    
+    cy.get('h1').should('contain', 'NEW');
 });
 
-
-When(/^I go to the room list page$/, function () {
-    cy.get('.nav-link').contains('Rooms').click();
+When(/^I go to the create room page$/, function () {
+    cy.visit('http://localhost:4200/room/create');
 });
 
 And(/^I click on create room button$/, function () {
-    cy.get('button.btn.btn-primary.mt-3.mb-3')
-    .contains('Create')
-    .click(); 
+    cy.get('button.btn.btn-primary.mt-3.mb-3').contains('Create').click();
+    cy.get('h1').should('contain', 'Create Room');
+    cy.get('#apartmentSelect').should('not.be.empty');
 });
 
-And('I select "NEW" for "Select apartment"', () => {
-    cy.get('#apartmentSelect').should('be.visible').select('NEW');
+And('I select the first option for {string}', (selection) => {
+    cy.get('#' + selection).focus(); // Force form refresh to show options, it seems a bug...
+    cy.wait(1000);
+    cy.get('#' + selection).blur();
+    cy.get('#' + selection).select(0);
 });
 
-And('I select "True" for "Is occupied?"', () => {
-    cy.get('#trueFalseSelectOcupied').select('True');
-}); 
-
-And('I select "True" for "Has bed?"', () => {
-    cy.get('#trueFalseSelectHasBed').select('True');
+And('I check {string}', (checkId) => {
+    cy.get('#' + checkId).check();
 });
 
-And('I select "True" for "Has window?"', () => {
-    cy.get('#trueFalseSelectHasWindow').select('True');
-});
-
-And('I select "True" for "Has desk?"', () => {
-    cy.get('#trueFalseSelectHasDesk').select('True');
-});
-
-And('I enter "45" into the "Surface" field', () => {
-    cy.get('#surfaceInput').type('45');
+And('I enter {string} into the "Surface" field', (text) => {
+    cy.get('#surfaceInput').type(text);
 });
 
 And('I click the {string} button', (buttonName) => {
@@ -77,4 +57,3 @@ Then('I should see a new room', () => {
       cy.get('td').eq(6).should('contain.text', '45');
     });
   });
-  

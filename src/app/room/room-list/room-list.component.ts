@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { RoomService } from '../room.service';
 import { Room } from '../room';
 import { Apartment } from '../../apartment/apartment';
@@ -14,7 +14,7 @@ import { map } from 'rxjs/operators';
 @Component({
   selector: 'app-room-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './room-list.component.html',
   styleUrls: ['./room-list.component.css']
 })
@@ -24,7 +24,7 @@ export class RoomListComponent implements OnInit {
   public currentUser: User = new User();
   public rooms: Room[] = [];
   public isShowed: boolean = false;
-  public isLoading: boolean = true; 
+  public isLoading: boolean = true;
 
   constructor(
     private router: Router,
@@ -43,7 +43,7 @@ export class RoomListComponent implements OnInit {
     }
     if (this.currentUser) {
       this.getAparments();
-      this.isLoading = false; 
+      this.isLoading = false;
     }
   }
 
