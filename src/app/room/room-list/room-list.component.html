@@ -35,9 +35,9 @@
             </tbody>
         </table>
     </div>
-    <button class="btn btn-primary mt-3 mb-3" (click)="createRoom()">
-      <span>Create</span>
-    </button>
+    <div class="mb-3">
+      <button [routerLink]="['/room/create']" type="button" class="btn btn-primary mt-3 mb-3">Create</button>
+    </div>
     <div *ngIf="rooms.length === 0" class="alert alert-info" role="alert">
         No rooms available for this apartment.
     </div>

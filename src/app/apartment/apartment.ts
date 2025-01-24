@@ -15,7 +15,7 @@ export class Apartment extends Resource {
   owner: User = new User();
   detail: string = '';
   note?: string = '';
-  registrationDate?: Date = new Date();
+  registrationDate: string = '';
   uri: string = '';
   apartmentDetails: ApartmentDetails = new ApartmentDetails();
 
