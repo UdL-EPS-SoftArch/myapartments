@@ -19,7 +19,6 @@ export class Advertisement extends Resource {
 
     adStatus: AdvertisementStatus = new AdvertisementStatus();
 
-    adStatus: AdvertisementStatus | number = 0;
     apartment: Apartment | number = 0;
 
     constructor(values: object = {}) {
