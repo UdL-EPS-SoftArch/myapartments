@@ -19,6 +19,7 @@
                     <th>Note</th>
                     <th></th>
                     <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -41,6 +42,11 @@
                           <span>Edit</span>
                         </button>
                     </td>
+                    <td>
+                      <button class="btn btn-secondary mt-3">
+                        <a style="text-decoration: none; color: white;" [href]="'/advertisement/' + apartment.getIdFromLinks() + '/create/'"><span>Create Advertisement</span></a>
+                      </button>
+                  </td>
                 </tr>
             </tbody>
         </table>
