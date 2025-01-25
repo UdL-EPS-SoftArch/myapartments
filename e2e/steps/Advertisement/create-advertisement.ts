@@ -39,4 +39,7 @@ And('I click the {string} button', (buttonName: string) => {
 
 Then('I should see the advertisement in the advertisements list', () => {
   cy.url().should('include', '/advertisements');
+
+  const advertisementTitle = 'Sunny Apartment';
+  cy.get('.card h5').should('contain.text', advertisementTitle);
 });
