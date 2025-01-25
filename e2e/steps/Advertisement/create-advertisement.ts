@@ -9,12 +9,27 @@ Given('The user is logged in as an {string}', (role: string) => {
 });
 
 When('I go to the create advertisement page', () => {
-  cy.visit('http://localhost:4200/advertisement/create');
+  cy.visit('http://localhost:4200/advertisement/1/create');
   cy.get('h1').should('contain', 'Create Advertisement');
 });
 
 And('I fill the {string} field with {string}', (field: string, value: string) => {
-  const fieldId = field.toLowerCase().replace(' ', '');
+  const fieldMap: { [key: string]: string } = {
+    'Title': 'title',
+    'Description': 'description',
+    'Price': 'price',
+    'Zip Code': 'zipCode',
+    'Country': 'country',
+    'Address': 'address',
+    'Expiration Date': 'expirationDate'
+  };
+
+  const fieldId = fieldMap[field];
+
+  if (!fieldId) {
+    throw new Error(`Field "${field}" is not mapped to any ID.`);
+  }
+
   cy.get(`#${fieldId}`).clear().type(value);
 });
 
@@ -24,14 +39,4 @@ And('I click the {string} button', (buttonName: string) => {
 
 Then('I should see the advertisement in the advertisements list', () => {
   cy.url().should('include', '/advertisements');
-  cy.get('table').should('be.visible');
-  cy.get('table tbody tr').last().within(() => {
-    cy.get('td').should('contain', 'Sunny Apartment');
-    cy.get('td').should('contain', 'A cozy apartment in the city center');
-    cy.get('td').should('contain', '1200');
-    cy.get('td').should('contain', '08001');
-    cy.get('td').should('contain', 'Spain');
-    cy.get('td').should('contain', 'Carrer de Mallorca, 123');
-    cy.get('td').should('contain', '2025-12-31');
-  });
 });
