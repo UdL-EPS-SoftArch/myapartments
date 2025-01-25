@@ -23,18 +23,14 @@ Given('I create a room', () => {
   // Hacer clic en el botón de submit
   cy.get('button').contains('Submit').click();
 
-  cy.visit('http://localhost:4200/room/create');
+  cy.visit('http://localhost:4200/rooms');
+  cy.get('button').contains('Create').click();
 
-  cy.wait(4000);
-  cy.reload();
-  cy.get('#apartmentSelect').should('be.visible').select('NEW');
-
-  cy.get('#trueFalseSelectOcupied').select('True');
-  cy.get('#trueFalseSelectHasBed').select('True');
-  cy.get('#trueFalseSelectHasWindow').select('True');
-  cy.get('#trueFalseSelectHasDesk').select('True');
-  cy.get('#surfaceInput').type('45');
-  cy.contains('button', "Submit")
+  cy.get('#apartmentSelect').focus()
+  cy.wait(1000);
+  cy.get('#apartmentSelect').blur()
+  cy.get('#apartmentSelect').should('not.be.empty').select(0);
+  cy.contains('button', "Create")
     .should('be.visible')
     .click();
 
@@ -50,7 +46,9 @@ And('I click the {string} button', (buttonName) => {
     .click();
 });
 
-
 Then('Room is deleted', () => {
   cy.visit('http://localhost:4200/rooms');
+  cy.contains('button', "Delete")
+    .should('be.visible')
+    .click();
 });
