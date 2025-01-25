@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { HateoasResourceOperation, PagedResourceCollection, ResourceCollection } from '@lagoshny/ngx-hateoas-client';
 import { Advertisement } from './advertisement';
 import {Apartment} from '../apartment/apartment';
+import {User} from '../login-basic/user';
 
 @Injectable({
   providedIn: 'root'

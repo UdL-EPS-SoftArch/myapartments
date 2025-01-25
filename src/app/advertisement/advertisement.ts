@@ -15,6 +15,9 @@ export class Advertisement extends Resource {
     creationDate: Date = new Date();
     expirationDate?: Date;
     uri?: string;
+    owner: User = new User();
+
+    adStatus: AdvertisementStatus = new AdvertisementStatus();
 
     adStatus: AdvertisementStatus | number = 0;
     apartment: Apartment | number = 0;
