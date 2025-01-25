@@ -34,7 +34,7 @@ const routes: Routes = [
   { path: 'users/:id', component: UserDetailComponent, canActivate: [LoggedInGuard]},
   { path: 'users', component: UserListComponent, canActivate: [LoggedInGuard]},
   { path: 'about', component: AboutComponent},
-  { path: 'advertisement/:id/create', component: CreateAdvertisementComponent},
+  { path: 'advertisement/create', component: CreateAdvertisementComponent},
   { path: 'advertisements', component: AdvertisementListComponent},
   { path: 'advertisement/:id/delete', component: DeleteAdvertisementComponent, canActivate: [LoggedInGuard] },
   { path: 'advertisements/myAdvertisement', component: MyAdvertisementComponent},

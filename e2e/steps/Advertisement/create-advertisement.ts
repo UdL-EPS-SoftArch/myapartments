@@ -3,7 +3,7 @@ import { Given, When, Then, And } from 'cypress-cucumber-preprocessor/steps';
 Given('The user is logged in as an {string}', (role: string) => {
   cy.visit('http://localhost:4200/login');
   cy.get('#username').clear().type(role);
-  cy.get('#password').clear().type('password123');
+  cy.get('#password').clear().type('password');
   cy.get('button[type="submit"]').click();
   cy.url().should('not.include', 'login');
 });
