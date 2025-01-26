@@ -25,6 +25,7 @@ import { VisitAcceptComponent } from './visit/visit-accept/visit-accept.componen
 import { RoomUpdateComponent } from './room/room-update/room-update.component';
 import { MyAdvertisementComponent } from './advertisement/my-advertisement-list/my-advertisement.component';
 import { ImageCreateComponent } from './image/image-create/image.component';
+import { DocumentationComponent } from './documentation/documentation.component';
 
 
 const routes: Routes = [
@@ -51,6 +52,7 @@ const routes: Routes = [
   { path: 'room/create', component: RoomCreateComponent},
   { path: 'room/update/:id', component: RoomUpdateComponent},
   { path: 'room/delete/:id', component: RoomDeleteComponent},
+  { path: 'documentation', component: DocumentationComponent},
   { path: '404', component: NotFoundComponent},
   { path: '', redirectTo: 'about', pathMatch: 'full'},
 ];
