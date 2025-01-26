@@ -7,5 +7,5 @@ Feature: Delete Apartment
   Given I'm on the homepage logged in as an owner
   When I go to the apartment list page
   And There is at least one apartment
-  And I delete the apartment "1"
-  Then The apartment "1" should be deleted
+  And I delete the apartment "2"
+  Then The apartment "2" should be deleted
