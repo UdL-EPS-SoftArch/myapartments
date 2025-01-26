@@ -41,5 +41,10 @@ export class DeleteAdvertisementComponent implements OnInit {
       console.log('Deletion cancelled.');
     }
   }
+  showDialog: boolean = false; // Controla si el diálogo está visible
+
+  openDialog() {
+    this.showDialog = true; // Muestra el diálogo
+  }
 
 }
