@@ -49,12 +49,10 @@ Then('I should see a confirmation dialog', () => {
   });
 });
 
-
 When('I confirm the deletion', () => {
   // No additional action is needed here since the stub handles the confirmation
   // If using a custom dialog, you would click the "Accept" button here
 });
-
 
 Then('The advertisement should no longer appear in the advertisements list', () => {
 
