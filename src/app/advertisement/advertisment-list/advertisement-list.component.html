@@ -39,6 +39,7 @@
         </div>
         <div class="col-12 p-3 text-center">
           <button class="btn btn-danger"
+                  [attr.data-title]="ad.title"
                   (click)="onDelete(ad.uri ? ad.uri.split('/').pop() : '')">Delete</button>
         </div>
       </div>
