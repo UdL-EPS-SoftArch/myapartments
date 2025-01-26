@@ -23,7 +23,7 @@
             </thead>
             <tbody>
                 <tr *ngFor="let apartment of apartments">
-                  <td><a [routerLink]="['/apartment', apartment.getIdFromLinks()]">{{ apartment.getIdFromLinks() }}</a></td>
+                  <td id="apartment_id"><a [routerLink]="['/apartment', apartment.getIdFromLinks()]">{{ apartment.getIdFromLinks() }}</a></td>
                     <td>{{ apartment.name }}</td>
                     <td>{{ apartment.address }}, {{ apartment.city }}, {{ apartment.country }}</td>
                     <td>{{ apartment.floor }}</td>
