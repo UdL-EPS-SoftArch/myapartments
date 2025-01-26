@@ -1,0 +1,18 @@
+p {
+    text-align: justify;
+}
+
+.github {
+    border-radius: 20px;
+    border: solid 1px #c7b5ec;
+    padding: 10px 20px;
+    background-color: #ececff;
+    color: #212529;
+    text-decoration: none;
+}
+.github:hover {
+    background-color: #d1c6f2;
+}
+.github:active {
+    background-color: #b3a9e6;
+}
