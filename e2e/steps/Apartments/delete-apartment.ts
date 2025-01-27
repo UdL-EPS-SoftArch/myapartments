@@ -17,8 +17,7 @@ And('There is at least one apartment', () => {
 });
 
 And('I delete the apartment {string}', (apartmentId) => {
-  cy.get('#apartment_id').contains(apartmentId).parent().get('.btn-danger').contains('Delete').click();
-
+  cy.get('#apartment_'+apartmentId).parent().find('.btn-danger').contains('Delete').click();
 });
 
 Then ('The apartment {string} should be deleted', (apartmentId) => {
