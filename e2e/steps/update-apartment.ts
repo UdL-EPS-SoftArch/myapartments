@@ -48,6 +48,8 @@ Then('I should see the apartment created', () => {
 
 Then('I should see the apartment updated', () => {
   cy.url().should('include', '/apart');
+  cy.get('table tbody tr:last-child td:nth-child(2)').should('have.text', 'Different Name');
+
 });
 
 And('I fill the form with some empty fields', () => {
