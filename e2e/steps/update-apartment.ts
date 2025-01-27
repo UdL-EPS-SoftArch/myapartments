@@ -61,9 +61,3 @@ And('I fill the form with some empty fields', () => {
   cy.get('#country').clear();
   cy.get('#description').type('A description of the apartment');
 });
-
-Then('I should see an error message', () => {
-  cy.get('ngb-alert.alert-danger')
-    .should('be.visible')
-    .and('contain', 'Invalid form: field country is required.');
-});

@@ -25,4 +25,4 @@ Feature: Update Apartment
     And I click on the edit button
     And I fill the form with some empty fields
     And I click the "Submit" button
-    Then I should see an error message
+    Then I see error message "Invalid form: field country is required"
