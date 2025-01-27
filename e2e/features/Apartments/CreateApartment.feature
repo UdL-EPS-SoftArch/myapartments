@@ -11,12 +11,10 @@ Feature: Create Apartment
     And I click the "Submit" button
     Then I should see the apartment created
 
-
-
   Scenario: Create a new apartment with empty compulsory spaces
     Given I'm on the homepage logged in as an owner
     When I go to the apartment list page
     And I click on the create button
-    And I fill the form with some empty fields
+    And I fill the form but leave some empty fields
     And I click the "Submit" button
-    Then I should see an error message
+    Then I see error message "Failed to create apartment. Please try again"
