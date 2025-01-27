@@ -46,7 +46,7 @@ export class RoomUpdateComponent implements OnInit {
     // Configuración inicial del formulario
     this.roomForm = this.formBuilder.group({
       surface: new FormControl('', { validators: [Validators.required, Validators.min(0)] }),
-      isOccupied: new FormControl(false),
+      occupied: new FormControl(false),
       hasWindow: new FormControl(false),
       hasDesk: new FormControl(false),
       hasBed: new FormControl(false),
@@ -77,7 +77,7 @@ export class RoomUpdateComponent implements OnInit {
   setUpForm(): void {
     this.roomForm.setValue({
       surface: this.room.surface || 0,
-      isOccupied: this.room.isOccupied || false,
+      occupied: this.room.occupied || false,
       hasWindow: this.room.hasWindow || false,
       hasDesk: this.room.hasDesk || false,
       hasBed: this.room.hasBed || false,

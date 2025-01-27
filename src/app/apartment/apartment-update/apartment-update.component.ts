@@ -5,7 +5,7 @@ import {
   FormGroup, FormsModule, ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ApartmentService } from '../apartment.service';
 import { Apartment } from '../apartment';
 import { catchError, of } from 'rxjs';
@@ -17,7 +17,7 @@ import {ErrorMessageService} from '../../error-handler/error-message.service';
 @Component({
   selector: 'app-apartment-update',
   standalone: true,
-  imports: [FormsModule, CommonModule, ReactiveFormsModule],
+  imports: [FormsModule, CommonModule, RouterModule, ReactiveFormsModule],
   templateUrl: './apartment-update.component.html',
   styleUrls: ['./apartment-update.component.css']
 })
@@ -52,8 +52,6 @@ export class ApartmentUpdateComponent implements OnInit {
       return;
     }
 
-
-
     this.apartmentService
       .getResource(this.apartmentId)
       .pipe(
@@ -63,6 +61,7 @@ export class ApartmentUpdateComponent implements OnInit {
         })
       )
       .subscribe((_apartment) => {
+        this.isLoading = false;
         if (_apartment) {
           _apartment.id = _apartment.getIdFromLinks()
           if(!this.user.getRoles().includes('admin')) {
@@ -73,11 +72,9 @@ export class ApartmentUpdateComponent implements OnInit {
               }
             });
           }
-
           this.apartment = _apartment;
           this.setUpForm();
         }
-        this.isLoading = false;
       });
 
     this.apartmentForm = this.formBuilder.group({
@@ -91,7 +88,6 @@ export class ApartmentUpdateComponent implements OnInit {
     });
 
   }
-
 
   setUpForm(): void {
     this.apartmentForm.setValue({

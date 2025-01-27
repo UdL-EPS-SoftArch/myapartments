@@ -56,7 +56,7 @@ export class RoomDeleteComponent implements OnInit {
       (room: Room) => {
         this.roomService.deleteResource(room).subscribe(
           () => {
-            this.router.navigate(['/room']);
+            this.router.navigate(['/rooms']);
           },
           () => {
             this.errorMessageService.showErrorMessage('Failed to delete room. Please try again.')
