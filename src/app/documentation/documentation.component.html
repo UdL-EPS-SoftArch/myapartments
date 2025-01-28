@@ -1,0 +1,175 @@
+<div class="mt-5">
+  <div class="row">
+    <div class="col">
+      <h1>Documentation</h1>
+    </div>
+    <div class="col">
+      <h1 class="display-6" style="text-align: end">
+        <strong>My</strong>Apartments
+      </h1>
+    </div>
+  </div>
+
+  <hr/>
+
+  <div>
+    <h2 class="mt-4">Description</h2>
+    <p class="lead mt-3">
+      MyApartments application is a project developed by 4th-year software
+      engineering students from the University of Lleida (UdL).
+    </p>
+
+    <p class="lead mt-3">
+      Its purpose is to create a rental portal exclusively for students,
+      allowing them to browse available apartment listings and their respective
+      rooms, request a visit, track the status of their requests, leave
+      comments, and more.
+    </p>
+
+    <p class="lead mt-3">
+      On the other hand, apartment owners can manage all their listed
+      properties, oversee advertisements and occupancy statuses, schedule
+      visits, and perform additional tasks.
+    </p>
+  </div>
+
+  <div class="mt-5">
+    <h2>Role-Based Functionalities</h2>
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead class="thead-light">
+          <tr>
+            <th>User</th>
+            <th>Admin</th>
+            <th>Student</th>
+            <th>Owner</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Register Student</td>
+            <td>Delete Advertisements</td>
+            <td>List Advertisements</td>
+            <td>Register Apartment (and rooms)</td>
+          </tr>
+          <tr>
+            <td>Register Owner</td>
+            <td>Block User</td>
+            <td>Find Advertisement</td>
+            <td>Publish Advertisement</td>
+          </tr>
+          <tr>
+            <td>Login</td>
+            <td>Delete User</td>
+            <td>Request Visit</td>
+            <td>List Owned Apartments</td>
+          </tr>
+          <tr>
+            <td>Logout</td>
+            <td></td>
+            <td>Filter Advertisement</td>
+            <td>List Own Advertisements</td>
+          </tr>
+          <tr>
+            <td>View Profile</td>
+            <td></td>
+            <td>Cancel Visit</td>
+            <td>Accept Visit</td>
+          </tr>
+          <tr>
+            <td>Edit Profile</td>
+            <td></td>
+            <td>Review Advertisement</td>
+            <td>Reject Visit</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>View Visit Status</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="mt-5">
+    <h2>Entities Model</h2>
+    <p>
+      The following diagram represents the main entities of the system and their
+      relationships:
+    </p>
+    <div class="text-center mb-4">
+      <img
+        src="assets/images/entities-model.png"
+        class="img-fluid"
+        alt="Entities Model"
+      />
+    </div>
+  </div>
+
+  <div class="mt-5 mb-5">
+    <h2>Technologies and Architecture</h2>
+
+    <p class="lead mt-3">
+      <strong>MyApartments</strong> project is built using a robust architecture
+      and modern technologies to ensure scalability and maintainability:
+    </p>
+    <ul class="lead mt-3">
+      <li class="mb-2">
+        <strong>Frontend</strong>: Developed with Angular, using TypeScript for
+        a component-based architecture (MVC) and npm for dependency management.
+        Cypress and Karma are used for testing (end-to-end and unit tests,
+        respectively).
+      </li>
+
+      <li class="mb-2">
+        <strong>Backend</strong>: Built with Spring Boot in Java, leveraging JPA
+        for data persistence. The RESTful API includes HATEOAS for dynamic
+        resource navigation.
+      </li>
+
+      <li>
+        <strong>Containerization</strong>: Docker is used for creating
+        containerized environments and deploying the application.
+      </li>
+    </ul>
+
+    <p class="lead mt-3">
+      The architecture follows a clear <strong>client-server model</strong>,
+      separating frontend and backend concerns. Both layers implement the
+      <strong>MVC pattern</strong> for structured development. Additionally, the
+      repository pattern is utilized for database operations, ensuring clean and
+      modular code.
+    </p>
+  </div>
+
+	<hr>
+
+  <div class="mb-5 mt-5">
+		<h3>Contact and Resources</h3>
+		<div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+			<p class="lead mt-3 mb-4" style="flex-grow: 1; margin-right: 20px;">
+				For more information, check the complete repository of the project
+				visiting the following links:
+			</p>
+			<div style="text-align: right; display: flex; flex-wrap: wrap;">
+				<a
+					href="https://github.com/UdL-EPS-SoftArch/myapartments-api"
+					target="_blank"
+					class="me-3 github"
+					style="margin-bottom: 5px;"
+				>
+					<i class="fab fa-github"></i> Spring Back-End
+				</a>
+				<a
+					href="https://github.com/UdL-EPS-SoftArch/myapartments"
+					target="_blank"
+					class="me-3 github"
+					style="margin-bottom: 5px;"
+				>
+					<i class="fab fa-github"></i> Angular Front-End
+				</a>
+			</div>
+		</div>
+	</div>
+</div>
