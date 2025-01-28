@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { AuthenticationBasicService } from '../login-basic/authentication-basic.service';
 
+type MenuItem = ({ label: string; link: string; roles: string[]; submenu: MenuItem[] });
+
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -12,7 +14,7 @@ export class NavbarComponent {
   constructor(private authenticationService: AuthenticationBasicService) {}
 
   // Navbar menu items
-  menuItems = [
+  menuItems: MenuItem[] = [
     {
       label: 'About',
       link: '/about',
@@ -56,7 +58,7 @@ export class NavbarComponent {
   ];
 
   //to check if a menu item is visible based on the user's role
-  hasAccess(item: any): boolean {
+  hasAccess(item: MenuItem): boolean {
     return item.roles.some((role: string) =>
       this.authenticationService.getCurrentUser().getRoles().includes(role));
   }
