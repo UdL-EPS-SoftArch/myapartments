@@ -86,8 +86,8 @@ export class CreateAdvertisementComponent implements OnInit{
             this.router.navigate(['/advertisements']);
           },
           error: (error) => {
-            console.error('Error creating apartment:', error);
-            this.errorMessageService.showErrorMessage('Failed to create apartment. Please try again.');
+            console.error('Error creating advertisement:', error);
+            this.errorMessageService.showErrorMessage('Failed to create advertisement. Please try again.');
           }
         });
       },
