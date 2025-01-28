@@ -8,10 +8,6 @@ Given('I\'m on the homepage logged in as an owner', () => {
   cy.get('button').contains('Submit').click();
 });
 
-When('I go to the apartment list page', () => {
-  cy.get('.nav-link').contains('Apartments').click();
-});
-
 And('I click on the create button', () => {
   cy.get('button').contains('Create').click();
   cy.url().should('include', '/apartment/create');

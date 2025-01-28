@@ -9,7 +9,7 @@ I want to update a Room
     And I log in as "owner" with password "password"
     And I'm logged in as user "owner"
     And The test apartment
-    When I go to the create room page
+    When I click the "Create" submenu in the "Rooms" menu
     And I select the first option for "apartmentSelect"
     And I check "isOccupied"
     And I check "hasBed"
@@ -21,7 +21,7 @@ I want to update a Room
   Scenario: Update the room just created
     Given I'm logged in as user "owner"
     And I go to the homepage
-    When I go to the rooms list page
+    When I click the "List" submenu in the "Rooms" menu
     And I click on the edit room button
     And I fill some of the room form with different data
     And I click the "Update" button
@@ -30,7 +30,7 @@ I want to update a Room
   Scenario: Update the room with not valid data
     Given I'm logged in as user "owner"
     And I go to the homepage
-    When I go to the rooms list page
+    When I click the "List" submenu in the "Rooms" menu
     And I click on the edit room button
     And I fill some of the room form with different and invalid data
     And I click the "Update" button

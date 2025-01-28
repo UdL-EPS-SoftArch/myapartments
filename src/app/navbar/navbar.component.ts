@@ -37,6 +37,15 @@ export class NavbarComponent {
       ]
     },
     {
+      label: 'Rooms',
+      link: '',
+      roles: ['admin', 'user', 'owner'], //  Visible to all
+      submenu: [
+        { label: 'List', link: '/rooms', roles: ['admin', 'user', 'owner'], submenu: [] },
+        { label: 'Create', link: '/room/create', roles: ['admin', 'owner'], submenu: [] },
+      ]
+    },
+    {
       label: 'Users',
       link: '',
       roles: ['admin'], // Admin only
