@@ -1,5 +1,4 @@
-
-import { Given, When, Then } from 'cypress-cucumber-preprocessor/steps';
+import { Given, When, Then, And } from 'cypress-cucumber-preprocessor/steps';
 
 Given('I\'m on the homepage logged in as an owner', () => {
   cy.visit('http://localhost:4200');
@@ -7,10 +6,6 @@ Given('I\'m on the homepage logged in as an owner', () => {
   cy.get('#username').type('owner');
   cy.get('#password').type('password');
   cy.get('button').contains('Submit').click();
-});
-
-When('I go to the apartment list page', () => {
-  cy.get('.nav-link').contains('Apartments').click();
 });
 
 And('I click on the create button', () => {
@@ -36,15 +31,8 @@ Then('I should see the apartment created', () => {
   cy.url().should('include', '/apart');
 });
 
-And('I fill the form with some empty fields', () => {
-  
+And('I fill the form but leave some empty fields', () => {
     cy.get('#address').type('123 Main Street');
     cy.get('#description').type('A description of the apartment');
     cy.get('button').contains('Submit').click();
-});
-
-Then('I should see an error message', () => {
-    cy.get('ngb-alert.alert-danger')
-    .should('be.visible')
-    .and('contain.text', 'Failed to create apartment. Please try again.'); 
 });

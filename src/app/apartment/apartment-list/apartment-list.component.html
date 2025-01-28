@@ -22,8 +22,8 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let apartment of apartments">
-                  <td id="apartment_id"><a [routerLink]="['/apartment', apartment.getIdFromLinks()]">{{ apartment.getIdFromLinks() }}</a></td>
+                <tr *ngFor="let apartment of apartments; index as i">
+                  <td [attr.id]="'apartment_'+(i+1)"><a [routerLink]="['/apartment', apartment.getIdFromLinks()]">{{ apartment.getIdFromLinks() }}</a></td>
                     <td>{{ apartment.name }}</td>
                     <td>{{ apartment.address }}, {{ apartment.city }}, {{ apartment.country }}</td>
                     <td>{{ apartment.floor }}</td>

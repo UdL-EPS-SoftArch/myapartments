@@ -1,7 +1,20 @@
-.nav-item{
-  cursor:pointer;
+nav ul {
+  list-style-type: none;
+  padding: 0;
 }
-.dropdown-item:hover{
-  background: #007bff;
-  color: white;
+
+nav li {
+  margin: 5px 0;
 }
+
+nav a {
+  text-decoration: none;
+  color: #333;
+}
+
+nav div ul {
+  margin-left: 15px;
+}
+
+
+
