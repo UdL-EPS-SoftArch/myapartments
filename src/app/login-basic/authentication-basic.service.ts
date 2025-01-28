@@ -5,7 +5,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs/internal/Observable';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',  // Ensures it's a singleton service across the app
+})
 export class AuthenticationBasicService {
 
   constructor(private http: HttpClient) {
@@ -53,3 +55,4 @@ export class AuthenticationBasicService {
     return user && user.authorities[0] && user.authorities[0].authority === 'ROLE_' + role.toUpperCase();
   }
 }
+
