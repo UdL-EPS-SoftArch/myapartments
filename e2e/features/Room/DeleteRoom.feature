@@ -5,10 +5,10 @@ Feature: Delete a Room
 
   Scenario: Delete a room
     Given I am in the homepage logged in as owner with username "owner" and password "password"
-    Given I create a room
+    Given I create a room with surface "1234"
     When I go to roomList
-    And I click the "Delete" button
-    Then Room is deleted
+    And I delete the room with surface "1234"
+    Then The room with surface "1234" is deleted
 
 
 
