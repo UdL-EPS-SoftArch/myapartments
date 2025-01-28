@@ -16,10 +16,6 @@ Given('The test apartment', () => {
     cy.get('h1').should('contain', 'NEW');
 });
 
-When(/^I go to the create room page$/, function () {
-    cy.visit('http://localhost:4200/room/create');
-});
-
 And(/^I click on create room button$/, function () {
     cy.get('button.btn.btn-primary.mt-3.mb-3').contains('Create').click();
     cy.get('h1').should('contain', 'Create Room');

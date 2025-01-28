@@ -5,7 +5,7 @@ Feature: Update Apartment
 
   Scenario: Create a new apartment
     Given I'm on the homepage logged in as an owner
-    When I go to the apartment list page
+    When I click the "List" submenu in the "Apartments" menu
     And I click on the create button
     And I fill the form with correct data
     And I click the "Submit" button
@@ -13,7 +13,7 @@ Feature: Update Apartment
 
   Scenario: Update the apartment just created
     Given I'm on the homepage logged in as an owner
-    When I go to the apartment list page
+    When I click the "List" submenu in the "Apartments" menu
     And I click on the edit button
     And I fill some of the form with different data
     And I click the "Submit" button
@@ -21,7 +21,7 @@ Feature: Update Apartment
 
   Scenario: Update the apartment with empty compulsory spaces
     Given I'm on the homepage logged in as an owner
-    When I go to the apartment list page
+    When I click the "List" submenu in the "Apartments" menu
     And I click on the edit button
     And I fill the form with some empty fields
     And I click the "Submit" button

@@ -1,9 +1,5 @@
 import {When, Then, And} from 'cypress-cucumber-preprocessor/steps';
 
-When('I go to the rooms list page', () => {
-  cy.get('.nav-link').contains('Rooms').click();
-});
-
 And('I go to the homepage', () => {
   cy.visit('http://localhost:4200');
 });
