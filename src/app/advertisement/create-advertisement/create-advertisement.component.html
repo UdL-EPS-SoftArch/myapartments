@@ -30,10 +30,8 @@
       <label for="expirationDate" class="form-label">Expiration Date</label>
       <input type="date" class="form-control" id="expirationDate" [(ngModel)]="advertisement.expirationDate" name="expirationDate">
     </div>
-  
     <button type="submit" class="btn btn-primary mt-3">Submit</button>
   </form>
-  
   </div>
 <div *ngIf="!isAuthorized" class="container mt-5 w-50 p-3">
     <div class="alert alert-danger" role="alert">

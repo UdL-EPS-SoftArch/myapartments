@@ -17,7 +17,12 @@ Given('I log in as {string} with password {string}', (username, password) => {
 });
 
 Given('I click the {string} menu', (option) => {
-  cy.get('.nav-link').contains(option).click();
+  cy.get('.nav-item').contains(option).click();
+});
+
+Given('I click the {string} submenu in the {string} menu', (submenu, menu) => {
+  cy.get('.nav-item.dropdown').contains(menu).click();
+  cy.get('.dropdown-menu').filter(':visible').contains(submenu).click();
 });
 
 When('I fill the form with', (table: DataTable) => {
