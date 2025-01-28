@@ -28,7 +28,6 @@ import { ImageCreateComponent } from './image/image-create/image.component';
 import { AdvertisementUpdateComponent } from './advertisement/advertisement-update/advertisement-update.component';
 import { DocumentationComponent } from './documentation/documentation.component';
 
-
 const routes: Routes = [
   { path: 'users/create', component: UserRegisterComponent},
   { path: 'users/:id/delete', component: UserDeleteComponent, canActivate: [LoggedInGuard]},

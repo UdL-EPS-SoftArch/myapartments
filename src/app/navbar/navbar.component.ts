@@ -22,6 +22,12 @@ export class NavbarComponent {
       submenu: []
     },
     {
+      label: 'Documentation',
+      link: '/documentation',
+      roles: ['admin', 'demo', 'owner'], // Visible to all
+      submenu: []
+    },
+    {
       label: 'Apartments',
       link: '',
       roles: ['admin', 'user', 'owner'], //  Visible to all
