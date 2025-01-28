@@ -62,6 +62,8 @@ export class CreateAdvertisementComponent implements OnInit{
       return;
     }
 
+    this.advertisement.owner = this.user;
+
     if (this.advertisement?.expirationDate) {
       const expirationDate = new Date(this.advertisement.expirationDate);
       const currentTime = new Date();
