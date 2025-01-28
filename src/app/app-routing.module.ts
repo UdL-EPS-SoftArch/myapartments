@@ -25,6 +25,7 @@ import { VisitAcceptComponent } from './visit/visit-accept/visit-accept.componen
 import { RoomUpdateComponent } from './room/room-update/room-update.component';
 import { MyAdvertisementComponent } from './advertisement/my-advertisement-list/my-advertisement.component';
 import { ImageCreateComponent } from './image/image-create/image.component';
+import { AdvertisementUpdateComponent } from './advertisement/advertisement-update/advertisement-update.component';
 import { DocumentationComponent } from './documentation/documentation.component';
 
 
@@ -37,6 +38,7 @@ const routes: Routes = [
   { path: 'about', component: AboutComponent},
   { path: 'advertisement/:id/create', component: CreateAdvertisementComponent},
   { path: 'advertisements', component: AdvertisementListComponent},
+  { path: 'advertisement/:id/update', component: AdvertisementUpdateComponent},
   { path: 'advertisement/:id/delete', component: DeleteAdvertisementComponent, canActivate: [LoggedInGuard] },
   { path: 'advertisements/myAdvertisement', component: MyAdvertisementComponent},
   { path: 'apartments', component: ApartmentListComponent},

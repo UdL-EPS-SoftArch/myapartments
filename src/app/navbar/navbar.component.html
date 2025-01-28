@@ -4,41 +4,21 @@
     <span class="navbar-toggler-icon"></span>
   </button>
 
+  <div class="collapse navbar-collapse" id="navbarContent" [ngbCollapse]="isCollapsed">
+      <ul class="navbar-nav">
+        <ng-container *ngFor="let item of menuItems">
+          <li *ngIf="hasAccess(item)" class="nav-item" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{ exact: true }" ngbDropdown>
+            <a *ngIf="!item['submenu'].length" class="nav-link" [routerLink]="item['link']">{{ item['label'] }}</a>
+            <a *ngIf="item['submenu'].length" class="nav-link dropdown-toggle" [id]="item['label'] + 'Dropdown'" role="button"
+               aria-haspopup="true" aria-expanded="false" ngbDropdownToggle>{{ item['label'] }}</a>
+            <div *ngIf="item['submenu'].length" class="dropdown-menu"
+                 [attr.aria-labelledby]="item['label'] + 'Dropdown'" ngbDropdownMenu>
+              <a *ngFor="let subItem of item['submenu']" [routerLink]="subItem['link']" class="dropdown-item" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{ exact: true }">{{ subItem['label'] }}</a>
+            </div>
+          </li>
+        </ng-container>
+      </ul>
+      <ul class="navbar-nav ms-auto me-3" app-login-navbar></ul>
+  </div>
 
-    <div class="collapse navbar-collapse" id="navbarContent" [ngbCollapse]="isCollapsed">
-        <ul class="navbar-nav">
-
-            <li class="nav-item" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{ exact: true }">
-                <a class="nav-link" [routerLink]="['/about']">About</a>
-            </li>
-
-            <!--LIST ADVERTISEMENTS-->
-            <li class="nav-item" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{ exact: true }">
-              <a class="nav-link" [routerLink]="['/advertisements']">Advertisements</a>
-            </li>
-
-            <!--LIST APARTMENTS-->
-            <li class="nav-item" *ngIf="isRole('owner')" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{ exact: true }">
-                <a class="nav-link" [routerLink]="['/apartments']">Apartments</a>
-            </li>
-
-            <!--LIST ROOMS-->
-            <li class="nav-item" *ngIf="isRole('owner')" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{ exact: true }">
-                <a class="nav-link" [routerLink]="['/rooms']">Rooms</a>
-            </li>
-
-            <!--DOCUMENTATION-->
-            <li class="nav-item" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{ exact: true }">
-                <a class="nav-link" [routerLink]="['/documentation']">Documentation</a>
-            </li>
-
-            <li class="nav-item" *ngIf="isRole('user')" ngbDropdown>
-                <a class="nav-link dropdown-toggle" id="playerDropdown" role="button" aria-haspopup="true" aria-expanded="false" ngbDropdownToggle>Users</a>
-                <div class="dropdown-menu" aria-labelledby="playDropdown" ngbDropdownMenu>
-                    <a class="dropdown-item" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{ exact: true }" [routerLink]="['/users']"><span class="fas fa-user-circle"></span> List</a>
-                </div>
-            </li>
-        </ul>
-        <ul class="navbar-nav ms-auto me-3" app-login-navbar></ul>
-    </div>
 </nav>

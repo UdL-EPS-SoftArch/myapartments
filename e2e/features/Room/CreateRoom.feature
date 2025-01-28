@@ -8,8 +8,7 @@ Feature: Create a new Room
     And I log in as "owner" with password "password"
     And I'm logged in as user "owner"
     And The test apartment
-    When  I go to the create room page
-    # And I click on create room button
+    When  I click the "Create" submenu in the "Rooms" menu
     And I select the first option for "apartmentSelect"
     And I check "isOccupied"
     And I check "hasBed"

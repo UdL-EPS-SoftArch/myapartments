@@ -1,11 +1,14 @@
 <div class="">
   <div class="row">
-    <div class=" col-12 col-sm-6 col-md-4 col-lg-3 p-2" *ngFor="let ad of advertisements">
-      <a class="no-color" href="{{ad.uri}}">
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3 p-2" *ngFor="let ad of advertisements">
       <div class="card">
         <div class="card-block">
           <div class="card-header row m-1 text-center">
-            <h5>{{ ad.title }}</h5>
+            <h5>
+              <a class="no-color" [routerLink]="[ad.uri]">
+                {{ ad.title }}
+              </a>
+            </h5>
           </div>
           <div class="card-body row m-1">
             <div class="col-md-6 p-3">
@@ -34,8 +37,12 @@
             </div>
           </div>
         </div>
+        <div class="col-12 p-3 text-center">
+          <button class="btn btn-danger"
+                  [attr.data-title]="ad.title"
+                  (click)="onDelete(ad.uri ? ad.uri.split('/').pop() : '')">Delete</button>
+        </div>
       </div>
-    </a>
     </div>
   </div>
 </div>
